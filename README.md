@@ -24,74 +24,10 @@ Luego de elegir la estatuilla por la que en ese turno jugarán, deberán lanzar 
 
 # Las estatuillas
 
-*Estatuilla del cangrejo
-
-Obtención
-Uno de sus dados debe ser par y otro de sus dados impar.
-
-Bendición
-(En fase final)
-Podrá lanzar los dados dos veces en el primer tiro de la fase final.
-
-Maldición
-(En fase expedición)
-El rival tira un dado de diez caras y el valor obtenido son los puntos de victoria que le descuenta al portador de la estatuilla al final de la partida.
+![imagen](https://github.com/mbalbona/Proyecto_Laboratorio1_TN_Presencial_Grupo3/assets/119949692/52fa404e-2668-4272-81b8-0556a55500b4)
 
 
-*Estatuilla de la hormiga
-
-Obtención
-Al menos dos dados deben ser menores a 5.
-
-Bendición
-(En fase final)
-Antes de empezar la fase final el portador de la estatuilla puede elegir un número del 1 al 6. Luego, en cada tiro puede optar por elegir uno de los cinco dados del lanzamiento y reemplazarlo por el número elegido.
-
-Maldición
-(En fase expedición)
-El rival tira dos dados de diez caras y el valor obtenido son los puntos de victoria que le descuenta al portador de la estatuilla al final de la partida.
-
-*Estatuilla de la medusa
-
-Obtención
-La suma de dos de los dados lanzados debe dar exactamente siete.
-
-Bendición
-(En fase final)
-Permite ganar el desafío de la Fase Final también con la obtención de 5 dados iguales.
-
-Maldición
-(En fase expedición)
-El portador de la estatuilla debe esperar 3 turnos sin lanzar dados para seguir la Fase de Expedición.
-
-
-
-*Estatuilla del águila
-
-Obtención
-Dos de los dados lanzados deberán devolver los números 1 y 10.
-
-Bendición
-(En fase final)
-En cada tirada de la Fase Final el portador de la estatuilla podrá elegir un dado y modificar su número a su antojo.
-
-Maldición
-(En fase expedición)
-El rival tira dos veces por turno durante el resto de la Fase de Expedición.
-
-
-Estatuilla de la salamandra
-
-Obtención
-Los dados lanzados deben ser consecutivos. Por ejemplo: (1 y 2) (2 y 3) (9 y 10).
-
-Bendición
-(En fase final)
-El portador de la estatuilla podrá ganar la fase final con una escalera de 4 dados consecutivos entre 5 dados lanzados.
-
-Maldición
-(En fase expedición)
-El rival juega con tres dados durante el resto de la Fase de Expedición.
+![imagen](https://github.com/mbalbona/Proyecto_Laboratorio1_TN_Presencial_Grupo3/assets/119949692/cb1afe2d-8ae0-4000-802e-d9090256245e)
 
 
 La Fase de Expedición termina cuando no quedan estatuillas en juego. A partir de ese momento, comienza la Fase Final siendo el primero en tirar aquel jugador que haya obtenido más estatuillas.
@@ -113,25 +49,13 @@ Las únicas excepciones a las reglas de victoria en la fase final mencionadas an
 
 Una vez finalizada la partida se deben computar los Puntos de Victoria que se especifican a continuación:
 
-Puntos de Victoria  | Hito           | Descripción
-+5                    Estatuilla        Obtener una estatuilla
-+10                   Estatuilla++      Obtiene una estatuilla en el primer intento por obtenerla
-+15                   Ganador           Ganador de la Fase Final
-+50                   Ganador++         Ganador de la Fase Final sin estatuillas
--3                    Estatuilla--      Rival obtiene una estatuilla
--1                    Lanzamiento       Lanzamiento en la fase final
-
+![imagen](https://github.com/mbalbona/Proyecto_Laboratorio1_TN_Presencial_Grupo3/assets/119949692/4a28eb6b-3d21-4b20-9c7f-5b22d9319b38)
 
 Actividad
 Se pide desarrollar en C/C++ el juego Irwin's Revenge haciendo uso de un proyecto de Aplicación de Consola.
 El juego debe contar con un menú principal con las siguientes opciones:
-IRWIN'S REVENGE
-------------------------------
-1 - JUGAR PARA DOS JUGADORES
-2 - ESTADÍSTICAS
-3 - CRÉDITOS
-------------------------------
-0 - SALIR
+
+![imagen](https://github.com/mbalbona/Proyecto_Laboratorio1_TN_Presencial_Grupo3/assets/119949692/46a628f7-ed10-4684-baa3-0d4219ad63e3)
 
 
 La opción jugar, debe permitir iniciar un nuevo juego de Irwin's Revenge. Antes de comenzar el juego debe solicitar a los jugadores sus respectivos nombres.
@@ -139,91 +63,20 @@ Luego, en la Fase de Expedición, el juego debe mostrar la información necesari
 Antes de comenzar la Fase de Expedición se le debe preguntar a cada jugador cuál es la estatuilla por la que lanzará. Ambos jugadores podrían elegir la misma estatuilla. Si el primero de ellos obtiene la estatuilla que ambos jugadores disputaban. El juego debe solicitarle al otro jugador otra estatuilla antes de lanzar.
 El juego nunca debe permitir elegir a un jugador una estatuilla que no está disponible.
 
-IRWIN'S REVENGE - FASE DE EXPEDICIÓN
-------------------------------------------------------------------------
-STEVE                                   IRWIN
-ESTATUILLAS: Hormiga, Cangrejo          ESTATUILLAS: Medusa
-
-¿Por qué estatuilla lanzarás Steve?
-1) Águila
-2) Salamandra
-
-Opción? _
-
+![imagen](https://github.com/mbalbona/Proyecto_Laboratorio1_TN_Presencial_Grupo3/assets/119949692/feaa86bc-80fb-456f-839a-f1c9d3ccf369)
 
 Ejemplo de interfaz previa al lanzamiento de dados en la Fase de Expedición
 
 
-IRWIN'S REVENGE - FASE DE EXPEDICIÓN
-------------------------------------------------------------------------
-STEVE                                   IRWIN
-ESTATUILLAS: Hormiga, Cangrejo          ESTATUILLAS: Medusa
-------------------------------------------------------------------------
-
-TURNO DE STEVE
---------------
-ESTATUILLA OBJETIVO: SALAMANDRA
-CONDICIÓN DE OBTENCIÓN: Los dados lanzados deben ser consecutivos
-
-LANZAMIENTO
-
-+-------+ +-------+ 
-| x   x | | x 	| 
-|   x   | |   x   | 
-| x   x | |     x | 
-+-------+ +-------+
-
-> NO HAS OBTENIDO LA ESTATUILLA
-
-Presiona ENTER para continuar
-
+![imagen](https://github.com/mbalbona/Proyecto_Laboratorio1_TN_Presencial_Grupo3/assets/119949692/8f31fdc4-ad25-4b0f-af04-59a436ddca52)
 
 
 Al finalizar la Fase de Expedición, debe comenzar la Fase Final. 
-IRWIN'S REVENGE - FASE DE EXPEDICIÓN
-------------------------------------------------------------------------
-STEVE                                   IRWIN
-ESTATUILLAS: Hormiga, Cangrejo          ESTATUILLAS: Medusa, Águila
-             Salamandra
-------------------------------------------------------------------------
 
-TURNO DE STEVE
---------------
-
-LANZAMIENTO
-
-+-------+ +-------+ +-------+ +-------+ +-------+
-| x   x | | x 	| |       | | x 	  | |       |
-|       | |   x   | |   x   | |       | |   x   | 
-| x   x | |     x | |       | |     x | |       | 
-+-------+ +-------+ +-------+ +-------+ +-------+
-
-> HAS GANADO CON UNA ESCALERA CORTA (BENEFICIO DE SALAMANDRA)
-
-Presiona ENTER para continuar
+![imagen](https://github.com/mbalbona/Proyecto_Laboratorio1_TN_Presencial_Grupo3/assets/119949692/6b9822a3-7a56-4908-a5b5-077fadbe9031)
 
 
-
-
-
-IRWIN'S REVENGE - FASE FINAL
-------------------------------------------------------------------------
-
-HITO                   STEVE               IRWIN
-------------------------------------------------------------------------
-Estatuilla   	     +15 PDV   		 +10 PDV
-Estatuilla++   	     +10 PDV   		 +10 PDV
-Ganador   		     +15 PDV   		   0 PDV
-Ganador++   	       0 PDV   		   0 PDV
-Estatuilla--   	      -6 PDV   		  -9 PDV
-Lanzamiento   		-7 PDV   		  -6 PDV
-------------------------------------------------------------------------
-TOTAL                   27 PDV               5 PDV
-
-GANADOR: STEVE con 27 puntos de victoria.      
-
-Presione ENTER para continuar.
-
+![imagen](https://github.com/mbalbona/Proyecto_Laboratorio1_TN_Presencial_Grupo3/assets/119949692/a09bd409-cedc-4043-a689-9e1e75e99fe4)
 
 La opción estadísticas, debe mostrar el nombre del jugador que haya obtenido la mayor cantidad de puntos de victoria y dicha cantidad.
 
@@ -237,7 +90,7 @@ La opción salir, debe salir del juego previa confirmación del usuario.
  - Si el primer jugador se llama LAB1 entonces los dados no deben ser aleatorios para ninguno de los dos jugadores y se deben solicitar por ingreso de teclado.
 
 # Créditos
-Imagen de Steve Irwin creada por TinyPixelBlock.
-Caricaturas de Irwin y su familia por Google Doodle
-Juego inventado por Gonzalo Ligero - gonzalo.ligero@alumnos.frgp.utn.edu.ar 
-Reglamento adaptado para TP por Gonzalo Ligero y Angel Simón
+ - Imagen de Steve Irwin creada por TinyPixelBlock.
+ - Caricaturas de Irwin y su familia por Google Doodle
+ - Juego inventado por Gonzalo Ligero - gonzalo.ligero@alumnos.frgp.utn.edu.ar 
+ - Reglamento adaptado para TP por Gonzalo Ligero y Angel Simón
