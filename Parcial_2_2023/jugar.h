@@ -6,8 +6,9 @@
 
 void jugar(){
     system("cls");
-    string jugadores[2] = {}
-    string estatuillas_jugadores[2][5] = {};
+    string jugadores[2] = {};
+    string estatuillas_j1[5] = {"Ninguna"};
+    string estatuillas_j2[5] = {"Ninguna"};
     string empieza;
     bool primer_turno = false;
 
@@ -24,6 +25,7 @@ void jugar(){
 
     ///Seleccion de primer turno
     empieza = primerTurno(jugadores);
+    cout<<"El primer jugador en empezar es: "<<empieza<<endl;
     system("pause");
     system("cls");
     ///Comienza la fase de expecidicion
@@ -33,8 +35,12 @@ void jugar(){
             cout<<"---------------------------------------------------"<<endl;
             cout<<jugadores[0]<<"\t\t";
             cout<<jugadores[1]<<endl;
-            cout<<"ESTATUILLAS: "<<mostrar_estatuillas(jugadores[0], estatuillas_jugadores)<<"\t\t";
-            cout<<"ESTATUILLAS: "<<mostrar_estatuillas(jugadores[1], estatuillas_jugadores)<<endl;
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuillas_j1, 5);
+            cout<<"\t\t";
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuillas_j2, 5);
+            cout<<endl;
             system("pause");
             system("cls");
 

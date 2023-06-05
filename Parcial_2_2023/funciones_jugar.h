@@ -6,10 +6,12 @@ int tiraDado(){
 
     return ( rand() % numero) + 1;
 }
-void mostrarEstatuillas(jugador){
-    for
-}
 
+void mostrar_estatuillas(string estatuillas_jugador[], int tam){
+    for(int i = 0; i < tam; i++){
+        cout<<estatuillas_jugador[i];
+    }
+}
 
 string primerTurno(string jugadores[2]){
     int dadoAnterior, ultimoDado;
@@ -22,10 +24,10 @@ string primerTurno(string jugadores[2]){
             ultimoDado = tiraDado();
             dadoAnterior = ultimoDado;
             jugador = jugadores[i];
-            cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado;
+            cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
         }else{
             ultimoDado = tiraDado();
-            cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado;
+            cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
 
             if(ultimoDado < dadoAnterior){
                 jugador = jugadores[i];
@@ -37,29 +39,4 @@ string primerTurno(string jugadores[2]){
     return jugador;
 }
 
-void faseExpedicion(string jugadores[2], string empieza, string vEstatuillas[5], string estatuillas_jugadores[2][5]){
-    bool primerTurno = false
-
-        if(primerTurno == false){
-            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
-            cout<<"-----------------------------------------------"<<endl;
-            cout<<jugadores[0]<<"\t\t\t";
-            cout<<jugadores[1]<<endl;
-            cout<<"ESTATUILLAS: \t\t";
-            cout<<"ESTATUILLAS: \t\t";
-            cout<<endl;
-            cout<<"Por que estatuilla lanzaras "<<empieza<<"?"<<endl;
-            primerTurno = true
-        }else{
-            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
-            cout<<"-----------------------------------------------"<<endl;
-            cout<<jugadores[0]<<"\t\t\t";
-            cout<<jugadores[1]<<endl;
-            cout<<"ESTATUILLAS: \t\t";
-            cout<<"ESTATUILLAS: \t\t";
-            cout<<endl;
-            cout<<"Por que estatuilla lanzaras "<<empieza<<"?"<<endl;
-        }
-
-}
 #endif // FUNCIONES_JUGAR_H_INCLUDED
