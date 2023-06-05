@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1685967191 source:c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\mateo_balbona_arvigo_parcial_2_2023\main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"menues.h"
+
+1685966487 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\mateo_balbona_arvigo_parcial_2_2023\menues.h
+	"jugar.h"
+
+1685969514 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\mateo_balbona_arvigo_parcial_2_2023\jugar.h
+	"funciones_jugar.h"
+
+1685969543 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\mateo_balbona_arvigo_parcial_2_2023\funciones_jugar.h
+
+1685967191 source:c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\parcial_2_2023\main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"menues.h"
+
+1685974475 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\parcial_2_2023\menues.h
+	"jugar.h"
+
+1685974437 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\parcial_2_2023\jugar.h
+	"funciones_jugar.h"
+
+1685974437 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\parcial_2_2023\funciones_jugar.h
+
