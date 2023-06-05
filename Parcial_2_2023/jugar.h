@@ -3,10 +3,13 @@
 
 #include "funciones_jugar.h"
 
+
 void jugar(){
     system("cls");
-    string jugadores[2] = {}, empieza;
+    string jugadores[2] = {}
     string estatuillas_jugadores[2][5] = {};
+    string empieza;
+    bool primer_turno = false;
 
     ///Estatuas             0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
     const string vEstatuilas[5] = {"Cangrejo", "Hormiga", "Medusa", "Aguila", "Salamandra"};
@@ -24,9 +27,20 @@ void jugar(){
     system("pause");
     system("cls");
     ///Comienza la fase de expecidicion
-    faseExpedicion(jugadores,empieza, vEstatuilas, estatuillas_jugadores);
-    system("pause");
-    system("cls");
+    while(true){
+        if(primer_turno == false){
+            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"---------------------------------------------------"<<endl;
+            cout<<jugadores[0]<<"\t\t";
+            cout<<jugadores[1]<<endl;
+            cout<<"ESTATUILLAS: "<<mostrar_estatuillas(jugadores[0], estatuillas_jugadores)<<"\t\t";
+            cout<<"ESTATUILLAS: "<<mostrar_estatuillas(jugadores[1], estatuillas_jugadores)<<endl;
+            system("pause");
+            system("cls");
+
+            primer_turno = true;
+        }
+    }
     ///Comienza la fase final
 
 
