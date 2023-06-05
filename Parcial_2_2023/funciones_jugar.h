@@ -6,44 +6,60 @@ int tiraDado(){
 
     return ( rand() % numero) + 1;
 }
-
-string primerTurno(string j1, string j2){
-    int dadoAnterior, ultimoDado;
-
-    atras:
-    cout<<"-----------------------------------------------"<<endl;
-    cout<<"QUIEN COMENZARA?"<<endl;
-    cout<<endl;
-    ///Tira primer dado J1
-    dadoAnterior = tiraDado();
-    cout<<"El jugador "<<j1<<" saco el dado numero: "<<dadoAnterior<<endl;
-    ///Tira primer dado J2
-    ultimoDado = tiraDado();
-    cout<<"El jugador "<<j2<<" saco el dado numero: "<<ultimoDado<<endl;
-    if(ultimoDado == dadoAnterior){
-        system("cls");
-        cout<<"SACARON DADOS IGUALES SE VOLVERA A TIRAR EL DADO"<<endl;
-        system("pause");
-        system("cls");
-        goto atras;
-    }else if(ultimoDado > dadoAnterior){
-        cout<<"EL PRIMER TURNO SERA PARA EL JUGADOR "<<j1<<endl;
-        return j1;
-    }
-    else{
-        cout<<"EL PRIMER TURNO SERA PARA EL JUGADOR " <<j2<<endl;
-        return j2;
-    }
-    cout<<"-----------------------------------------------"<<endl;
-
+void mostrarEstatuillas(jugador){
+    for
 }
 
-void faseExpedicion(string j1, string j2, int turno){
-    cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
-    cout<<"-----------------------------------------------"<<endl;
-    cout<<j1<<"\t\t\t";
-    cout<<j2<<endl;
-    cout<<"ESTATUILLAS: \t\t";
-    cout<<"ESTATUILLAS: \t\t";
+
+string primerTurno(string jugadores[2]){
+    int dadoAnterior, ultimoDado;
+    string jugador;
+
+    atras:
+
+    for(int i = 0; i < 2 ; i++){
+        if(i == 0){
+            ultimoDado = tiraDado();
+            dadoAnterior = ultimoDado;
+            jugador = jugadores[i];
+            cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado;
+        }else{
+            ultimoDado = tiraDado();
+            cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado;
+
+            if(ultimoDado < dadoAnterior){
+                jugador = jugadores[i];
+                return jugador;
+            }
+        }
+    }
+
+    return jugador;
+}
+
+void faseExpedicion(string jugadores[2], string empieza, string vEstatuillas[5], string estatuillas_jugadores[2][5]){
+    bool primerTurno = false
+
+        if(primerTurno == false){
+            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"-----------------------------------------------"<<endl;
+            cout<<jugadores[0]<<"\t\t\t";
+            cout<<jugadores[1]<<endl;
+            cout<<"ESTATUILLAS: \t\t";
+            cout<<"ESTATUILLAS: \t\t";
+            cout<<endl;
+            cout<<"Por que estatuilla lanzaras "<<empieza<<"?"<<endl;
+            primerTurno = true
+        }else{
+            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"-----------------------------------------------"<<endl;
+            cout<<jugadores[0]<<"\t\t\t";
+            cout<<jugadores[1]<<endl;
+            cout<<"ESTATUILLAS: \t\t";
+            cout<<"ESTATUILLAS: \t\t";
+            cout<<endl;
+            cout<<"Por que estatuilla lanzaras "<<empieza<<"?"<<endl;
+        }
+
 }
 #endif // FUNCIONES_JUGAR_H_INCLUDED

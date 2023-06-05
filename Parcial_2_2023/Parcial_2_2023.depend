@@ -27,3 +27,17 @@
 
 1685974437 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\parcial_2_2023\funciones_jugar.h
 
+1685980556 source:c:\users\mbalbona\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"menues.h"
+
+1685980556 c:\users\mbalbona\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
+	"jugar.h"
+
+1685982745 c:\users\mbalbona\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
+	"funciones_jugar.h"
+
+1685982751 c:\users\mbalbona\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+
