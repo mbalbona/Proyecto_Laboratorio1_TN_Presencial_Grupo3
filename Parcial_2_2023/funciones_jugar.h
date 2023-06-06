@@ -13,9 +13,9 @@ void mostrar_estatuillas(string estatuillas_jugador[], int tam){
     }
 }
 
-string primerTurno(string jugadores[2]){
+int primerTurno(string jugadores[2]){
     int dadoAnterior, ultimoDado;
-    string jugador;
+    int jugador;
 
     atras:
 
@@ -23,14 +23,14 @@ string primerTurno(string jugadores[2]){
         if(i == 0){
             ultimoDado = tiraDado();
             dadoAnterior = ultimoDado;
-            jugador = jugadores[i];
+            jugador = i;
             cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
         }else{
             ultimoDado = tiraDado();
             cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
 
             if(ultimoDado < dadoAnterior){
-                jugador = jugadores[i];
+                jugador = i;
                 return jugador;
             }
         }
@@ -38,5 +38,19 @@ string primerTurno(string jugadores[2]){
 
     return jugador;
 }
+
+int lanzamiento_estatuilla(string *vEstatuas, int tam){
+    int opc;
+    for(int i = 0; i < 5; i++){
+        cout<<i+1<<")"<<vEstatuas[i]<<endl;
+    }
+    cout<<endl;
+    cout<<"Opcion a elegir: ";
+    cin>>opc;
+
+    return opc;
+}
+
+
 
 #endif // FUNCIONES_JUGAR_H_INCLUDED
