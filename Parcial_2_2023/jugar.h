@@ -36,7 +36,7 @@ void jugar(){
         if(primer_turno == false){
             cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[0]<<"\t\t";
+            cout<<jugadores[0]<<"\t\t\t\t";
             cout<<jugadores[1]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, 5);
@@ -44,9 +44,9 @@ void jugar(){
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j2, 5);
             cout<<endl;
-            cout<<"Por que estatuilla lanzaras "<<empieza<<"?"<<endl;
+            cout<<"Por que estatuilla lanzaras "<<jugadores[empieza]<<"?"<<endl;
             opcion_elegida = lanzamiento_estatuilla(vEstatuillas, 5);
-            lanzamiento_primer_turno(jugadores[empieza],opcion_elegida);
+            lanzamiento_primer_turno(jugadores,jugadores[empieza], vEstatuillas[opcion_elegida-1], estatuillas_j1, estatuillas_j2,vEstatuillas);
 
             system("pause");
             system("cls");

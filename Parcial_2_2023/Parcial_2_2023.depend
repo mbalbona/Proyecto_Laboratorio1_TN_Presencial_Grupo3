@@ -41,17 +41,18 @@
 
 1685982751 c:\users\mbalbona\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
 
-1686002375 source:c:\users\mateo\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
+1686012840 source:c:\users\mateo\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
 	<iostream>
 	<ctime>
 	<cstdlib>
+	<string.h>
 	"menues.h"
 
 1686002375 c:\users\mateo\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
 	"jugar.h"
 
-1686010138 c:\users\mateo\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
+1686015326 c:\users\mateo\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
 	"funciones_jugar.h"
 
-1686009880 c:\users\mateo\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+1686016679 c:\users\mateo\documents\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
 
