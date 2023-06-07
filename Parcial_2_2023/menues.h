@@ -7,7 +7,6 @@ void menu(){
 
     while(true){
         int opc;
-        atras:
         cout<<"IRWIN'S REVENGE"<<endl;
         cout<<"---------------------------"<<endl;
         cout<<"1 - JUGAR PARA DOS JUGADORES"<<endl;
@@ -28,6 +27,7 @@ void menu(){
             case 0: return;
         }
     }
+
 }
 
 #endif // MENUES_H_INCLUDED

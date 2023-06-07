@@ -14,12 +14,13 @@ void jugar(){
     int opcion_elegida;
     bool primer_turno = false;
 
-    ///Estatuas                     0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
+    ///Estatuas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
     string vEstatuillas[5] = {"Cangrejo", "Hormiga", "Medusa", "Aguila", "Salamandra"};
+
 
     ///Pide nombre de ambos jugadores
     for(int i = 0; i < 2 ; i++){
-        cout<<"Ingrese el nombre del jugador numero "<<i<<": ";
+        cout<<"Ingrese el nombre del jugador numero "<<i+1<<": ";
         cin>>jugadores[i];
     }
 
@@ -46,7 +47,7 @@ void jugar(){
             cout<<endl;
             cout<<"Por que estatuilla lanzaras "<<jugadores[empieza]<<"?"<<endl;
             opcion_elegida = lanzamiento_estatuilla(vEstatuillas, 5);
-            lanzamiento_primer_turno(jugadores,jugadores[empieza], vEstatuillas[opcion_elegida-1], estatuillas_j1, estatuillas_j2,vEstatuillas);
+            lanzamiento_primer_turno(jugadores, 5,jugadores[empieza], vEstatuillas[opcion_elegida-1], estatuillas_j1, estatuillas_j2,vEstatuillas);
 
             system("pause");
             system("cls");
@@ -55,10 +56,10 @@ void jugar(){
         }else{
             /*turno_primer_jugador();
             turno_segundo_jugador();*/
+
         }
     }
     ///Comienza la fase final
-
 
 }
 

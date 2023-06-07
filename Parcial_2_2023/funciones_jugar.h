@@ -1,19 +1,24 @@
 #ifndef FUNCIONES_JUGAR_H_INCLUDED
 #define FUNCIONES_JUGAR_H_INCLUDED
 
+///Funcion para tirar dado
 int tiraDado(){
     int  numero = 10;
 
-    return ( rand() % numero) + 1;
+    return (rand() % numero) + 1;
 }
 
-void mostrar_estatuillas(string estatuillas_jugador[], int tam){
+///Mostramos las estatuas del jugador
+void mostrar_estatuillas(string *estatuillas_jugador, int tam){
+
     for(int i = 0; i < tam; i++){
         cout<<estatuillas_jugador[i];
     }
+
 }
 
 
+///Funcion para utilizar el jugador elegido para el primer turno y su primer turno completo
 int primerTurno(string jugadores[2]){
     int dadoAnterior, ultimoDado;
     int jugador;
@@ -46,6 +51,7 @@ int primerTurno(string jugadores[2]){
     return jugador;
 }
 
+///Funcion para elegir por cual estatuilla vamos a jugar este turno
 int lanzamiento_estatuilla(string *vEstatuas, int tam){
     int opc;
     for(int i = 0; i < 5; i++){
@@ -58,11 +64,13 @@ int lanzamiento_estatuilla(string *vEstatuas, int tam){
     return opc;
 }
 
+///Funcion para mostrar la condicion de obtencion de la estatua
 string condicion_estatua(string *vEstatuas, int tam, string opcion){
     int opc;
     string vCondicion[5] = {};
+
     for(int i = 0; i < tam; i++){
-        if( vEstatuas[i] == opcion){
+        if(vEstatuas[i] == opcion){
             opc = i;
         }
     }
@@ -84,6 +92,7 @@ string condicion_estatua(string *vEstatuas, int tam, string opcion){
     return vCondicion[opc];
 }
 
+///Funcion que determina si ganaste o no ganaste una estatua
 void  obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, string opcion){
     int opc;
 
@@ -127,42 +136,44 @@ void  obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, string
 
 }
 
-void lanzamiento_primer_turno(string *jugadores, string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas){
+
+///Interfaz del primer lanzamiento
+void lanzamiento_primer_turno(string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas){
     while(true){
-    system("cls");
-    int dado1, dado2;
+            system("cls");
 
-    string condicion;
+            int dado1, dado2;
 
-    cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
-    cout<<"---------------------------------------------------"<<endl;
-    cout<<jugadores[0]<<"\t\t\t\t";
-    cout<<jugadores[1]<<endl;
-    cout<<"ESTATUILLAS: ";
-    mostrar_estatuillas(estatuillas_j1, 5);
-    cout<<"\t\t";
-    cout<<"ESTATUILLAS: ";
-    mostrar_estatuillas(estatuillas_j2, 5);
-    cout<<endl;
-    cout<<"---------------------------------------------------"<<endl;
-    cout<<endl;
-    cout<<"TURNO DE "<<jugador<<endl;
-    cout<<"-------------------------"<<endl;
-    cout<<"ESTATUILLA OBJETIVO: "<<opcion<<endl;
-    condicion = condicion_estatua(vEstatuas,5,opcion);
-    cout<<"CONDICIONES DE OBTENCION: "<<condicion<<endl;
+            string condicion;
 
-    cout<<"Primer dado: ";
-    dado1 = tiraDado();
-    cout<<dado1<<endl;
+            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"---------------------------------------------------"<<endl;
+            cout<<jugadores[0]<<"\t\t\t\t";
+            cout<<jugadores[1]<<endl;
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuillas_j1, tam);
+            cout<<"\t\t";
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuillas_j2, tam);
+            cout<<endl;
+            cout<<"---------------------------------------------------"<<endl;
+            cout<<endl;
+            cout<<"TURNO DE "<<jugador<<endl;
+            cout<<"-------------------------"<<endl;
+            cout<<"ESTATUILLA OBJETIVO: "<<opcion<<endl;
+            condicion = condicion_estatua(vEstatuas,tam,opcion);
+            cout<<"CONDICIONES DE OBTENCION: "<<condicion<<endl;
 
-    cout<<"Segundo dado: ";
-    dado2 = tiraDado();
-    cout<<dado2<<endl;
+            cout<<"Primer dado: ";
+            dado1 = tiraDado();
+            cout<<dado1<<endl;
 
-    obtencion_estatua(dado1, dado2, vEstatuas, 5, opcion);
+            cout<<"Segundo dado: ";
+            dado2 = tiraDado();
+            cout<<dado2<<endl;
 
-    system("pause");
+            system("pause");
     }
 }
+
 #endif // FUNCIONES_JUGAR_H_INCLUDED
