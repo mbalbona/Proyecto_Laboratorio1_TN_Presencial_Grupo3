@@ -32,6 +32,7 @@ void jugar(){
     cout<<"El primer jugador en empezar es: "<<jugadores[empieza]<<endl;
     system("pause");
     system("cls");
+
     ///Comienza la fase de expecidicion
     while(true){
         if(primer_turno == false){
