@@ -10,8 +10,11 @@ void jugar(){
     string estatuillas_j1[5] = {"Ninguna"};
     string estatuillas_j2[5] = {"Ninguna"};
 
-    int empieza;
-    int opcion_elegida;
+    string primer_lanzamiento;
+    string lanzamiento_j1, lanzamiento_j2;
+
+    int empieza, noEmpieza;
+    int opcion_elegidaJ1, opcion_elegidaJ2;
     bool primer_turno = false;
 
     ///Estatuas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
@@ -29,6 +32,7 @@ void jugar(){
 
     ///Seleccion de primer turno
     empieza = primerTurno(jugadores);
+    noEmpieza = empieza-1;
     cout<<"El primer jugador en empezar es: "<<jugadores[empieza]<<endl;
     system("pause");
     system("cls");
@@ -36,29 +40,52 @@ void jugar(){
     ///Comienza la fase de expecidicion
     while(true){
         if(primer_turno == false){
-            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
-            cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[0]<<"\t\t\t\t";
-            cout<<jugadores[1]<<endl;
-            cout<<"ESTATUILLAS: ";
-            mostrar_estatuillas(estatuillas_j1, 5);
-            cout<<"\t\t";
-            cout<<"ESTATUILLAS: ";
-            mostrar_estatuillas(estatuillas_j2, 5);
-            cout<<endl;
-            cout<<"Por que estatuilla lanzaras "<<jugadores[empieza]<<"?"<<endl;
-            opcion_elegida = lanzamiento_estatuilla(vEstatuillas, 5);
-            lanzamiento_primer_turno(jugadores, 5,jugadores[empieza], vEstatuillas[opcion_elegida-1], estatuillas_j1, estatuillas_j2,vEstatuillas);
+            ///Pide al jugador seleccionar por cual estatua jugara
+            opcion_elegidaJ1 = seleccion_estatuilla_jugadores(jugadores[0], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+            opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[1], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
 
+            ///Lanzamiento de dados jugadores
+            lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas);
+            system("pause");
+            lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2], estatuillas_j2, estatuillas_j2, vEstatuillas);
+
+            ///Ambos seleccionaron la misma estatua y ambos obtienen esa estatua
+            cout<<endl;
+            cout<<lanzamiento_j1<<endl;
+            cout<<lanzamiento_j2<<endl;
             system("pause");
             system("cls");
+            if(lanzamiento_j1 == lanzamiento_j2 && lanzamiento_j1 != "No obtuvo"){
+                    cout<<"Ambos han seleccionado y obtenido la misma estatua, por lo tanto el jugador "<<jugadores[0]<<" se lleva la estatua y el jugador "<<jugadores[1]<<
+                    " tiene que volver a seleccionar otra estatua"<<endl;
 
-            primer_turno = true;
-        }else{
-            /*turno_primer_jugador();
-            turno_segundo_jugador();*/
+                    system("pause");
+                    system("cls");
 
-        }
+                    estatuillas_j1[buscar_estatua(vEstatuillas,5,lanzamiento_j1)] = {vEstatuillas[buscar_estatua(vEstatuillas,5,lanzamiento_j1)]};
+
+                    opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[1], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+                    lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2], estatuillas_j2, estatuillas_j2, vEstatuillas);
+
+
+            }else if(lanzamiento_j1 != "No obtuvo"){
+                estatuillas_j1[buscar_estatua(vEstatuillas,5,lanzamiento_j1)] = {vEstatuillas[buscar_estatua(vEstatuillas,5,lanzamiento_j1)]};
+                mostrar_estatuillas(estatuillas_j1,5);
+                cout<<endl;
+            }else if(lanzamiento_j2 != "No obtuvo"){
+                estatuillas_j2[buscar_estatua(vEstatuillas,5,lanzamiento_j1)] = {vEstatuillas[buscar_estatua(vEstatuillas,5,lanzamiento_j2)]};
+                mostrar_estatuillas(estatuillas_j2,5);
+                cout<<endl;
+            }
+
+             system("pause");
+
+            //primer_turno = true;
+        }/*else{
+            turno_primer_jugador();
+            turno_segundo_jugador();
+
+        }*/
     }
     ///Comienza la fase final
 

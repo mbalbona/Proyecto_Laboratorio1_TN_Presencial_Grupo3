@@ -93,8 +93,10 @@ string condicion_estatua(string *vEstatuas, int tam, string opcion){
 }
 
 ///Funcion que determina si ganaste o no ganaste una estatua
-void  obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, string opcion){
+string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, string opcion){
     int opc;
+    string nada = "Nada";
+
 
     for(int i = 0; i < tam; i++){
         if(vEstatuas[i] == opcion){
@@ -104,47 +106,77 @@ void  obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, string
 
     switch(opc){
         case 0: if((dado1 % 2 == 0 && dado2 % 2 == 1) || (dado1 % 2 == 1 && dado2 % 2 == 0)){
-                        cout<<"Cangrejo"<<endl;
-                        return;
+                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
+                        return "cangrejo";
                         }
                         break;
         case 1:  if(dado1 < 5 && dado2 < 5){
-                        cout<<"Hormiga"<<endl;
-                        return;
+                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
+                        return "hormiga";
                         }
                         break;
         case 2:   if((dado1 + dado2) == 7){
-                        cout<<"Medusa"<<endl;
-                        return;
+                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
+                        return "medusa";
                         }
                         break;
         case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1)){
-                        cout<<"Aguila"<<endl;
-                        return;
+                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
+                        return"anguila";
                         }
                         break;
         case 4: if(((dado1 + 1) == dado2) || (dado2 + 1) == dado1){
-                        cout<<"Salamandra"<<endl;
-                        return;
+                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: "<<endl;
+                        return "salamandra";
                         }
                         break;
     }
 
     cout<<"NO HAS OBTENIDO NIGUNA ESTATUILLAS"<<endl;
-    return;
+    return nada;
 
 
 }
 
+///Interfaz de jugador seleccionando por cual estatua jugara
+int seleccion_estatuilla_jugadores(string jugador, string *jugadores, string *vEstatuas, int tam, string *estatuas_j1, string *estatuas_j2){
+            int opcion_elegida;
 
-///Interfaz del primer lanzamiento
-void lanzamiento_primer_turno(string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas){
+            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"---------------------------------------------------"<<endl;
+            cout<<jugadores[0]<<"\t\t\t\t";
+            cout<<jugadores[1]<<endl;
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuas_j1, tam);
+            cout<<"\t\t";
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuas_j2, tam);
+            cout<<endl;
+            cout<<"Por que estatuilla lanzaras "<<jugador<<"?"<<endl;
+            opcion_elegida = lanzamiento_estatuilla(vEstatuas, 5);
+
+            system("cls");
+            return opcion_elegida;
+
+}
+
+///Ubicar estatuas
+int buscar_estatua(string *vEstatuas, int tam, string seleccion){
+    for(int i = 0; i < tam; i++){
+        if(vEstatuas[i] == seleccion){
+            return i;
+        }
+    }
+}
+///Lanzamiento de estatuillas
+string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas){
     while(true){
             system("cls");
 
             int dado1, dado2;
+            string no_obtuvo = "No obtuvo";
 
-            string condicion;
+            string condicion, estatua_obtenida;
 
             cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
@@ -171,6 +203,14 @@ void lanzamiento_primer_turno(string *jugadores, int tam,  string jugador, strin
             cout<<"Segundo dado: ";
             dado2 = tiraDado();
             cout<<dado2<<endl;
+
+            estatua_obtenida = obtencion_estatua(dado1,dado2,vEstatuas,tam,opcion);
+
+            if(estatua_obtenida == "Nada"){
+                return no_obtuvo;
+            }else{
+                return estatua_obtenida;
+            }
 
             system("pause");
     }
