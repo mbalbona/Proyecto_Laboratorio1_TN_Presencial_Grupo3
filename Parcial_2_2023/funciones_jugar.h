@@ -184,13 +184,11 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             cout<<jugadores[noEmpieza]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, tam);
-            cout<<"\n";
             cout<<"\t\t";
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j2, tam);
             cout<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<endl;
             cout<<endl;
             cout<<"TURNO DE "<<jugador<<endl;
             cout<<"-------------------------"<<endl;

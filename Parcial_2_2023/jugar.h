@@ -83,27 +83,28 @@ void jugar(){
 
                                 }
                         }
+                        if(opcion_elegidaJ1 != opcion_elegidaJ2){
+                             if(lanzamiento_j1 != "No obtuvo"){
+                                ///Se agrega la estatua obtenida por el jugador
+                                    estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
+
+                                ///Se elimina la estatua conseguida para que no se liste mas
+                                    vEstatuillas[opcion_elegidaJ1-1] = {" "};
+                             }
+                             if(lanzamiento_j2 != "No obtuvo"){
+                                ///Se agrega la estatua obtenida por el jugador
+                                    estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
+
+                                ///Se elimina la estatua conseguida para que no se liste mas
+                                    vEstatuillas[opcion_elegidaJ2-1] = {" "};
+                             }
+                             system("pause");
+                        }
                         system("pause");
                         system("cls");
                     }
 
-                    if(opcion_elegidaJ1 != opcion_elegidaJ2){
-                         if(lanzamiento_j1 != "No obtuvo"){
-                            ///Se agrega la estatua obtenida por el jugador
-                                estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
 
-                            ///Se elimina la estatua conseguida para que no se liste mas
-                                vEstatuillas[opcion_elegidaJ1-1] = {" "};
-                         }
-                         if(lanzamiento_j2 != "No obtuvo"){
-                            ///Se agrega la estatua obtenida por el jugador
-                                estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
-
-                            ///Se elimina la estatua conseguida para que no se liste mas
-                                vEstatuillas[opcion_elegidaJ2-1] = {" "};
-                         }
-                         system("pause");
-                    }
                 }else{
                     ///Lanzamiento de dados jugadores
                     lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas);
