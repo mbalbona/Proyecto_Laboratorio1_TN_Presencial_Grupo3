@@ -12,8 +12,8 @@ int tiraDado(){
 void mostrar_estatuillas(string *estatuillas_jugador, int tam){
 
     for(int i = 0; i < tam; i++){
-        if((estatuillas_jugador[i] != " ") || (estatuillas_jugador[i] != "Ninguna")){
-            cout<<estatuillas_jugador[i]<<" ";
+        if(estatuillas_jugador[i] != ""){
+            cout<<estatuillas_jugador[i]<<"";
         }
     }
 
@@ -57,7 +57,7 @@ int primerTurno(string jugadores[2]){
 int lanzamiento_estatuilla(string *vEstatuas, int tam){
     int opc;
     for(int i = 0; i < 5; i++){
-        if(vEstatuas[i] != " "){
+        if(vEstatuas[i] != ""){
             cout<<i+1<<")"<<vEstatuas[i]<<endl;
         }
     }
@@ -65,7 +65,13 @@ int lanzamiento_estatuilla(string *vEstatuas, int tam){
     cout<<"Opcion a elegir: ";
     cin>>opc;
 
-    return opc;
+    if((opc > 5) || (opc < 1)){
+        return -1;
+    }else if(vEstatuas[opc-1].length() == 0){
+        return -1;
+    }else if(opc > 0 && opc < 6){
+        return opc;
+    }
 }
 
 ///Funcion para mostrar la condicion de obtencion de la estatua
@@ -145,8 +151,9 @@ string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, strin
 ///Interfaz de jugador seleccionando por cual estatua jugara
 
 int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, string *jugadores, string *vEstatuas, int tam, string *estatuas_j1, string *estatuas_j2){
-            int opcion_elegida;
 
+            int opcion_elegida;
+            atras:
             cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
             cout<<jugadores[empieza]<<"\t\t\t\t";
@@ -159,6 +166,14 @@ int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, s
             cout<<endl;
             cout<<"Por que estatuilla lanzaras "<<jugador<<"?"<<endl;
             opcion_elegida = lanzamiento_estatuilla(vEstatuas, 5);
+
+            if(opcion_elegida == -1){
+                cout<<endl;
+                cout<<"OPCION INCORRECTA. INGRESE UN VALOR CORRECTO."<<endl;
+                system("pause");
+                system("cls");
+                goto atras;
+            }
 
             system("cls");
             return opcion_elegida;
@@ -206,7 +221,6 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             cout<<endl;
 
             estatua_obtenida = obtencion_estatua(dado1,dado2,vEstatuas,tam,opcion);
-
             if(estatua_obtenida == "Nada"){
                 system("pause");
                 system("cls");

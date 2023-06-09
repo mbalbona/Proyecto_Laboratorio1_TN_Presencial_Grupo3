@@ -7,8 +7,8 @@
 void jugar(){
     system("cls");
     string jugadores[2] = {};
-    string estatuillas_j1[5] = {"Ninguna"};
-    string estatuillas_j2[5] = {"Ninguna"};
+    string estatuillas_j1[5] = {""};
+    string estatuillas_j2[5] = {""};
 
     string primer_lanzamiento;
     string lanzamiento_j1, lanzamiento_j2;
@@ -69,41 +69,46 @@ void jugar(){
                                 estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
 
                                 ///Se elimina la estatua conseguida para que no se liste mas
-                                vEstatuillas[opcion_elegidaJ1-1] = {" "};
-
-                                system("pause");
-                                system("cls");
+                                vEstatuillas[opcion_elegidaJ1-1] = {""};
 
                                 if(lanzamiento_j2 != "No obtuvo"){
                                     system("cls");
-                                    cout<<"Al haber seleccionado las mismas estatuas el jugador "<<jugadores[empieza]<<" ha ganado la estatua."<<endl;
-                                    cout<<"Por favor seleccionar una nueva estatua de la siguiente lista: "<<endl;
+                                    cout<<"AL HABER SELECCIONADO LAS MISMAS ESTATUAS EL JUGADOR "<<jugadores[empieza]<<" HA GANADO."<<endl;
+                                    cout<<"POR FAVOR SELECCIONA NUEVAMENTE UNA ESTATUA: "<<endl;
+                                    system("pause");
+                                    system("cls");
                                     opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                                     lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas);
 
                                 }
+
                         }
+                        if(lanzamiento_j2 != "No obtuvo"){
+                                ///Se agrega la estatua obtenida por el jugador
+                                    estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
+
+                                ///Se elimina la estatua conseguida para que no se liste mas
+                                    vEstatuillas[opcion_elegidaJ2-1] = {""};
+                        }
+
                         if(opcion_elegidaJ1 != opcion_elegidaJ2){
                              if(lanzamiento_j1 != "No obtuvo"){
                                 ///Se agrega la estatua obtenida por el jugador
                                     estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
 
                                 ///Se elimina la estatua conseguida para que no se liste mas
-                                    vEstatuillas[opcion_elegidaJ1-1] = {" "};
+                                    vEstatuillas[opcion_elegidaJ1-1] = {""};
                              }
                              if(lanzamiento_j2 != "No obtuvo"){
                                 ///Se agrega la estatua obtenida por el jugador
                                     estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
 
                                 ///Se elimina la estatua conseguida para que no se liste mas
-                                    vEstatuillas[opcion_elegidaJ2-1] = {" "};
+                                    vEstatuillas[opcion_elegidaJ2-1] = {""};
                              }
-                             system("pause");
                         }
-                        system("pause");
                         system("cls");
                     }
-
 
                 }else{
                     ///Lanzamiento de dados jugadores
