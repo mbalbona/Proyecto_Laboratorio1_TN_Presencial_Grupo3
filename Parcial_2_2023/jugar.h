@@ -55,6 +55,7 @@ void jugar(){
                 opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
 
                 ///Se lanzan los dados
+
                 ///Lanza jugador 1
                 lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas);
 
@@ -72,17 +73,21 @@ void jugar(){
 
                                 system("pause");
                                 system("cls");
+
                                 if(lanzamiento_j2 != "No obtuvo"){
                                     system("cls");
                                     cout<<"Al haber seleccionado las mismas estatuas el jugador "<<jugadores[empieza]<<" ha ganado la estatua."<<endl;
                                     cout<<"Por favor seleccionar una nueva estatua de la siguiente lista: "<<endl;
                                     opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+                                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas);
 
                                 }
                         }
                         system("pause");
                         system("cls");
-                    }else if(opcion_elegidaJ1 != opcion_elegidaJ2){
+                    }
+
+                    if(opcion_elegidaJ1 != opcion_elegidaJ2){
                          if(lanzamiento_j1 != "No obtuvo"){
                             ///Se agrega la estatua obtenida por el jugador
                                 estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
@@ -100,7 +105,7 @@ void jugar(){
                          system("pause");
                     }
                 }else{
-                     ///Lanzamiento de dados jugadores
+                    ///Lanzamiento de dados jugadores
                     lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas);
                     system("pause");
                     lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas);

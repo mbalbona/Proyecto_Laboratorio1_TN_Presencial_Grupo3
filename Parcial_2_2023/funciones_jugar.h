@@ -12,8 +12,8 @@ int tiraDado(){
 void mostrar_estatuillas(string *estatuillas_jugador, int tam){
 
     for(int i = 0; i < tam; i++){
-        if((estatuillas_jugador[i] != " ") || (estatuillas_jugador[i] != "Ninguna"){
-            cout<<estatuillas_jugador[i];
+        if((estatuillas_jugador[i] != " ") || (estatuillas_jugador[i] != "Ninguna")){
+            cout<<estatuillas_jugador[i]<<" ";
         }
     }
 
@@ -184,6 +184,7 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             cout<<jugadores[noEmpieza]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, tam);
+            cout<<"\n";
             cout<<"\t\t";
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j2, tam);
