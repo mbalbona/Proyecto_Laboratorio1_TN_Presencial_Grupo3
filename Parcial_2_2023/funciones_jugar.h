@@ -159,6 +159,29 @@ int seleccion_estatuilla_jugadores(string jugador, string *jugadores, string *vE
             return opcion_elegida;
 
 }
+    ///SE AGREGO DOS PARAMETROS PARA QUE LOS JUGADORES SE MANTENGA EN SU LUGAR RESPECTO AL EMPIEZA Y NOEMPIEZA
+/*
+int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, string *jugadores, string *vEstatuas, int tam, string *estatuas_j1, string *estatuas_j2){
+            int opcion_elegida;
+
+            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"---------------------------------------------------"<<endl;
+            cout<<jugadores[empieza]<<"\t\t\t\t";
+            cout<<jugadores[noEmpieza]<<endl;
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuas_j1, tam);
+            cout<<"\t\t";
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuas_j2, tam);
+            cout<<endl;
+            cout<<"Por que estatuilla lanzaras "<<jugador<<"?"<<endl;
+            opcion_elegida = lanzamiento_estatuilla(vEstatuas, 5);
+
+            system("cls");
+            return opcion_elegida;
+
+}
+*/
 
 ///Ubicar estatuas
 int buscar_estatua(string *vEstatuas, int tam, string seleccion){
@@ -215,6 +238,58 @@ string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string o
             system("pause");
     }
 }
+
+    ///SE AGREGARON LOS PARAMETROS EMPIEZA Y NOEMPIEZA PARA PASARLOS A JUGADORES ASI MANTIENE LOS NOMBRES EN SU LUGAR
+/*
+string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas){
+    while(true){
+            system("cls");
+
+            int dado1, dado2;
+            string no_obtuvo = "No obtuvo";
+
+            string condicion, estatua_obtenida;
+
+            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"---------------------------------------------------"<<endl;
+            cout<<jugadores[empieza]<<"\t\t\t\t";
+            cout<<jugadores[noEmpieza]<<endl;
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuillas_j1, tam);
+            cout<<"\t\t";
+            cout<<"ESTATUILLAS: ";
+            mostrar_estatuillas(estatuillas_j2, tam);
+            cout<<endl;
+            cout<<"---------------------------------------------------"<<endl;
+            cout<<endl;
+            cout<<"TURNO DE "<<jugador<<endl;
+            cout<<"-------------------------"<<endl;
+            cout<<"ESTATUILLA OBJETIVO: "<<opcion<<endl;
+            condicion = condicion_estatua(vEstatuas,tam,opcion);
+            cout<<"CONDICIONES DE OBTENCION: "<<condicion<<endl;
+            cout<<"-------------------------"<<endl;
+            cout<<"Primer dado: ";
+            dado1 = tiraDado();
+            cout<<dado1<<endl;
+
+            cout<<"Segundo dado: ";
+            dado2 = tiraDado();
+            cout<<dado2<<endl;
+            cout<<endl;
+
+            estatua_obtenida = obtencion_estatua(dado1,dado2,vEstatuas,tam,opcion);
+
+            if(estatua_obtenida == "Nada"){
+                return no_obtuvo;
+            }else{
+                return estatua_obtenida;
+            }
+
+            system("pause");
+    }
+}
+
+*/
 
 #endif // FUNCIONES_JUGAR_H_INCLUDED
 
