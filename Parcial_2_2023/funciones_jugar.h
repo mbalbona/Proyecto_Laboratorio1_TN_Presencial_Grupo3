@@ -31,14 +31,21 @@ int primerTurno(string jugadores[2]){
             ultimoDado = tiraDado();
             dadoAnterior = ultimoDado;
             jugador = i;
+            cout<<endl;
             cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
         }else{
             ultimoDado = tiraDado();
+            cout<<endl;
             cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
 
             if(ultimoDado == dadoAnterior){
                 system("cls");
+                cout<<endl;
+                cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
+                cout<<endl;
+                cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
                 cout<<"Los dados se repitieron. Se vuelve a tirar."<<endl;
+                cout<<endl;
                 system("Pause");
                 system("cls");
                 goto atras;
@@ -116,34 +123,34 @@ string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, strin
 
     switch(opc){
         case 0: if((dado1 % 2 == 0 && dado2 % 2 == 1) || (dado1 % 2 == 1 && dado2 % 2 == 0)){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
 
-                        return "cangrejo";
+                        return " Cangrejo";
                         }
                         break;
         case 1:  if(dado1 < 5 && dado2 < 5){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
-                        return "hormiga";
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
+                        return " Hormiga";
                         }
                         break;
         case 2:   if((dado1 + dado2) == 7){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
-                        return "medusa";
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
+                        return " Medusa";
                         }
                         break;
         case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1)){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
-                        return"anguila";
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
+                        return" Aguila";
                         }
                         break;
         case 4: if(((dado1 + 1) == dado2) || (dado2 + 1) == dado1){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: "<<endl;
-                        return "salamandra";
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: "<<endl;
+                        return " Salamandra";
                         }
                         break;
     }
 
-    cout<<"NO HAS OBTENIDO NIGUNA ESTATUILLA"<<endl;
+    cout<<">NO HAS OBTENIDO NIGUNA ESTATUILLA"<<endl;
     return nada;
 
 
@@ -155,7 +162,7 @@ int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, s
 
             int opcion_elegida;
             atras:
-            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
             cout<<jugadores[empieza]<<"\t\t\t\t";
             cout<<jugadores[noEmpieza]<<endl;
@@ -164,6 +171,7 @@ int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, s
             cout<<"\t\t";
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuas_j2, tam);
+            cout<<endl;
             cout<<endl;
             cout<<"Por que estatuilla lanzaras "<<jugador<<"?"<<endl;
             opcion_elegida = lanzamiento_estatuilla(vEstatuas, 5);
@@ -194,7 +202,7 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
 
             string condicion, estatua_obtenida;
 
-            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
             cout<<jugadores[empieza]<<"\t\t\t\t";
             cout<<jugadores[noEmpieza]<<endl;
