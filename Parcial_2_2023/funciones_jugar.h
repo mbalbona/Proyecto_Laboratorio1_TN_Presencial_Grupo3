@@ -117,6 +117,7 @@ string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, strin
     switch(opc){
         case 0: if((dado1 % 2 == 0 && dado2 % 2 == 1) || (dado1 % 2 == 1 && dado2 % 2 == 0)){
                         cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
+
                         return "cangrejo";
                         }
                         break;
@@ -234,6 +235,20 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
     }
 }
 
+int recorrer_estatuas(string *vEstatuas, int tam){
+    int cont = 0;
+    for(int i = 0; i < tam; i++){
+        if(vEstatuas[i] == ""){
+            cont++;
+        }
+    }
 
+    if(cont++ == 5){
+        return 0;
+        }
+        else{
+            return 1;
+    }
+}
 #endif // FUNCIONES_JUGAR_H_INCLUDED
 
