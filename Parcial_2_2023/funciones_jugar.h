@@ -144,7 +144,7 @@ string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, strin
                         }
                         break;
         case 4: if(((dado1 + 1) == dado2) || (dado2 + 1) == dado1){
-                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: "<<endl;
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: SALAMANDRA"<<endl;
                         return " Salamandra";
                         }
                         break;
@@ -193,11 +193,11 @@ int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, s
 ///Lanzamiento de estatuillas
 ///SE AGREGARON LOS PARAMETROS EMPIEZA Y NOEMPIEZA PARA PASARLOS A JUGADORES ASI MANTIENE LOS NOMBRES EN SU LUGAR
 
-string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas){
+string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int dado1, int dado2){
     while(true){
             system("cls");
 
-            int dado1, dado2;
+            //int dado1, dado2;
             string no_obtuvo = "No obtuvo";
 
             string condicion, estatua_obtenida;
@@ -221,11 +221,11 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             cout<<"CONDICIONES DE OBTENCION: "<<condicion<<endl;
             cout<<"-------------------------"<<endl;
             cout<<"Primer dado: ";
-            dado1 = tiraDado();
+            //dado1 = tiraDado();
             cout<<dado1<<endl;
 
             cout<<"Segundo dado: ";
-            dado2 = tiraDado();
+            //dado2 = tiraDado();
             cout<<dado2<<endl;
             cout<<endl;
 
@@ -239,8 +239,19 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
                 system("cls");
                 return estatua_obtenida;
             }
-
     }
+}
+
+int maldicion(string lanzamiento, int maldicion, int suma){
+
+    ///MALDICION OBTENIDA
+    if(lanzamiento == " Cangrejo" || lanzamiento == " Hormiga" ){
+        maldicion+=suma;
+        cout<<"MALDICION OBTENIDA: AHORA SE TE VA A RESTAR "<<maldicion<<" PUNTOS EN LA FASE FINAL."<<endl;
+        system("pause");
+        return maldicion;
+    }
+
 }
 
 int recorrer_estatuas(string *vEstatuas, int tam){
