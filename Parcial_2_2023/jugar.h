@@ -44,8 +44,6 @@ void jugar(){
     ///Limpiamos la pantalla
     system("cls");
 
-
-
     ///Seleccion de primer turno
     empieza = primerTurno(jugadores);
     if(empieza==0){
@@ -64,7 +62,7 @@ void jugar(){
     while(true){
         system("cls");
 
-                while(bandera){
+                /*while(bandera){
                     cout<<endl;
                     cout<<"LA MALDICION DE LA MEDUSA COMIENZA, TIENE 3 LANZAMIENTOS EL JUGADOR: "<<jugadores[jugadorMedusa]<<endl;
                     system("pause");
@@ -110,7 +108,7 @@ void jugar(){
                     cout<<"FINALIZA LA MALDICION DE LA MEDUSA, AMBOS JUGADORES VUELVEN A LANZAR."<<endl;
                     system("pause");
                     system("cls");
-                }
+                }*/
 
                 ///Seleccion de estatua por la que jugara
 
@@ -130,7 +128,7 @@ void jugar(){
                 suma_j1=dado1+dado2;
                 //cout<<suma_j1<<endl;
                 //system("pause");
-                lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, dado1, dado2);
+                lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, sumaj1);
 
                 ///Lanza jugador 2
                 dado1 = tiraDado();
@@ -142,7 +140,7 @@ void jugar(){
                 suma_j2=dado1+dado2;
                 //cout<<suma_j2<<endl;
                 //system("pause");
-                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, dado1, dado2);
+                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, suma_j2);
 
 
                 ///Lanzamiento de dados con opciones de estatuillas iguales

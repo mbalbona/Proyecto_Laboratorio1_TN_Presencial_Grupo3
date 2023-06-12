@@ -189,15 +189,60 @@ int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, s
 
 }
 
+int comprobar_maldicion(string *vEstatuas, int suma, string estatua_obtenida){
+    int opc;
+
+    ///Obtenemos la posicion de la estatua que se obtuvo
+    for(int i = 0; i < tam; i++){
+        if(vEstatuas[i] == estatua_obtenida){
+            opc = i;
+        }
+    }
+
+    ///Comprobamos que maldicion obtuvo
+    switch(opc){
+        case 0: cout<<"LA MALDICION DEL CANGREJO SE ACTIVA!"<<endl;
+            maldicion_cangrejo();
+            break;
+        case 1: cout<<"LA MALDICION DE LA HORMIGA SE ACTIVA!"<<endl;
+            maldicion_hormiga();
+            break;
+        case 2: cout<<"LA MALDICION DE LA MEDUSA SE ACTIVA!"<<endl;
+            maldicion_medusa();
+            break;
+        case 3: cout<<"LA MALDICION DEL AGUILA SE ACTIVA!"<<endl;
+            maldicion_aguila();
+            break;
+        case 4: cout<<"LA MALDICION DE LA SALAMANDRA SE ACTIVA!"<<endl;
+            maldicion_salamandra();
+            break;
+    }
+
+}
+
+int recorrer_estatuas(string *vEstatuas, int tam){
+    int cont = 0;
+    for(int i = 0; i < tam; i++){
+        if(vEstatuas[i] == ""){
+            cont++;
+        }
+    }
+
+    if(cont == 5){
+        return 0;
+        }
+        else{
+            return 1;
+    }
+}
 
 ///Lanzamiento de estatuillas
-///SE AGREGARON LOS PARAMETROS EMPIEZA Y NOEMPIEZA PARA PASARLOS A JUGADORES ASI MANTIENE LOS NOMBRES EN SU LUGAR
 
-string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int dado1, int dado2){
+string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int dado1, int dado2, int sumaJugador){
     while(true){
             system("cls");
 
-            //int dado1, dado2;
+            int dado1, dado2;
             string no_obtuvo = "No obtuvo";
 
             string condicion, estatua_obtenida;
@@ -221,11 +266,11 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             cout<<"CONDICIONES DE OBTENCION: "<<condicion<<endl;
             cout<<"-------------------------"<<endl;
             cout<<"Primer dado: ";
-            //dado1 = tiraDado();
+            dado1 = tiraDado();
             cout<<dado1<<endl;
 
             cout<<"Segundo dado: ";
-            //dado2 = tiraDado();
+            dado2 = tiraDado();
             cout<<dado2<<endl;
             cout<<endl;
 
@@ -235,6 +280,7 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
                 system("cls");
                 return no_obtuvo;
             }else{
+                comprobar_maldicion(vEstatuas, tam, estatua_obtenida);
                 system("pause");
                 system("cls");
                 return estatua_obtenida;
@@ -242,40 +288,6 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
     }
 }
 
-int maldicion(string lanzamiento, int maldicion, int suma, bool bandera){
 
-    ///MALDICION OBTENIDA
-    if(lanzamiento == " Cangrejo" || lanzamiento == " Hormiga" ){
-        maldicion+=suma;
-        cout<<"MALDICION OBTENIDA: AHORA SE TE VA A RESTAR "<<maldicion<<" PUNTOS EN LA FASE FINAL."<<endl;
-        system("pause");
-        return maldicion;
-    }
-
-    if(lanzamiento == " Medusa"){
-        cout<<"LA MALDICION DE LA MEDUSA A SURGIDO!"<<endl;
-        system("pause");
-        bandera=1;
-        return bandera;
-
-    }
-
-}
-
-int recorrer_estatuas(string *vEstatuas, int tam){
-    int cont = 0;
-    for(int i = 0; i < tam; i++){
-        if(vEstatuas[i] == ""){
-            cont++;
-        }
-    }
-
-    if(cont++ == 5){
-        return 0;
-        }
-        else{
-            return 1;
-    }
-}
 #endif // FUNCIONES_JUGAR_H_INCLUDED
 
