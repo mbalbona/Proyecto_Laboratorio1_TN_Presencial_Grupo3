@@ -13,8 +13,13 @@ void jugar(){
     string primer_lanzamiento;
     string lanzamiento_j1, lanzamiento_j2;
 
+    string lanzamiento_Medusa;
+
     int empieza, noEmpieza;
+    int jugadorMedusa;
     int opcion_elegidaJ1, opcion_elegidaJ2;
+
+    int opcion_elegida_Medusa;
 
     int dado1,dado2,suma_j1,suma_j2;
     int maldicion_j1{0};
@@ -54,9 +59,59 @@ void jugar(){
     system("pause");
     system("cls");
 
+    bool bandera= false;
     ///Comienza la fase de expecidicion
     while(true){
         system("cls");
+
+                while(bandera){
+                    cout<<endl;
+                    cout<<"LA MALDICION DE LA MEDUSA COMIENZA, TIENE 3 LANZAMIENTOS EL JUGADOR: "<<jugadores[jugadorMedusa]<<endl;
+                    system("pause");
+                    system("cls");
+                    for(int i=0; i<3; i++)
+                    {
+                        ///OPCION DE ESTATUILLA DENTRO LA MALDICION DE LA MEDUSA
+                        opcion_elegida_Medusa = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[jugadorMedusa], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+                        ///LANZAMIENDO DENTRO DE LA MALDICION DE LA MEDUSA
+                        lanzamiento_Medusa = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[jugadorMedusa], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, dado1, dado2);
+                        if(lanzamiento_Medusa != "No obtuvo"){
+                                if(jugadorMedusa==0){
+                                        ///AQUI CARGAR LA ESTATUA DEL JUGAR EMPIEZA
+                                     ///Se agrega la estatua obtenida por el jugador
+                                        estatuillas_j1[opcion_elegida_Medusa-1] = lanzamiento_Medusa;
+
+                                        ///Maldicion de la Estatua Obtenida
+                                        maldicion_total = maldicion(lanzamiento_Medusa, maldicion_j1, suma_j2, bandera);
+
+                                        maldicion_j2=maldicion_total;
+
+                                    ///Se elimina la estatua conseguida para que no se liste mas
+                                        vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                }else{
+                                    ///AQUI CARGA LA ESTATUA DEL JUGADOR NoEMPIEZA
+                                    ///Se agrega la estatua obtenida por el jugador
+                                        estatuillas_j2[opcion_elegida_Medusa-1] = lanzamiento_Medusa;
+
+                                        ///Maldicion de la Estatua Obtenida
+                                        maldicion_total = maldicion(lanzamiento_Medusa, maldicion_j2, suma_j1, bandera);
+
+                                        maldicion_j2=maldicion_total;
+
+                                    ///Se elimina la estatua conseguida para que no se liste mas
+                                        vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                }
+
+                            }///LLAVE DEL IF SI ES QUE OBTUVO LA ESTATUA
+                    }///FIN CICLO FOR, TERMINA LA MALDICION DE LA MEDUSA
+
+
+                    bandera=false;
+                    cout<<"FINALIZA LA MALDICION DE LA MEDUSA, AMBOS JUGADORES VUELVEN A LANZAR."<<endl;
+                    system("pause");
+                    system("cls");
+                }
+
                 ///Seleccion de estatua por la que jugara
 
                 opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
@@ -98,8 +153,16 @@ void jugar(){
                                 estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
 
                                 ///Maldicion de la Estatua Obtenida
-                                maldicion_total = maldicion(lanzamiento_j1, maldicion_j1, suma_j2);
+                                maldicion_total = maldicion(lanzamiento_j1, maldicion_j1, suma_j2, bandera);
+
+                                if(maldicion_total == 1){
+                                    bandera=true;
+                                    jugadorMedusa=noEmpieza;
+                                    maldicion_total--;
+                                }
+
                                 maldicion_j1=maldicion_total;
+
 
                                 ///Se elimina la estatua conseguida para que no se liste mas
                                 vEstatuillas[opcion_elegidaJ1-1] = {""};
@@ -123,7 +186,12 @@ void jugar(){
                                         estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
 
                                         ///Maldicion de la Estatua Obtenida
-                                        maldicion_total = maldicion(lanzamiento_j2, maldicion_j2, suma_j1);
+                                        maldicion_total = maldicion(lanzamiento_j2, maldicion_j2, suma_j1, bandera);
+                                        if(maldicion_total == 1){
+                                            bandera=true;
+                                            jugadorMedusa=empieza;
+                                            maldicion_total--;
+                                        }
                                         maldicion_j2=maldicion_total;
 
                                     ///Se elimina la estatua conseguida para que no se liste mas
@@ -138,7 +206,12 @@ void jugar(){
                             estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
 
                             ///Maldicion de la Estatua Obtenida
-                            maldicion_total = maldicion(lanzamiento_j1, maldicion_j1, suma_j2);
+                            maldicion_total = maldicion(lanzamiento_j1, maldicion_j1, suma_j2, bandera);
+                            if(maldicion_total == 1){
+                                    bandera=true;
+                                    jugadorMedusa=noEmpieza;
+                                    maldicion_total--;
+                                }
                             maldicion_j1=maldicion_total;
 
 
@@ -150,7 +223,12 @@ void jugar(){
                             estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
 
                             ///Maldicion de la Estatua Obtenida;
-                            maldicion_total = maldicion(lanzamiento_j2, maldicion_j2, suma_j1);
+                            maldicion_total = maldicion(lanzamiento_j2, maldicion_j2, suma_j1, bandera);
+                            if(maldicion_total == 1){
+                                    bandera=true;
+                                    jugadorMedusa=empieza;
+                                    maldicion_total--;
+                                }
                             maldicion_j2=maldicion_total;
 
 

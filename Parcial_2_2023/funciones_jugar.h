@@ -242,7 +242,7 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
     }
 }
 
-int maldicion(string lanzamiento, int maldicion, int suma){
+int maldicion(string lanzamiento, int maldicion, int suma, bool bandera){
 
     ///MALDICION OBTENIDA
     if(lanzamiento == " Cangrejo" || lanzamiento == " Hormiga" ){
@@ -250,6 +250,14 @@ int maldicion(string lanzamiento, int maldicion, int suma){
         cout<<"MALDICION OBTENIDA: AHORA SE TE VA A RESTAR "<<maldicion<<" PUNTOS EN LA FASE FINAL."<<endl;
         system("pause");
         return maldicion;
+    }
+
+    if(lanzamiento == " Medusa"){
+        cout<<"LA MALDICION DE LA MEDUSA A SURGIDO!"<<endl;
+        system("pause");
+        bandera=1;
+        return bandera;
+
     }
 
 }
