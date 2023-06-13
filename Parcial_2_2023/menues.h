@@ -3,6 +3,7 @@
 
 #include "jugar.h"
 
+
 void menu(){
 
     while(true){
