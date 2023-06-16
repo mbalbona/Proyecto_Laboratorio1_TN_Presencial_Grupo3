@@ -3,11 +3,12 @@
 
 #include "jugar.h"
 
+
 void menu(){
 
     while(true){
         int opc;
-        cout<<"IRWIN'S REVENGE"<<endl;
+        cout<<"\tIRWIN'S REVENGE"<<endl;
         cout<<"---------------------------"<<endl;
         cout<<"1 - JUGAR PARA DOS JUGADORES"<<endl;
         cout<<"2 - ESTADISTICAS"<<endl;

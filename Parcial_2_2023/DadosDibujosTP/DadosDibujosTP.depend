@@ -1,0 +1,79 @@
+# depslib dependency file v1.0
+1686340753 source:c:\users\pineda walter\desktop\dadosdibujo\dadosdibujostp\main.cpp
+	<iostream>
+	"rlutil.h"
+	"dados.h"
+
+1686270610 c:\users\pineda walter\desktop\dadosdibujo\dadosdibujostp\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1686279571 c:\users\pineda walter\desktop\dadosdibujo\dadosdibujostp\dados.h
+
+1686341242 source:c:\users\pineda walter\desktop\dadosdibujo\dadosdibujostp\funciondados.cpp
+	<iostream>
+	"rlutil.h"
+	"dados.h"
+
+1686330444 source:c:\users\walte\desktop\dadosdibujostp\funciondados.cpp
+	<iostream>
+	"rlutil.h"
+	"dados.h"
+
+1686259812 c:\users\walte\desktop\dadosdibujostp\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1686268772 c:\users\walte\desktop\dadosdibujostp\dados.h
+
+1686330466 source:c:\users\walte\desktop\dadosdibujostp\main.cpp
+	<iostream>
+	"rlutil.h"
+	"dados.h"
+
+1686618282 source:c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\dadosdibujostp\main.cpp
+	<iostream>
+	"rlutil.h"
+	"dados.h"
+
+1686363069 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\dadosdibujostp\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1686363069 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\dadosdibujostp\dados.h
+
+1686618240 source:c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\dadosdibujostp\funciondados.cpp
+	<iostream>
+	"rlutil.h"
+	"dados.h"
+

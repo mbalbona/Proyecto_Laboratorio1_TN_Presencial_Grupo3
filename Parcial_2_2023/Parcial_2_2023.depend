@@ -63,13 +63,45 @@
 	<string.h>
 	"menues.h"
 
-1686257996 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
+1686589900 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
 	"jugar.h"
 
-1686346098 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
+1686590823 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
 	"funciones_jugar.h"
 
-1686346098 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+1686590823 c:\users\mbalbona\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+
+1686624885 source:c:\users\mateo\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	<string.h>
+	"menues.h"
+
+1686626644 c:\users\mateo\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
+	"jugar.h"
+
+1686627128 c:\users\mateo\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
+	"funciones_jugar.h"
+
+1686627531 c:\users\mateo\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+
+1686624824 c:\users\mateo\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\maldiciones.h
+
+1686670427 source:c:\users\juan pablo\desktop\tup frgp\laboratorio 1\segundo parcial\proyecto_laboratorio1_tn_presencial_grupo3\proyectolabo\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	<string.h>
+	"menues.h"
+
+1686670427 c:\users\juan pablo\desktop\tup frgp\laboratorio 1\segundo parcial\proyecto_laboratorio1_tn_presencial_grupo3\proyectolabo\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
+	"jugar.h"
+
+1686954488 c:\users\juan pablo\desktop\tup frgp\laboratorio 1\segundo parcial\proyecto_laboratorio1_tn_presencial_grupo3\proyectolabo\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
+	"funciones_jugar.h"
+
+1686954512 c:\users\juan pablo\desktop\tup frgp\laboratorio 1\segundo parcial\proyecto_laboratorio1_tn_presencial_grupo3\proyectolabo\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
 
 1686347147 source:c:\users\walte\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
 	<iostream>

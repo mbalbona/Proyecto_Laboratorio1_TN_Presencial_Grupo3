@@ -1,9 +1,17 @@
 #ifndef FUNCIONES_JUGAR_H_INCLUDED
 #define FUNCIONES_JUGAR_H_INCLUDED
 
-///Funcion para tirar dado
+
+///Funcion para tirar dado (10 caras)
 int tiraDado(){
     int  numero = 10;
+
+    return (rand() % numero) + 1;
+}
+
+///Dado de 6 caras
+int tiraDado_6_caras(){
+    int  numero = 6;
 
     return (rand() % numero) + 1;
 }
@@ -12,13 +20,12 @@ int tiraDado(){
 void mostrar_estatuillas(string *estatuillas_jugador, int tam){
 
     for(int i = 0; i < tam; i++){
-        if((estatuillas_jugador[i] != " ") || (estatuillas_jugador[i] != "Ninguna")){
-            cout<<estatuillas_jugador[i]<<" ";
+        if(estatuillas_jugador[i] != ""){
+            cout<<estatuillas_jugador[i]<<"";
         }
     }
 
 }
-
 
 ///Funcion para utilizar el jugador elegido para el primer turno y su primer turno completo
 int primerTurno(string jugadores[2]){
@@ -31,14 +38,21 @@ int primerTurno(string jugadores[2]){
             ultimoDado = tiraDado();
             dadoAnterior = ultimoDado;
             jugador = i;
+            cout<<endl;
             cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
         }else{
             ultimoDado = tiraDado();
+            cout<<endl;
             cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
 
             if(ultimoDado == dadoAnterior){
                 system("cls");
+                cout<<endl;
+                cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
+                cout<<endl;
+                cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
                 cout<<"Los dados se repitieron. Se vuelve a tirar."<<endl;
+                cout<<endl;
                 system("Pause");
                 system("cls");
                 goto atras;
@@ -57,7 +71,7 @@ int primerTurno(string jugadores[2]){
 int lanzamiento_estatuilla(string *vEstatuas, int tam){
     int opc;
     for(int i = 0; i < 5; i++){
-        if(vEstatuas[i] != " "){
+        if(vEstatuas[i] != ""){
             cout<<i+1<<")"<<vEstatuas[i]<<endl;
         }
     }
@@ -65,7 +79,13 @@ int lanzamiento_estatuilla(string *vEstatuas, int tam){
     cout<<"Opcion a elegir: ";
     cin>>opc;
 
-    return opc;
+    if((opc > 5) || (opc < 1)){
+        return -1;
+    }else if(vEstatuas[opc-1].length() == 0){
+        return -1;
+    }else if(opc > 0 && opc < 6){
+        return opc;
+    }
 }
 
 ///Funcion para mostrar la condicion de obtencion de la estatua
@@ -110,44 +130,91 @@ string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, strin
 
     switch(opc){
         case 0: if((dado1 % 2 == 0 && dado2 % 2 == 1) || (dado1 % 2 == 1 && dado2 % 2 == 0)){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
-                        return "cangrejo";
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
+
+                        return "Cangrejo";
                         }
                         break;
         case 1:  if(dado1 < 5 && dado2 < 5){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
-                        return "hormiga";
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
+                        return "Hormiga";
                         }
                         break;
         case 2:   if((dado1 + dado2) == 7){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
-                        return "medusa";
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
+                        return "Medusa";
                         }
                         break;
         case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1)){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
-                        return"anguila";
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
+                        return"Aguila";
                         }
                         break;
         case 4: if(((dado1 + 1) == dado2) || (dado2 + 1) == dado1){
-                        cout<<"HAS OBTENIDO LA ESTATUA SELECCIONADA: "<<endl;
-                        return "salamandra";
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: SALAMANDRA"<<endl;
+                        return "Salamandra";
                         }
                         break;
     }
 
-    cout<<"NO HAS OBTENIDO NIGUNA ESTATUILLA"<<endl;
+    cout<<">NO HAS OBTENIDO NIGUNA ESTATUILLA"<<endl;
     return nada;
 
+
+}
+
+///Funcion que determina si ganaste o no ganaste una estatua MALDICION SALAMANDRA
+string obtencion_estatuaMS(int dado1, int dado2, int dado3, string *vEstatuas, int tam, string opcion){
+    int opc;
+    string nada = "Nada";
+
+    for(int i = 0; i < tam; i++){
+        if(vEstatuas[i] == opcion){
+            opc = i;
+        }
+    }
+
+    switch(opc){
+        case 0: if((dado1 % 2 == 0 && dado2 % 2 == 1) || (dado1 % 2 == 1 && dado2 % 2 == 0)|| (dado1 % 2 == 0 && dado3 % 2 == 1) || (dado1 % 2 == 1 && dado3 % 2 == 0) || (dado2 % 2 == 0 && dado3 % 2 == 1)||(dado2 % 2 == 1 && dado3 % 2 == 0)) {
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
+
+                        return "Cangrejo";
+                        }
+                        break;
+        case 1:  if(dado1 < 5 && dado2 < 5 || dado1 < 5 && dado3 < 5 || dado2 < 5 && dado3 < 5){
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
+                        return "Hormiga";
+                        }
+                        break;
+        case 2:   if((dado1 + dado2) == 7 || (dado1+dado3)== 7 || (dado2+dado3)== 7){
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
+                        return "Medusa";
+                        }
+                        break;
+        case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1) || (dado1 == 1 && dado3==10) || (dado1 == 10 && dado3 == 1) || (dado2 == 1 && dado3==10) || (dado2 == 10 && dado3 == 1)){
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
+                        return"Aguila";
+                        }
+                        break;
+        case 4: if(((dado1 + 1) == dado2) || (dado2 + 1) == dado1){
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: SALAMANDRA"<<endl;
+                        return "Salamandra";
+                        }
+                        break;
+    }
+
+    cout<<">NO HAS OBTENIDO NIGUNA ESTATUILLA"<<endl;
+    return nada;
 
 }
 
 ///Interfaz de jugador seleccionando por cual estatua jugara
 
 int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, string *jugadores, string *vEstatuas, int tam, string *estatuas_j1, string *estatuas_j2){
-            int opcion_elegida;
 
-            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            int opcion_elegida;
+            atras:
+            cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
             cout<<jugadores[empieza]<<"\t\t\t\t";
             cout<<jugadores[noEmpieza]<<endl;
@@ -157,40 +224,173 @@ int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, s
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuas_j2, tam);
             cout<<endl;
+            cout<<endl;
             cout<<"Por que estatuilla lanzaras "<<jugador<<"?"<<endl;
             opcion_elegida = lanzamiento_estatuilla(vEstatuas, 5);
+
+            if(opcion_elegida == -1){
+                cout<<endl;
+                cout<<"OPCION INCORRECTA. INGRESE UN VALOR CORRECTO."<<endl;
+                system("pause");
+                system("cls");
+                goto atras;
+            }
 
             system("cls");
             return opcion_elegida;
 
 }
 
+///DECLARAMOS LAS FUNCIONES DE LAS MALDICIONES
+void maldicion_cangrejo(string *, string , int *);
+void maldicion_hormiga(string *, string , int *);
+bool maldicion_medusa(string *, string , int *);
+void maldicion_aguila(string *, string , int *);
+void maldicion_salamandra(string *, string , int *);
+
+
+int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, string *jugadores, string jugador, int *puntosJugadores){
+    int opc, aguila = 0, salamandra = 0, medusa = 0;
+
+    ///Obtenemos la posicion de la estatua que se obtuvo
+    for(int i = 0; i < tam; i++){
+        if(vEstatuas[i] == estatua_obtenida){
+            opc = i;
+        }
+        cout<<vEstatuas[i]<<endl;
+    }
+
+    ///Comprobamos que maldicion obtuvo
+    switch(opc){
+        case 0: cout<<"LA MALDICION DEL CANGREJO SE ACTIVA!"<<endl;
+            system("pause");
+            maldicion_cangrejo(jugadores, jugador, puntosJugadores);
+            break;
+        case 1: cout<<"LA MALDICION DE LA HORMIGA SE ACTIVA!"<<endl;
+            maldicion_hormiga(jugadores, jugador, puntosJugadores);
+            break;
+        case 2: cout<<"LA MALDICION DE LA MEDUSA SE ACTIVA!"<<endl;
+            medusa = 1;
+            return medusa;
+            break;
+        case 3: cout<<"LA MALDICION DEL AGUILA SE ACTIVA!"<<endl;
+            aguila = 2;
+            return aguila;
+            break;
+        case 4: cout<<"LA MALDICION DE LA SALAMANDRA SE ACTIVA!"<<endl;
+            salamandra = 3;
+            return salamandra;
+            break;
+    }
+
+}
+
+void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador){
+    system("cls");
+
+    int pos, dado, rival;
+
+    for(int i = 0; i < 2; i++){
+        if(jugadores[i] == jugador){
+            pos = i;
+        }
+    }
+
+    if(pos==0){
+        rival=1;
+    }else{
+        rival=0;
+    }
+    cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR UN DADO, POR LA MALDICION DEL CANGREJO."<<endl;
+    cout<<endl;
+    system("pause");
+    dado = tiraDado();
+
+
+    puntosJugador[pos] -= dado;
+
+    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
+
+    system("pause");
+}
+
+void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
+    system("cls");
+
+    int dado1, dado2, pos, rival;
+
+    for(int i = 0; i < 2; i++){
+        if(jugadores[i] == jugador){
+            pos = i;
+        }
+    }
+
+    if(pos==0){
+        rival=1;
+    }else{
+        rival=0;
+    }
+    cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR DOS DADO, POR LA MALDICION DE LA HORMIGA."<<endl;
+    system("pause");
+
+    dado1 = tiraDado();
+    dado2 = tiraDado();
+
+    puntosJugador[pos] += (dado1 + dado2);
+
+    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<puntosJugador[pos]<<" PUNTOS DEBIDO A LA MALDICION DE LA HORMIGA."<<endl;
+    system("pause");
+}
+
+void maldicion_aguila(string *jugadores, string jugador, int *puntosJugador){
+
+}
+void maldicion_salamandra(string *jugadores, string jugador, int *puntosJugador){
+
+}
+
+///FIN DE FUNCIONES DE MALDICIONES
+
+///FUNCION PARA RECORRER LAS ESTATUAS Y DETERMINAR EL FIN DE LA FASE DE EXPEDICION
+int recorrer_estatuas(string *vEstatuas, int tam){
+    int cont = 0;
+    for(int i = 0; i < tam; i++){
+        if(vEstatuas[i] == ""){
+            cont++;
+        }
+    }
+
+    if(cont == 5){
+        return 0;
+        }
+        else{
+            return 1;
+    }
+}
 
 ///Lanzamiento de estatuillas
-///SE AGREGARON LOS PARAMETROS EMPIEZA Y NOEMPIEZA PARA PASARLOS A JUGADORES ASI MANTIENE LOS NOMBRES EN SU LUGAR
 
-string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas){
+string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores){
     while(true){
             system("cls");
 
             int dado1, dado2;
+
             string no_obtuvo = "No obtuvo";
 
             string condicion, estatua_obtenida;
 
-            cout<<"IRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
+            cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
             cout<<jugadores[empieza]<<"\t\t\t\t";
             cout<<jugadores[noEmpieza]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, tam);
-            cout<<"\n";
             cout<<"\t\t";
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j2, tam);
             cout<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<endl;
             cout<<endl;
             cout<<"TURNO DE "<<jugador<<endl;
             cout<<"-------------------------"<<endl;
@@ -198,30 +398,27 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             condicion = condicion_estatua(vEstatuas,tam,opcion);
             cout<<"CONDICIONES DE OBTENCION: "<<condicion<<endl;
             cout<<"-------------------------"<<endl;
-            cout<<"Primer dado: ";
-            dado1 = tiraDado();
-            cout<<dado1<<endl;
 
-            cout<<"Segundo dado: ";
-            dado2 = tiraDado();
-            cout<<dado2<<endl;
-            cout<<endl;
+                cout<<"Primer dado: ";
+                dado1 = tiraDado();
+                cout<<dado1<<endl;
 
-            estatua_obtenida = obtencion_estatua(dado1,dado2,vEstatuas,tam,opcion);
+                cout<<"Segundo dado: ";
+                dado2 = tiraDado();
+                cout<<dado2<<endl;
+                cout<<endl;
+
+                estatua_obtenida = obtencion_estatua(dado1,dado2,vEstatuas,tam,opcion);
 
             if(estatua_obtenida == "Nada"){
                 system("pause");
                 system("cls");
                 return no_obtuvo;
             }else{
-                system("pause");
-                system("cls");
-                return estatua_obtenida;
+               return estatua_obtenida;
             }
-
     }
 }
-
 
 #endif // FUNCIONES_JUGAR_H_INCLUDED
 
