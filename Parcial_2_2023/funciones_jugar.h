@@ -132,27 +132,27 @@ string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, strin
         case 0: if((dado1 % 2 == 0 && dado2 % 2 == 1) || (dado1 % 2 == 1 && dado2 % 2 == 0)){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
 
-                        return " Cangrejo";
+                        return "Cangrejo";
                         }
                         break;
         case 1:  if(dado1 < 5 && dado2 < 5){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
-                        return " Hormiga";
+                        return "Hormiga";
                         }
                         break;
         case 2:   if((dado1 + dado2) == 7){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
-                        return " Medusa";
+                        return "Medusa";
                         }
                         break;
         case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1)){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
-                        return" Aguila";
+                        return"Aguila";
                         }
                         break;
         case 4: if(((dado1 + 1) == dado2) || (dado2 + 1) == dado1){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: SALAMANDRA"<<endl;
-                        return " Salamandra";
+                        return "Salamandra";
                         }
                         break;
     }
@@ -178,27 +178,27 @@ string obtencion_estatuaMS(int dado1, int dado2, int dado3, string *vEstatuas, i
         case 0: if((dado1 % 2 == 0 && dado2 % 2 == 1) || (dado1 % 2 == 1 && dado2 % 2 == 0)|| (dado1 % 2 == 0 && dado3 % 2 == 1) || (dado1 % 2 == 1 && dado3 % 2 == 0) || (dado2 % 2 == 0 && dado3 % 2 == 1)||(dado2 % 2 == 1 && dado3 % 2 == 0)) {
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
 
-                        return " Cangrejo";
+                        return "Cangrejo";
                         }
                         break;
         case 1:  if(dado1 < 5 && dado2 < 5 || dado1 < 5 && dado3 < 5 || dado2 < 5 && dado3 < 5){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
-                        return " Hormiga";
+                        return "Hormiga";
                         }
                         break;
         case 2:   if((dado1 + dado2) == 7 || (dado1+dado3)== 7 || (dado2+dado3)== 7){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
-                        return " Medusa";
+                        return "Medusa";
                         }
                         break;
         case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1) || (dado1 == 1 && dado3==10) || (dado1 == 10 && dado3 == 1) || (dado2 == 1 && dado3==10) || (dado2 == 10 && dado3 == 1)){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
-                        return" Aguila";
+                        return"Aguila";
                         }
                         break;
         case 4: if(((dado1 + 1) == dado2) || (dado2 + 1) == dado1){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: SALAMANDRA"<<endl;
-                        return " Salamandra";
+                        return "Salamandra";
                         }
                         break;
     }
@@ -250,7 +250,7 @@ void maldicion_salamandra(string *, string , int *);
 
 
 int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, string *jugadores, string jugador, int *puntosJugadores){
-    int opc, medusa, aguila, salamandra;
+    int opc, aguila = 0, salamandra = 0, medusa = 0;
 
     ///Obtenemos la posicion de la estatua que se obtuvo
     for(int i = 0; i < tam; i++){
@@ -270,13 +270,16 @@ int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, str
             maldicion_hormiga(jugadores, jugador, puntosJugadores);
             break;
         case 2: cout<<"LA MALDICION DE LA MEDUSA SE ACTIVA!"<<endl;
-            //medusa = maldicion_medusa();
+            medusa = 1;
+            return medusa;
             break;
         case 3: cout<<"LA MALDICION DEL AGUILA SE ACTIVA!"<<endl;
-            //aguila = maldicion_aguila();
+            aguila = 2;
+            return aguila;
             break;
         case 4: cout<<"LA MALDICION DE LA SALAMANDRA SE ACTIVA!"<<endl;
-            //salamandra = maldicion_salamandra();
+            salamandra = 3;
+            return salamandra;
             break;
     }
 
@@ -299,13 +302,14 @@ void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador){
         rival=0;
     }
     cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR UN DADO, POR LA MALDICION DEL CANGREJO."<<endl;
+    cout<<endl;
     system("pause");
     dado = tiraDado();
 
 
-    puntosJugador[pos] += dado;
+    puntosJugador[pos] -= dado;
 
-    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<puntosJugador[pos]<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
+    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
 
     system("pause");
 }
@@ -337,9 +341,7 @@ void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
     cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<puntosJugador[pos]<<" PUNTOS DEBIDO A LA MALDICION DE LA HORMIGA."<<endl;
     system("pause");
 }
-bool maldicion_medusa(string *jugadores, string jugador, int *puntosJugador){
 
-}
 void maldicion_aguila(string *jugadores, string jugador, int *puntosJugador){
 
 }
@@ -413,13 +415,10 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
                 system("cls");
                 return no_obtuvo;
             }else{
-                comprobar_maldicion(vEstatuas, tam, estatua_obtenida, jugadores, jugador, puntosJugadores);
-                system("cls");
-                return estatua_obtenida;
+               return estatua_obtenida;
             }
     }
 }
-
 
 #endif // FUNCIONES_JUGAR_H_INCLUDED
 

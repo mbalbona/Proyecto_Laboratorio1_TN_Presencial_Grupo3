@@ -23,7 +23,6 @@ void jugar(){
     bool primer_turno = false;
 
 
-
     ///Estatuas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
     string vEstatuillas[5] = {"Cangrejo", "Hormiga", "Medusa", "Aguila", "Salamandra"};
 
@@ -115,7 +114,27 @@ void jugar(){
                             vEstatuillas[opcion_elegidaJ2-1] = {""};
                      }
                 }
-                        system("cls");
+
+                ///Si toca Medusa
+                int contMedusa = 1;
+
+                if(lanzamiento_j1 == "Medusa"){
+                            while(contMedusa != 3){
+                                opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza,jugadores[noEmpieza], jugadores, vEstatuillas,5, estatuillas_j1, estatuillas_j2);
+                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                                contMedusa++;
+                            }
+                }
+                if(lanzamiento_j2 == "Medusa"){
+                            while(contMedusa != 3){
+                                opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza,jugadores[empieza], jugadores, vEstatuillas,5, estatuillas_j1, estatuillas_j2);
+                                lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                                contMedusa++;
+                            }
+
+                }
+
+                system("cls");
 
                    if(recorrer_estatuas(vEstatuillas,5) == 0){
                         break;
