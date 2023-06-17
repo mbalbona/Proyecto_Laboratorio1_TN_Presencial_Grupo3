@@ -21,7 +21,7 @@ void mostrar_estatuillas(string *estatuillas_jugador, int tam){
 
     for(int i = 0; i < tam; i++){
         if(estatuillas_jugador[i] != ""){
-            cout<<estatuillas_jugador[i]<<"";
+            cout<<estatuillas_jugador[i]<<" ";
         }
     }
 
@@ -242,7 +242,7 @@ int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, s
 }
 
 ///DECLARAMOS LAS FUNCIONES DE LAS MALDICIONES
-void maldicion_cangrejo(string *, string , int *);
+void maldicion_cangrejo(string *, string , int *, string *);
 void maldicion_hormiga(string *, string , int *);
 bool maldicion_medusa(string *, string , int *);
 void maldicion_aguila(string *, string , int *);
@@ -257,14 +257,13 @@ int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, str
         if(vEstatuas[i] == estatua_obtenida){
             opc = i;
         }
-        cout<<vEstatuas[i]<<endl;
     }
 
     ///Comprobamos que maldicion obtuvo
     switch(opc){
         case 0: cout<<"LA MALDICION DEL CANGREJO SE ACTIVA!"<<endl;
             system("pause");
-            maldicion_cangrejo(jugadores, jugador, puntosJugadores);
+            maldicion_cangrejo(jugadores, jugador, puntosJugadores, vEstatuas);
             break;
         case 1: cout<<"LA MALDICION DE LA HORMIGA SE ACTIVA!"<<endl;
             maldicion_hormiga(jugadores, jugador, puntosJugadores);
@@ -285,10 +284,11 @@ int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, str
 
 }
 
-void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador){
+void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador, string *vEstatuas){
     system("cls");
 
     int pos, dado, rival;
+    bool esta_cangrejo = false;
 
     for(int i = 0; i < 2; i++){
         if(jugadores[i] == jugador){
@@ -296,22 +296,28 @@ void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador){
         }
     }
 
+    for(int i = 0; i < 5; i++){
+            if(vEstatuas[i] == "Cangrejo"){
+                esta_cangrejo = true;
+            }
+    }
     if(pos==0){
         rival=1;
     }else{
         rival=0;
     }
-    cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR UN DADO, POR LA MALDICION DEL CANGREJO."<<endl;
-    cout<<endl;
-    system("pause");
-    dado = tiraDado();
 
+    if(esta_cangrejo = true){
+        cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR UN DADO, POR LA MALDICION DEL CANGREJO."<<endl;
+        system("pause");
+        dado = tiraDado();
 
-    puntosJugador[pos] -= dado;
+        cout<<"SALIO DADO: "<<dado<<endl;
 
-    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
+        puntosJugador[pos] -= dado;
 
-    system("pause");
+        cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
+    }
 }
 
 void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
@@ -336,10 +342,12 @@ void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
     dado1 = tiraDado();
     dado2 = tiraDado();
 
-    puntosJugador[pos] += (dado1 + dado2);
+    cout<<"SALIO DADO 1: "<<dado1<<endl;
+    cout<<"SALIO DADO 2: "<<dado2<<endl;
 
-    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<puntosJugador[pos]<<" PUNTOS DEBIDO A LA MALDICION DE LA HORMIGA."<<endl;
-    system("pause");
+    puntosJugador[pos] -= (dado1 + dado2);
+
+    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<(dado1+dado2)<<" PUNTOS DEBIDO A LA MALDICION DE LA HORMIGA."<<endl;
 }
 
 void maldicion_aguila(string *jugadores, string jugador, int *puntosJugador){
@@ -415,10 +423,21 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
                 system("cls");
                 return no_obtuvo;
             }else{
+                comprobar_maldicion(vEstatuas, tam, estatua_obtenida, jugadores, jugador, puntosJugadores);
+                system("pause");
+                system("cls");
                return estatua_obtenida;
             }
     }
 }
+///Lanzamiento por Aguila
+string lanzamiento_aguila(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores){
+    string lanza_aguila;
+    lanza_aguila = lanzamiento_jugador(empieza, noEmpieza, jugadores, tam,  jugador, opcion, estatuillas_j1, estatuillas_j2, vEstatuas, puntosJugadores);
+
+    return lanza_aguila;
+}
+
 
 #endif // FUNCIONES_JUGAR_H_INCLUDED
 
