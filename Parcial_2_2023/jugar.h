@@ -10,15 +10,12 @@ void jugar(){
     string estatuillas_j2[5] = {""};
 
     string primer_lanzamiento;
-    string lanzamiento_j1, lanzamiento_j2, lanzamiento_aguila_jugador;
+    string lanzamiento_j1, lanzamiento_j2;
 
-
-    string lanzamiento_Medusa;
     int  jugadorAguila;
     int empieza, noEmpieza;
     int opcion_elegidaJ1, opcion_elegidaJ2;
 
-    int suma_j1,suma_j2;
     int puntosJugadores[2] = {0};
 
     bool primer_turno = false;
@@ -52,7 +49,6 @@ void jugar(){
     system("cls");
 
     bool aguila_activa = false;
-    int pos_aguila = 0;
 
     ///Comienza la fase de expecidicion
     while(true){
@@ -63,122 +59,195 @@ void jugar(){
                 opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
 
                 if(aguila_activa){
-                        /// LA MALDICION DEL AGUILA UN JUGADOR TIRA DOBLE EL RESTO DE LA FASE
+                        /// LA MALDICION DEL AGUILA: UN JUGADOR TIRA DOBLE EL RESTO DE LA FASE
 
+                        ///PREGUNTA SI EL QUE SACO LA ESTATUA AGUILA ES "EMPIEZA", PARA QUE TIRE DOS VECES "NOEMPIEZA"
                     if(jugadorAguila == empieza){
-                            ///AQUI LANZA JUGAR EMPIEZA
-                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                            ///AQUI LANZA JUGAR "EMPIEZA"
+                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
 
+                            cout<<endl;
+                            cout<<"AQUI COMIENZA LA PRIMER TIRADA DEL JUGADOR RIVAL - 'NO EMPIEZA'"<<endl;
+                            system("pause");
+
+                            ///PRIMER LANZAMIENTO DE JUGADOR "NOEMPIEZA"
+                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+
+                        ///ESTANDO DENTRO DE LA MALDICION DEL AGUILA SE PREGUNTA SI AMBAS OPCIONES SON IGUALES
                         if(opcion_elegidaJ1==opcion_elegidaJ2){
 
                              if(lanzamiento_j1 != "No obtuvo"){
 
                                 ///Se agrega la estatua obtenida por el jugador
                                 estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
-                                lanzamiento_j1 = " ";
 
                                 ///Se elimina la estatua conseguida para que no se liste mas
                                 vEstatuillas[opcion_elegidaJ1-1] = {""};
 
-                                cout<<"AQUI COMIENZA LA PRIMER TIRADA DEL JUGADOR RIVAL - SI SON LOS DADOS IGUALES"<<endl;
-                                system("pause");
-                                system("cls");
 
-                                ///PRIMER LANZAMIENTO DEL AGUILA
-                                lanzamiento_aguila_jugador = lanzamiento_aguila(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+                                ///PREGUNTA SI JUGADOR "NOEMPIEZA" TAMBIEN SACO LA MISMA ESTATUA
+                                    if(lanzamiento_j2 != "No obtuvo"){
+                                        //system("cls");
+                                        cout<<endl;
+                                        cout<<"AL HABER SELECCIONADO LAS MISMAS ESTATUILLAS, EL JUGADOR "<<jugadores[empieza]<<" HA GANADO."<<endl;
+                                        cout<<"POR FAVOR SELECCIONA NUEVAMENTE UNA ESTATUILLA: "<<endl;
+                                        system("pause");
+                                        //system("cls");
 
-
-                                if(lanzamiento_aguila_jugador != "No obtuvo"){
-                                    system("cls");
-                                    cout<<"AL HABER SELECCIONADO LAS MISMAS ESTATUILLAS, EL JUGADOR "<<jugadores[empieza]<<" HA GANADO."<<endl;
-                                    cout<<"POR FAVOR SELECCIONA NUEVAMENTE UNA ESTATUILLA: "<<endl;
-                                    system("pause");
-                                    system("cls");
-                                    opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                    lanzamiento_aguila_jugador = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
-                                ///AQUI FALTA AGREGAR LA CONVDICION SI OBTUVO ALGO O NO
-                                }
-                              }
-                            }
-
-                             ///SE EVALUA LANZAMIENTO JUGADOR EMPIEZA
-
-                             if(lanzamiento_j1 != "No obtuvo"){
-
-                                ///Se agrega la estatua obtenida por el jugador
-                                estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
-                                lanzamiento_j1 = " ";
-                                ///Se elimina la estatua conseguida para que no se liste mas
-                                vEstatuillas[opcion_elegidaJ1-1] = {""};
-                             }
-
-                                ///COMIENZO DE TIRADAS JUGADOR NOEMPIEZA
-                                cout<<"AQUI COMIENZA LA PRIMER TIRADA DEL JUGADOR RIVAL"<<endl;
-                                system("pause");
-                                system("cls");
-                                    ///PRIMER LANZAMIENTO DEL AGUILA
-                            lanzamiento_aguila_jugador = lanzamiento_aguila(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
-
-                            if(lanzamiento_aguila_jugador != "No obtuvo"){
-                                        ///Se agrega la estatua obtenida por el jugador
-                                            estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_aguila_jugador;
-
-                                        ///Se elimina la estatua conseguida para que no se liste mas
-                                            vEstatuillas[opcion_elegidaJ2-1] = {""};
-                            }
-
-                                ///SEGUNDO LANZAMIENTO DEL AGUILA
-                            cout<<"AQUI COMIENZA LA SEGUNDA TIRADA DEL JUGADOR RIVAL"<<endl;
-                            system("pause");
-                            system("cls");
-
-                            opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-
-                            lanzamiento_aguila_jugador = lanzamiento_aguila(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
-
-                            if(lanzamiento_aguila_jugador != "No obtuvo"){
-                                        ///Se agrega la estatua obtenida por el jugador
-                                            estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_aguila_jugador;
-
-                                        ///Se elimina la estatua conseguida para que no se liste mas
-                                            vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                            //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                            if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                                    break;
+                                               }
+                                        opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
                                     }
+                              }
+                                  ///SE EVALUA LANZAMIENTO JUGADOR "NOEMPIEZA", CORRESPONDIENTE A LA PRIMERA TIRADA
 
+                                     if(lanzamiento_j2 != "No obtuvo"){
+                                        ///Se agrega la estatua obtenida por el jugador
+                                        estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
+
+                                        ///Se elimina la estatua conseguida para que no se liste mas
+                                            vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                         }
+
+                                         //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                            if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                                    break;
+                                               }
+                                cout<<endl;
+                                cout<<"AQUI COMIENZA LA SEGUNDA TIRADA DEL JUGADOR RIVAL - 'NOEMPIEZA'"<<endl;
+                                system("pause");
+
+                                ///SE VUELVE A PEDIR LA OPCIONES XQ NO SABEMOS SI ANTERIORMENTE OBTUVO LA ESTATUA SELECCIONADA
+                                opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+
+                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+
+                                    if(lanzamiento_j2!= "No obtuvo"){
+                                        ///Se agrega la estatua obtenida por el jugador
+                                            estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
+
+                                        ///Se elimina la estatua conseguida para que no se liste mas
+                                            vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                        }
+                                    ///FIN EVALUACIONES DE TIRADAS DE AMBOS JUGADORES DONDE AMBOS SI ELEGIERON LAS MISMAS OPCIONES
+                                    ///EL PROGRAMA IGNORA TODO HASTA LAS LA LINEA 293
+                            }else{
+                                ///JUEGO DONDE LAS OPCIONES SON DIFERENTES PARA CADA JUGADOR
+                                ///SE EVALUA LANZAMIENTO JUGADOR EMPIEZA
+
+                                 if(lanzamiento_j1 != "No obtuvo"){
+
+                                    ///Se agrega la estatua obtenida por el jugador
+                                    estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
+
+                                    ///Se elimina la estatua conseguida para que no se liste mas
+                                    vEstatuillas[opcion_elegidaJ1-1] = {""};
+                                 }
+
+                                    //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                            if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                                    break;
+                                               }
+                                 ///SE EVALUA LANZAMIENTO JUGADOR NOEMPIEZA
+
+                                 if(lanzamiento_j2 != "No obtuvo"){
+                                    ///Se agrega la estatua obtenida por el jugador
+                                    estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
+
+                                    ///Se elimina la estatua conseguida para que no se liste mas
+                                        vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                     }
+
+                                     //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                            if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                                    break;
+                                               }
+
+                                 ///COMIENZO DE TIRADAS JUGADOR "NOEMPIEZA"
+                                    cout<<"AQUI COMIENZA LA SEGUNDA TIRADA DEL JUGADOR RIVAL - 'NOEMPIEZA'"<<endl;
+                                    system("pause");
+                                    //system("cls");
+
+                                ///SEGUNDO LANZAMIENTO DEL JUGADOR "NOEMPIEZA"
+
+                                opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+
+                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+
+                                if(lanzamiento_j2 != "No obtuvo"){
+                                            ///Se agrega la estatua obtenida por el jugador
+                                                estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
+
+                                            ///Se elimina la estatua conseguida para que no se liste mas
+                                                vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                    }
+                                }
+
+                                //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                            if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                                    break;
+                                               }
+                                ///FIN EVALUACIONES DE TIRADAS DE AMBOS JUGADORES CON OPCIONES DIFERENTES
+                                ///EL PROGRAMA IGNORA TODO HASTA LAS LA LINEA 293
                     }else{
 
-                        cout<<"AQUI COMIENZA LA PRIMER TIRADA DEL JUGADOR RIVAL"<<endl;
+                        ///EL JUGADOR "NOEMPIEZA" FUE EL QUE OBTUVO EL AGUILA, POR ENDE JUGADOR "EMPIEZA" TIRA DOS VECES.
+
+                        cout<<"AQUI COMIENZA LA PRIMER TIRADA DEL JUGADOR - 'EMPIEZA'"<<endl;
                         system("pause");
-                        system("cls");
+                        //system("cls");
 
                         ///PRIMER LANZAMIENTO JUGADOR NOEMPIEZA
 
-                        lanzamiento_aguila_jugador = lanzamiento_aguila(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
 
-                        if(lanzamiento_aguila_jugador != "No obtuvo"){
+                        if(lanzamiento_j1 != "No obtuvo"){
                                     ///Se agrega la estatua obtenida por el jugador
-                                        estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_aguila_jugador;
+                                        estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
 
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ1-1] = {""};
                             }
-                         cout<<"AQUI COMIENZA LA SEGUNDA TIRADA DEL JUGADOR RIVAL"<<endl;
+
+                            //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                            if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                                    break;
+                                               }
+
+                         cout<<"AQUI COMIENZA LA SEGUNDA TIRADA DEL JUGADOR - 'EMPIEZA'"<<endl;
                          system("pause");
-                         system("cls");
+                         //system("cls");
 
                         ///SEGUNDO LANZAMIENTO
-
+                        ///SE VUELVE A PEDIR LA OPCIONES XQ NO SABEMOS SI ANTERIORMENTE OBTUVO LA ESTATUA SELECCIONADA
                         opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
 
-                        lanzamiento_aguila_jugador = lanzamiento_aguila(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                        ///lanzamiento_aguila_jugador = lanzamiento_aguila(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
 
-                        if(lanzamiento_aguila_jugador != "No obtuvo"){
+                        ///CONDICION PARA QUE J2 NO TIRE DOS VECES.
+                        bool paso_lanzamiento_j2=false;
+
+                        ///EVALUO SI "EMPIEZA" OBTUVO UNA ESTATUA
+                        if(lanzamiento_j1 != "No obtuvo"){
+
                                     ///Se agrega la estatua obtenida por el jugador
-                                        estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_aguila_jugador;
+                                        estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
 
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ1-1] = {""};
 
+                                //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                            if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                                    break;
+                                               }
+
                                 lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+
+                                paso_lanzamiento_j2=true;
 
                                 if(lanzamiento_j2 != "No obtuvo"){
                                     system("cls");
@@ -190,9 +259,23 @@ void jugar(){
                                     lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
                                 }
                             }
+                        ///PREGUNTO SI PASO DE LANZAMIENTO ESTA FALSE ES PORQUE TODAVIA NO TIRO EL J2, SI ES TRUE ES QUE YA TIRO Y NO PUEDO TIRAR DE NUEVO.
+                                if(!paso_lanzamiento_j2){
+                                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+                                }
 
-                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+                                if(lanzamiento_j2 != "No obtuvo"){
+                                    ///Se agrega la estatua obtenida por el jugador
+                                        estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
 
+                                    ///Se elimina la estatua conseguida para que no se liste mas
+                                        vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                    }
+
+                                //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                            if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                                    break;
+                                               }
                         }
 
                 }else{
@@ -205,6 +288,7 @@ void jugar(){
 
                 }
 
+                    ///AQUI SE EVALUAR LAS OPCIONES Y OBTENCIONES DE JUEGO NORMAL
                     ///Lanzamiento de dados con opciones de estatuillas iguales
                     if(opcion_elegidaJ1 == opcion_elegidaJ2){
                             if(lanzamiento_j1 != "No obtuvo"){
@@ -277,29 +361,40 @@ void jugar(){
 
                 if(lanzamiento_j1 == "Medusa"){
                            while(contMedusa != 3){
-                                opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza,jugadores[noEmpieza], jugadores, vEstatuillas,5, estatuillas_j1, estatuillas_j2);
-                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
-                                    if(lanzamiento_j1 != "No obtuvo"){
-                                    ///Se agrega la estatua obtenida por el jugador
-                                        estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
+                                //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                        break;
+                                   }
+                                       opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza,jugadores[noEmpieza], jugadores, vEstatuillas,5, estatuillas_j1, estatuillas_j2);
+                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                                            if(lanzamiento_j1 != "No obtuvo"){
+                                                ///Se agrega la estatua obtenida por el jugador
+                                                    estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
 
-                                    ///Se elimina la estatua conseguida para que no se liste mas
-                                        vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                                ///Se elimina la estatua conseguida para que no se liste mas
+                                                    vEstatuillas[opcion_elegidaJ2-1] = {""};
+                                                }
                                 }
+
                                 contMedusa++;
                             }
-                }
+
                 if(lanzamiento_j2 == "Medusa"){
                             while(contMedusa != 3){
-                                opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza,jugadores[empieza], jugadores, vEstatuillas,5, estatuillas_j1, estatuillas_j2);
-                                lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
-                                if(lanzamiento_j1 != "No obtuvo"){
-                                    ///Se agrega la estatua obtenida por el jugador
-                                    estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
-
-                                    ///Se elimina la estatua conseguida para que no se liste mas
-                                    vEstatuillas[opcion_elegidaJ1-1] = {""};
+                                //FUNCIONES QUE VERIFICA QUE TODABIA HAY ESTATUAS EN JUEGO
+                                if(recorrer_estatuas(vEstatuillas,5) == 0){
+                                    break;
                                 }
+                                    opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza,jugadores[empieza], jugadores, vEstatuillas,5, estatuillas_j1, estatuillas_j2);
+                                    lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+
+                                        if(lanzamiento_j1 != "No obtuvo"){
+                                            ///Se agrega la estatua obtenida por el jugador
+                                            estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
+
+                                            ///Se elimina la estatua conseguida para que no se liste mas
+                                            vEstatuillas[opcion_elegidaJ1-1] = {""};
+                                        }
                                 contMedusa++;
                             }
                 }
@@ -310,6 +405,12 @@ void jugar(){
                    }
         }
     ///Comienza la fase final
+    while(true){
+        cout<<"BIENVENIDOS A LA FASE FINAL"<<endl;
+        system("pause");
+        system("cls");
+        break;
+    }
 
 }
 

@@ -430,14 +430,6 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             }
     }
 }
-///Lanzamiento por Aguila
-string lanzamiento_aguila(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores){
-    string lanza_aguila;
-    lanza_aguila = lanzamiento_jugador(empieza, noEmpieza, jugadores, tam,  jugador, opcion, estatuillas_j1, estatuillas_j2, vEstatuas, puntosJugadores);
-
-    return lanza_aguila;
-}
-
 
 #endif // FUNCIONES_JUGAR_H_INCLUDED
 
