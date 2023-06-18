@@ -378,11 +378,11 @@ int recorrer_estatuas(string *vEstatuas, int tam){
 
 ///Lanzamiento de estatuillas
 
-string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores){
+string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra){
     while(true){
             system("cls");
 
-            int dado1, dado2;
+            int dado1, dado2, dado3;
 
             string no_obtuvo = "No obtuvo";
 
@@ -410,13 +410,26 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
                 cout<<"Primer dado: ";
                 dado1 = tiraDado();
                 cout<<dado1<<endl;
+                cout<<endl;
 
                 cout<<"Segundo dado: ";
                 dado2 = tiraDado();
                 cout<<dado2<<endl;
                 cout<<endl;
 
-                estatua_obtenida = obtencion_estatua(dado1,dado2,vEstatuas,tam,opcion);
+                if(llaveSalamandra){
+                    cout<<"Tercer dado: ";
+                    dado3 = tiraDado();
+                    cout<<dado3<<endl;
+                    cout<<endl;
+                }
+
+                if(llaveSalamandra){
+                    estatua_obtenida = obtencion_estatuaMS(dado1,dado2,dado3,vEstatuas,tam,opcion);
+                }else{
+                    estatua_obtenida = obtencion_estatua(dado1,dado2,vEstatuas,tam,opcion);
+                }
+
 
             if(estatua_obtenida == "Nada"){
                 system("pause");

@@ -19,6 +19,8 @@ void jugar(){
     int puntosJugadores[2] = {0};
 
     bool primer_turno = false;
+    bool llaveSalamandraJ1 = false;
+    bool llaveSalamandraJ2 = false;
 
 
     ///Estatuas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
@@ -64,14 +66,14 @@ void jugar(){
                         ///PREGUNTA SI EL QUE SACO LA ESTATUA AGUILA ES "EMPIEZA", PARA QUE TIRE DOS VECES "NOEMPIEZA"
                     if(jugadorAguila == empieza){
                             ///AQUI LANZA JUGAR "EMPIEZA"
-                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ1);
 
                             cout<<endl;
                             cout<<"AQUI COMIENZA LA PRIMER TIRADA DEL JUGADOR RIVAL - 'NO EMPIEZA'"<<endl;
                             system("pause");
 
                             ///PRIMER LANZAMIENTO DE JUGADOR "NOEMPIEZA"
-                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2);
 
                         ///ESTANDO DENTRO DE LA MALDICION DEL AGUILA SE PREGUNTA SI AMBAS OPCIONES SON IGUALES
                         if(opcion_elegidaJ1==opcion_elegidaJ2){
@@ -80,7 +82,11 @@ void jugar(){
 
                                 ///Se agrega la estatua obtenida por el jugador
                                 estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j1 == "Salamandra"){
+                                            llaveSalamandraJ2=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                 ///Se elimina la estatua conseguida para que no se liste mas
                                 vEstatuillas[opcion_elegidaJ1-1] = {""};
 
@@ -99,7 +105,7 @@ void jugar(){
                                                     break;
                                                }
                                         opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2);
                                     }
                               }
                                   ///SE EVALUA LANZAMIENTO JUGADOR "NOEMPIEZA", CORRESPONDIENTE A LA PRIMERA TIRADA
@@ -107,7 +113,11 @@ void jugar(){
                                      if(lanzamiento_j2 != "No obtuvo"){
                                         ///Se agrega la estatua obtenida por el jugador
                                         estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j2 == "Salamandra"){
+                                            llaveSalamandraJ1=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                         ///Se elimina la estatua conseguida para que no se liste mas
                                             vEstatuillas[opcion_elegidaJ2-1] = {""};
                                          }
@@ -123,12 +133,16 @@ void jugar(){
                                 ///SE VUELVE A PEDIR LA OPCIONES XQ NO SABEMOS SI ANTERIORMENTE OBTUVO LA ESTATUA SELECCIONADA
                                 opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
 
-                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ2);
 
                                     if(lanzamiento_j2!= "No obtuvo"){
                                         ///Se agrega la estatua obtenida por el jugador
                                             estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j2 == "Salamandra"){
+                                            llaveSalamandraJ1=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                         ///Se elimina la estatua conseguida para que no se liste mas
                                             vEstatuillas[opcion_elegidaJ2-1] = {""};
                                         }
@@ -142,7 +156,11 @@ void jugar(){
 
                                     ///Se agrega la estatua obtenida por el jugador
                                     estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j1 == "Salamandra"){
+                                            llaveSalamandraJ2=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                     vEstatuillas[opcion_elegidaJ1-1] = {""};
                                  }
@@ -156,7 +174,11 @@ void jugar(){
                                  if(lanzamiento_j2 != "No obtuvo"){
                                     ///Se agrega la estatua obtenida por el jugador
                                     estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j2 == "Salamandra"){
+                                            llaveSalamandraJ1=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ2-1] = {""};
                                      }
@@ -175,12 +197,16 @@ void jugar(){
 
                                 opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
 
-                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ2);
 
                                 if(lanzamiento_j2 != "No obtuvo"){
                                             ///Se agrega la estatua obtenida por el jugador
                                                 estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j2 == "Salamandra"){
+                                            llaveSalamandraJ1=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                             ///Se elimina la estatua conseguida para que no se liste mas
                                                 vEstatuillas[opcion_elegidaJ2-1] = {""};
                                     }
@@ -202,12 +228,16 @@ void jugar(){
 
                         ///PRIMER LANZAMIENTO JUGADOR NOEMPIEZA
 
-                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1);
 
                         if(lanzamiento_j1 != "No obtuvo"){
                                     ///Se agrega la estatua obtenida por el jugador
                                         estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j1 == "Salamandra"){
+                                            llaveSalamandraJ2=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ1-1] = {""};
                             }
@@ -226,7 +256,7 @@ void jugar(){
                         opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
 
                         ///lanzamiento_aguila_jugador = lanzamiento_aguila(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
-                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1);
 
                         ///CONDICION PARA QUE J2 NO TIRE DOS VECES.
                         bool paso_lanzamiento_j2=false;
@@ -236,7 +266,11 @@ void jugar(){
 
                                     ///Se agrega la estatua obtenida por el jugador
                                         estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j1 == "Salamandra"){
+                                            llaveSalamandraJ2=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ1-1] = {""};
 
@@ -245,7 +279,7 @@ void jugar(){
                                                     break;
                                                }
 
-                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ2);
 
                                 paso_lanzamiento_j2=true;
 
@@ -256,18 +290,22 @@ void jugar(){
                                     system("pause");
                                     system("cls");
                                     opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2);
                                 }
                             }
                         ///PREGUNTO SI PASO DE LANZAMIENTO ESTA FALSE ES PORQUE TODAVIA NO TIRO EL J2, SI ES TRUE ES QUE YA TIRO Y NO PUEDO TIRAR DE NUEVO.
                                 if(!paso_lanzamiento_j2){
-                                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
+                                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ2);
                                 }
 
                                 if(lanzamiento_j2 != "No obtuvo"){
                                     ///Se agrega la estatua obtenida por el jugador
                                         estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j2 == "Salamandra"){
+                                            llaveSalamandraJ1=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ2-1] = {""};
                                     }
@@ -283,12 +321,13 @@ void jugar(){
                     ///JUEGO DONDE AMBOS JUGADORES TIRAN POR TURNO
                     ///Se lanzan los dados
 
-                    lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores);
-                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                    lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1);
+                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2);
 
                 }
 
                     ///AQUI SE EVALUAR LAS OPCIONES Y OBTENCIONES DE JUEGO NORMAL
+
                     ///Lanzamiento de dados con opciones de estatuillas iguales
                     if(opcion_elegidaJ1 == opcion_elegidaJ2){
                             if(lanzamiento_j1 != "No obtuvo"){
@@ -300,7 +339,11 @@ void jugar(){
                                     jugadorAguila = empieza;
                                     aguila_activa=true;
                                 }
-
+    ///----------------------------------------------------------------------------------------------------------
+                                if(lanzamiento_j1 == "Salamandra"){
+                                    llaveSalamandraJ2=true;
+                                }
+    ///___________________________________________________________________________________________________________
                                 ///Se elimina la estatua conseguida para que no se liste mas
                                 vEstatuillas[opcion_elegidaJ1-1] = {""};
 
@@ -311,7 +354,7 @@ void jugar(){
                                     system("pause");
                                     system("cls");
                                     opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2);
 
                                 }
 
@@ -324,6 +367,11 @@ void jugar(){
                                             jugadorAguila = noEmpieza;
                                             aguila_activa=true;
                                         }
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j2 == "Salamandra"){
+                                            llaveSalamandraJ1=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ2-1] = {""};
                             }
@@ -339,6 +387,11 @@ void jugar(){
                                                 jugadorAguila = empieza;
                                                 aguila_activa=true;
                                             }
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j1 == "Salamandra"){
+                                            llaveSalamandraJ2=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ1-1] = {""};
                                  }
@@ -350,7 +403,11 @@ void jugar(){
                                                 jugadorAguila = noEmpieza;
                                                 aguila_activa=true;
                                             }
-
+    ///----------------------------------------------------------------------------------------------------------
+                                        if(lanzamiento_j2 == "Salamandra"){
+                                            llaveSalamandraJ1=true;
+                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ2-1] = {""};
                                  }
@@ -366,11 +423,15 @@ void jugar(){
                                         break;
                                    }
                                        opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza,jugadores[noEmpieza], jugadores, vEstatuillas,5, estatuillas_j1, estatuillas_j2);
-                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
-                                            if(lanzamiento_j1 != "No obtuvo"){
+                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2);
+                                            if(lanzamiento_j2 != "No obtuvo"){
                                                 ///Se agrega la estatua obtenida por el jugador
                                                     estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                                        if(lanzamiento_j2 == "Salamandra"){
+                                                            llaveSalamandraJ1=true;
+                                                        }
+    ///----------------------------------------------------------------------------------------------------------
                                                 ///Se elimina la estatua conseguida para que no se liste mas
                                                     vEstatuillas[opcion_elegidaJ2-1] = {""};
                                                 }
@@ -386,12 +447,16 @@ void jugar(){
                                     break;
                                 }
                                     opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza,jugadores[empieza], jugadores, vEstatuillas,5, estatuillas_j1, estatuillas_j2);
-                                    lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores);
+                                    lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ1);
 
                                         if(lanzamiento_j1 != "No obtuvo"){
                                             ///Se agrega la estatua obtenida por el jugador
                                             estatuillas_j1[opcion_elegidaJ1-1] = lanzamiento_j1;
-
+    ///----------------------------------------------------------------------------------------------------------
+                                                if(lanzamiento_j1 == "Salamandra"){
+                                                    llaveSalamandraJ2=true;
+                                                }
+    ///----------------------------------------------------------------------------------------------------------
                                             ///Se elimina la estatua conseguida para que no se liste mas
                                             vEstatuillas[opcion_elegidaJ1-1] = {""};
                                         }
