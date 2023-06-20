@@ -2,12 +2,13 @@
 #define JUGAR_H_INCLUDED
 
 #include "funciones_jugar.h"
+#include "funciones_jugar_faseFinal.h"
 
 void jugar(){
     system("cls");
     string jugadores[2] = {};
-    string estatuillas_j1[5] = {""};
-    string estatuillas_j2[5] = {""};
+    string estatuillas_j1[5] = {"Cangrejo", "Hormiga"};
+    string estatuillas_j2[5] = {"Medusa", "Aguila", "Salamandra"};
 
     string primer_lanzamiento;
     string lanzamiento_j1, lanzamiento_j2;
@@ -53,7 +54,7 @@ void jugar(){
     bool aguila_activa = false;
 
     ///Comienza la fase de expecidicion
-    while(true){
+    while(false){
         system("cls");
                 ///Seleccion de estatua por la que jugara
 
@@ -471,9 +472,47 @@ void jugar(){
         }
     ///Comienza la fase final
     while(true){
+        cout<<endl;
         cout<<"BIENVENIDOS A LA FASE FINAL"<<endl;
-        system("pause");
+        cout<<endl;
+        ///CONTAMOS ESTATUAS PARA SABER QUIEN ES EL PRIMERO.
+        int contador_J1, contador_J2;
+
+        contador_J1 = contadorEstatuillas(estatuillas_j1, 5);
+        contador_J2 = contadorEstatuillas(estatuillas_j1, 5);
+
+        int aux;
+
+        if(contador_J1>contador_J2){
+            cout<<"EMPIEZA EL JUGADOR "<<jugadores[empieza]<<endl;
+            system("pause");
+        }else{
+            cout<<"EMPIEZA EL JUGADOR "<<jugadores[noEmpieza]<<endl;
+            system("pause");
+            aux=empieza;
+            empieza=noEmpieza;
+            noEmpieza=aux;
+        }
         system("cls");
+
+        while(true){
+                lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas);
+
+            if(lanzamiento_j1=="GANASTE"){
+                cout<<"FIN DEL JUEGO"<<endl;
+                system("pause");
+                system("cls");
+                break;
+            }
+            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas);
+
+            if(lanzamiento_j2=="GANASTE"){
+                cout<<"FIN DEL JUEGO"<<endl;
+                system("pause");
+                system("cls");
+                break;
+            }
+        }
         break;
     }
 

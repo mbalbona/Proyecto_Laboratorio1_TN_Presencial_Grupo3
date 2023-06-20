@@ -146,7 +146,7 @@ string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, strin
                         }
                         break;
         case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1)){
-                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: AGUILA"<<endl;
                         return"Aguila";
                         }
                         break;
@@ -192,7 +192,7 @@ string obtencion_estatuaMS(int dado1, int dado2, int dado3, string *vEstatuas, i
                         }
                         break;
         case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1) || (dado1 == 1 && dado3==10) || (dado1 == 10 && dado3 == 1) || (dado2 == 1 && dado3==10) || (dado2 == 10 && dado3 == 1)){
-                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: AGUILA"<<endl;
                         return"Aguila";
                         }
                         break;
@@ -443,6 +443,7 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             }
     }
 }
+
 
 #endif // FUNCIONES_JUGAR_H_INCLUDED
 
