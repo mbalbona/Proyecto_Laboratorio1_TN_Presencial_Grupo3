@@ -378,7 +378,7 @@ int recorrer_estatuas(string *vEstatuas, int tam){
 
 ///Lanzamiento de estatuillas
 
-string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra){
+string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra, bool modoDiosActivado){
     while(true){
             system("cls");
 
@@ -390,8 +390,8 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
 
             cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[empieza]<<"\t\t\t\t";
-            cout<<jugadores[noEmpieza]<<endl;
+            cout<<jugadores[empieza]<<" "<<puntosJugadores[empieza]<<"\t\t\t\t";
+            cout<<jugadores[noEmpieza]<<" "<<puntosJugadores[noEmpieza]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, tam);
             cout<<"\t\t";
@@ -407,6 +407,7 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             cout<<"CONDICIONES DE OBTENCION: "<<condicion<<endl;
             cout<<"-------------------------"<<endl;
 
+            if(!modoDiosActivado){
                 cout<<"Primer dado: ";
                 dado1 = tiraDado();
                 cout<<dado1<<endl;
@@ -423,6 +424,17 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
                     cout<<dado3<<endl;
                     cout<<endl;
                 }
+            }else{
+                cout<<"Ingrese valor del Primer dado: ";
+                cin>>dado1;
+                cout<<"Ingrese valor del Segundo dado: ";
+                cin>>dado2;
+                if(llaveSalamandra){
+                    cout<<"Ingrese valor del Tercer dado: ";
+                    cin>>dado3;
+                }
+            }
+
 
                 if(llaveSalamandra){
                     estatua_obtenida = obtencion_estatuaMS(dado1,dado2,dado3,vEstatuas,tam,opcion);
