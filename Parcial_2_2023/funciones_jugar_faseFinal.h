@@ -33,6 +33,15 @@ bool buscarEstatuaS(string *estatua, int tam){
     return false;
 }
 
+bool buscarEstatuaA(string *estatuaAguila, int tam){
+    for(int i=0; i<tam; i++){
+        if(estatuaAguila[i] == "Aguila"){
+            return true;
+        }
+    }
+    return false;
+}
+
 ///FUNCION COMPROBAR ESCALERA
 string obtencion_escalera(int dado1, int dado2,int dado3,int dado4,int dado5, bool llaveMedusa, bool llaveSalamandra ){
 
@@ -73,11 +82,11 @@ string obtencion_escalera(int dado1, int dado2,int dado3,int dado4,int dado5, bo
 
 }
 
-string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra, bool modoDios){
+string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, bool modoDios){
     while(true){
             system("cls");
 
-            int dado1, dado2, dado3, dado4, dado5;
+            int dado1, dado2, dado3, dado4, dado5, dadoSelecionado, dadoNuevo;
 
             string no_obtuvo = "No obtuvo";
 
@@ -128,6 +137,36 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                 cout << "|  " << dado1 << "  | "<< "|  " << dado2 << "  | "<< "|  " << dado3 << "  | "<< "|  " << dado4 << "  | "<< "|  " << dado5 << "  |\n";
                 cout << "|     | "<< "|     | "<< "|     | "<< "|     | "<< "|     |\n";
                 cout << "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+\n";
+
+                if(aguilaActiva){
+
+                    cout<<"¿Que dado desea modificar?"<<endl;
+                    cout<<"Indique el numero de dado: ";
+                    cin>>dadoSelecionado;
+                    cout<<"Indique el nuevo valor del dado: ";
+                    cin>>dadoNuevo;
+                    cout<<endl;
+
+                        if(dadoSelecionado==1){
+                            dado1=dadoNuevo;
+                        }else if (dadoSelecionado==2){
+                            dado2=dadoNuevo;
+                        }else if (dadoSelecionado==3){
+                            dado3=dadoNuevo;
+                        }else if (dadoSelecionado==4){
+                            dado4=dadoNuevo;
+                        }else if (dadoSelecionado==5){
+                            dado5=dadoNuevo;
+                        }
+
+                cout << "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+\n";
+                cout << "|     | "<< "|     | "<< "|     | "<< "|     | "<< "|     |\n";
+                cout << "|  " << dado1 << "  | "<< "|  " << dado2 << "  | "<< "|  " << dado3 << "  | "<< "|  " << dado4 << "  | "<< "|  " << dado5 << "  |\n";
+                cout << "|     | "<< "|     | "<< "|     | "<< "|     | "<< "|     |\n";
+                cout << "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+\n";
+
+                }
+
 
                 obtencionEscalera = obtencion_escalera(dado1,dado2,dado3, dado4, dado5, llaveMedusa, llaveSalamandra);
                 system("pause");

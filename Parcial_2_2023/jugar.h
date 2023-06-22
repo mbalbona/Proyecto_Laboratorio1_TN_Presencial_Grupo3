@@ -497,16 +497,20 @@ void jugar(){
         cout<<endl;
 
         ///CONTAMOS ESTATUAS PARA SABER QUIEN ES EL PRIMERO.
-        int contador_J1=0, contador_J2=0;
-        bool estatuaMedusa_J1=false;
-        bool estatuaMedusa_J2=false;
-        bool estatuaSalamandra_J1=false;
-        bool estatuaSalamandra_J2=false;
+        int contador_J1 = 0, contador_J2 = 0;
+        bool estatuaMedusa_J1 = false;
+        bool estatuaMedusa_J2 = false;
+        bool estatuaSalamandra_J1 = false;
+        bool estatuaSalamandra_J2 = false;
+        bool aguila_J1 = false;
+        bool aguila_J2 = false;
 
         contador_J1 = contadorEstatuillas(estatuillas_j1, 5);
         contador_J2 = contadorEstatuillas(estatuillas_j2, 5);
 
         int aux;
+        string vectorAuxiliar[5]={""};
+
         ///DETERMINAR EL ORDEN DE TIRADA DE LOS JUGADORES DEPENDIENDO DE LA CANTIDAD DE ESTATUILLAS
         if(contador_J1>contador_J2){
             cout<<"EMPIEZA EL JUGADOR "<<jugadores[empieza]<<endl;
@@ -517,6 +521,12 @@ void jugar(){
             aux = empieza;
             empieza = noEmpieza;
             noEmpieza = aux;
+            ///SE COPIA EL VALOR DEL VECTOR EMPIEZA A NOEMPIEZA Y VICEVERSA;
+            for(int i=0; i<5; i++){
+                vectorAuxiliar[i]=estatuillas_j1[i];
+                estatuillas_j1[i]=estatuillas_j2[i];
+                estatuillas_j2[i]=vectorAuxiliar[i];
+            }
         }
         system("cls");
 
@@ -525,10 +535,12 @@ void jugar(){
         estatuaMedusa_J2 = buscarEstatuaM(estatuillas_j2, 5);
         estatuaSalamandra_J1 = buscarEstatuaS(estatuillas_j1, 5);
         estatuaSalamandra_J2 = buscarEstatuaS(estatuillas_j2, 5);
+        aguila_J1 = buscarEstatuaA(estatuillas_j1, 5);
+        aguila_J2 = buscarEstatuaA(estatuillas_j2, 5);
 
 
         while(true){
-                lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, modoDiosActivado);
+                lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, modoDiosActivado);
 
             if(lanzamiento_j1=="GANASTE"){
                 cout<<"FIN DEL JUEGO"<<endl;
@@ -536,7 +548,7 @@ void jugar(){
                 system("cls");
                 break;
             }
-            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, modoDiosActivado);
+            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, modoDiosActivado);
 
             if(lanzamiento_j2=="GANASTE"){
                 cout<<"FIN DEL JUEGO"<<endl;
