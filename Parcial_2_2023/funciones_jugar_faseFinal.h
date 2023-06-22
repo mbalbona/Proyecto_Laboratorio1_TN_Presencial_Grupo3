@@ -23,7 +23,7 @@ bool buscarEstatuaM(string *estatua, int tam){
      return false;
 }
 
-///FUNCIONA BUSCAR ESTATUA SALAMANDRA
+///FUNCION BUSCAR ESTATUA SALAMANDRA
 bool buscarEstatuaS(string *estatua, int tam){
     for(int i=0; i<tam; i++){
         if(estatua[i] == "Salamandra"){
@@ -33,9 +33,20 @@ bool buscarEstatuaS(string *estatua, int tam){
     return false;
 }
 
+///FUNCION BUSCAR ESTATUA AGUILA
 bool buscarEstatuaA(string *estatuaAguila, int tam){
     for(int i=0; i<tam; i++){
         if(estatuaAguila[i] == "Aguila"){
+            return true;
+        }
+    }
+    return false;
+}
+
+///FUNCION BUSCAR ESTATUA HORMIGA
+bool buscarEstatuaH(string *estatua, int tam){
+    for(int i=0; i<tam; i++){
+        if(estatua[i] == "Hormiga"){
             return true;
         }
     }
@@ -82,7 +93,7 @@ string obtencion_escalera(int dado1, int dado2,int dado3,int dado4,int dado5, bo
 
 }
 
-string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, bool modoDios){
+string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, int valorDadoH, bool modoDios){
     while(true){
             system("cls");
 
@@ -131,7 +142,8 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
             }
 
 
-
+                atras:
+                atrasH:
                 cout << "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+\n";
                 cout << "|     | "<< "|     | "<< "|     | "<< "|     | "<< "|     |\n";
                 cout << "|  " << dado1 << "  | "<< "|  " << dado2 << "  | "<< "|  " << dado3 << "  | "<< "|  " << dado4 << "  | "<< "|  " << dado5 << "  |\n";
@@ -139,7 +151,6 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                 cout << "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+\n";
 
                 if(aguilaActiva){
-
                     cout<<"¿Que dado desea modificar?"<<endl;
                     cout<<"Indique el numero de dado: ";
                     cin>>dadoSelecionado;
@@ -158,15 +169,31 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                         }else if (dadoSelecionado==5){
                             dado5=dadoNuevo;
                         }
-
-                cout << "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+\n";
-                cout << "|     | "<< "|     | "<< "|     | "<< "|     | "<< "|     |\n";
-                cout << "|  " << dado1 << "  | "<< "|  " << dado2 << "  | "<< "|  " << dado3 << "  | "<< "|  " << dado4 << "  | "<< "|  " << dado5 << "  |\n";
-                cout << "|     | "<< "|     | "<< "|     | "<< "|     | "<< "|     |\n";
-                cout << "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+ "<< "+-----+\n";
+                        aguilaActiva=false;
+                        goto atras;
 
                 }
 
+
+                if(valorDadoH !=0){
+                    cout<<"Que dado desea cambiar :";
+                    cin>>dadoSelecionado;
+
+                    if(dadoSelecionado==1){
+                            dado1=valorDadoH;
+                        }else if (dadoSelecionado==2){
+                            dado2=valorDadoH;
+                        }else if (dadoSelecionado==3){
+                            dado3=valorDadoH;
+                        }else if (dadoSelecionado==4){
+                            dado4=valorDadoH;
+                        }else if (dadoSelecionado==5){
+                            dado5=valorDadoH;
+                        }
+
+                        valorDadoH=0;
+                        goto atrasH;
+                }
 
                 obtencionEscalera = obtencion_escalera(dado1,dado2,dado3, dado4, dado5, llaveMedusa, llaveSalamandra);
                 system("pause");

@@ -490,8 +490,26 @@ void jugar(){
                         break;
                    }
         }
+
     ///Comienza la fase final
     while(true){
+            ///BENEFICIO DE LA HORMIGA
+        int valorDadoBeneficioHormigaJ1;
+        int valorDadoBeneficioHormigaJ2;
+        bool estatuaHormiga_J1;
+
+        estatuaHormiga_J1 = buscarEstatuaH(estatuillas_j1, 5);
+
+        if(estatuaHormiga_J1){
+            cout<<"Beneficio de la Hormiga"<<endl;
+            cout<<"El jugador "<<jugadores[empieza]<<" debe elegir un numero del 1 al 6: ";
+            cin>>valorDadoBeneficioHormigaJ1;
+        }else{
+            cout<<"Beneficio de la Hormiga"<<endl;
+            cout<<"El jugador "<<jugadores[noEmpieza]<<" debe elegir un numero del 1 al 6: ";
+            cin>>valorDadoBeneficioHormigaJ2;
+        }
+
         cout<<endl;
         cout<<"BIENVENIDOS A LA FASE FINAL"<<endl;
         cout<<endl;
@@ -518,9 +536,15 @@ void jugar(){
         }else{
             cout<<"EMPIEZA EL JUGADOR "<<jugadores[noEmpieza]<<endl;
             system("pause");
+            ///SE CAMBIAN LOS VALOS PARA QUE LOS NOMBRES SE ENCUENTRE ORDENADOS
             aux = empieza;
             empieza = noEmpieza;
             noEmpieza = aux;
+
+            /// SE CAMBIEN EL VALOR DEL DADO DE LA HORMIGA
+            valorDadoBeneficioHormigaJ1=valorDadoBeneficioHormigaJ2;
+            valorDadoBeneficioHormigaJ2=0;
+
             ///SE COPIA EL VALOR DEL VECTOR EMPIEZA A NOEMPIEZA Y VICEVERSA;
             for(int i=0; i<5; i++){
                 vectorAuxiliar[i]=estatuillas_j1[i];
@@ -540,7 +564,7 @@ void jugar(){
 
 
         while(true){
-                lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, modoDiosActivado);
+                lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, valorDadoBeneficioHormigaJ1, modoDiosActivado);
 
             if(lanzamiento_j1=="GANASTE"){
                 cout<<"FIN DEL JUEGO"<<endl;
@@ -548,7 +572,7 @@ void jugar(){
                 system("cls");
                 break;
             }
-            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, modoDiosActivado);
+            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, valorDadoBeneficioHormigaJ2,  modoDiosActivado);
 
             if(lanzamiento_j2=="GANASTE"){
                 cout<<"FIN DEL JUEGO"<<endl;
