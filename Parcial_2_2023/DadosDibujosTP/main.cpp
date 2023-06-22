@@ -16,6 +16,7 @@ dibujarDado(6,50,5);
 dibujarDado(7,60,5);
 dibujarDado(8,70,5);
 dibujarDado(9,80,5);
+dibujarDado(0,90,5);
 
 
 //muevo el return para que se veo mejor el dado.
