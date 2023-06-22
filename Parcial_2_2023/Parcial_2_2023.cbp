@@ -34,8 +34,10 @@
 		</Compiler>
 		<Unit filename="dados.h" />
 		<Unit filename="funciones_jugar.h" />
+		<Unit filename="funciones_jugar_faseFinal.h" />
 		<Unit filename="jugar.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="maldiciones.h" />
 		<Unit filename="menues.h" />
 		<Unit filename="rlutil.h" />
 		<Extensions />
