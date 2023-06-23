@@ -3,17 +3,52 @@
 
 
 ///Funcion para tirar dado (10 caras)
-int tiraDado(){
-    int  numero = 10;
+int tiraDado(int *vDados, int tam, bool modoDios){
+    int numero = 10;
 
-    return (rand() % numero) + 1;
+    if(!modoDios){
+        for(int i = 0; i < tam; i++){
+            vDados[i] = (rand() % numero) + 1;
+        }
+    }else{
+        atras:
+        for(int i = 0; i < tam; i++){
+
+            cout<<"Ingrese el dado numero "<<i+1<<": ";
+            cin>>vDados[i];
+            cout<<endl;
+            if(vDados[i] > 10 || vDados[i] < 1){
+                cout<<"INGRESE UN VALOR DENTRO DEL RANGO DE UN DADO DE 10 CARAS!!"<<endl;
+                system("pause");
+                system("cls");
+                goto atras;
+            }
+        }
+    }
 }
 
 ///Dado de 6 caras
-int tiraDado_6_caras(){
+int tiraDado_6_caras(int *vDados, bool modoDios){
     int  numero = 6;
 
-    return (rand() % numero) + 1;
+    if(!modoDios){
+        for(int i = 0; i < 5; i++){
+            vDados[i] = (rand() % numero) + 1;
+        }
+    }else{
+        atras:
+        for(int i = 0; i < 5; i++){
+            cout<<"Ingrese el dado numero "<<i+1<<": ";
+            cin>>vDados[i];
+            cout<<endl;
+            if(vDados[i] > 6 || vDados[i] < 1){
+                cout<<"INGRESE UN VALOR DENTRO DEL RANGO DE UN DADO DE 6 CARAS!!"<<endl;
+                system("pause");
+                system("cls");
+                goto atras;
+            }
+        }
+    }
 }
 
 ///Mostramos las estatuas del jugador
@@ -21,27 +56,28 @@ void mostrar_estatuillas(string *estatuillas_jugador, int tam){
 
     for(int i = 0; i < tam; i++){
         if(estatuillas_jugador[i] != ""){
-            cout<<estatuillas_jugador[i]<<"";
+            cout<<estatuillas_jugador[i]<<" ";
         }
     }
 
 }
 
 ///Funcion para utilizar el jugador elegido para el primer turno y su primer turno completo
-int primerTurno(string jugadores[2]){
-    int dadoAnterior, ultimoDado;
+int primerTurno(string jugadores[2], bool modoDios){
+
+    int dadoAnterior, ultimoDado, numero = 10;
     int jugador;
 
     atras:
     for(int i = 0; i < 2 ; i++){
         if(i == 0){
-            ultimoDado = tiraDado();
+            ultimoDado = (rand() % numero) + 1;
             dadoAnterior = ultimoDado;
             jugador = i;
             cout<<endl;
             cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
         }else{
-            ultimoDado = tiraDado();
+            ultimoDado = (rand() % numero) + 1;
             cout<<endl;
             cout<<"Al jugador "<<jugadores[i]<<" le salio el numero: "<<ultimoDado<<endl;
 
@@ -116,11 +152,45 @@ string condicion_estatua(string *vEstatuas, int tam, string opcion){
     return vCondicion[opc];
 }
 
+///Comprobamos vector de dados para activar maldiciones en fase de expedicion
+string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, string opcion){
+
+    if(llaveSalamandra){
+        if( (opcion == "Cangrejo") && (vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) || (vDados[1] % 2 == 0) && (vDados[2] % 2 == 1) || (vDados[0] % 2 == 0) && (vDados[2] % 2 == 1)){
+                return "Cangrejo";
+            }
+        else if( (opcion == "Hormiga") && (vDados[0] < 5) && (vDados[1] < 5) || (vDados[1] < 5) && (vDados[2] < 5) || (vDados[0] < 5) && (vDados[2] < 5) ){
+            return "Hormiga";
+        }
+        else if( (opcion == "Medusa") && (vDados[0] + vDados[1]) == 7 || (vDados[1] + vDados[2]) == 7 || (vDados[0] + vDados[2]) == 7){
+            return "Medusa";
+        }
+        else if( (opcion == "Aguila") && (vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10) || (vDados[0] == 1) && (vDados[2] == 10) || (vDados[2] == 1) && (vDados[0] == 10 || (vDados[2] == 1) && (vDados[1] == 10)) || (vDados[1] == 1) && (vDados[2] == 10)){
+            return "Aguila";
+        }
+
+    }else{
+        if( (opcion == "Cangrejo") && (vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) ){
+                return "Cangrejo";
+            }
+        else if( (opcion == "Hormiga") && (vDados[0] < 5) && (vDados[1] < 5) ){
+            return "Hormiga";
+        }
+        else if( (opcion == "Medusa") && ((vDados[0] + vDados[1]) == 7) ){
+            return "Medusa";
+        }
+        else if( (opcion == "Aguila") && (vDados[0] == 1) && (vDados[1] == 10) ){
+            return "Aguila";
+        }
+        else if( comprobar_dado(vDados, 2) == 1 ){
+            return "Salamandra";
+        }
+    }
+}
+
 ///Funcion que determina si ganaste o no ganaste una estatua
-string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, string opcion){
+string obtencion_estatua(int *vDados, string *vEstatuas, int tam, string opcion, bool llaveSalamandra){
     int opc;
-    string nada = "Nada";
-
 
     for(int i = 0; i < tam; i++){
         if(vEstatuas[i] == opcion){
@@ -129,28 +199,27 @@ string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, strin
     }
 
     switch(opc){
-        case 0: if((dado1 % 2 == 0 && dado2 % 2 == 1) || (dado1 % 2 == 1 && dado2 % 2 == 0)){
+        case 0: if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Cangrejo"){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
-
                         return "Cangrejo";
                         }
                         break;
-        case 1:  if(dado1 < 5 && dado2 < 5){
+        case 1:  if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Hormiga"){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
                         return "Hormiga";
                         }
                         break;
-        case 2:   if((dado1 + dado2) == 7){
+        case 2:   if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Medusa"){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
                         return "Medusa";
                         }
                         break;
-        case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1)){
-                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
+        case 3:   if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Aguila"){
+                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: AGUILA"<<endl;
                         return"Aguila";
                         }
                         break;
-        case 4: if(((dado1 + 1) == dado2) || (dado2 + 1) == dado1){
+        case 4: if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Salamandra"){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: SALAMANDRA"<<endl;
                         return "Salamandra";
                         }
@@ -158,66 +227,22 @@ string obtencion_estatua(int dado1, int dado2, string *vEstatuas, int tam, strin
     }
 
     cout<<">NO HAS OBTENIDO NIGUNA ESTATUILLA"<<endl;
-    return nada;
-
-
-}
-
-///Funcion que determina si ganaste o no ganaste una estatua MALDICION SALAMANDRA
-string obtencion_estatuaMS(int dado1, int dado2, int dado3, string *vEstatuas, int tam, string opcion){
-    int opc;
-    string nada = "Nada";
-
-    for(int i = 0; i < tam; i++){
-        if(vEstatuas[i] == opcion){
-            opc = i;
-        }
-    }
-
-    switch(opc){
-        case 0: if((dado1 % 2 == 0 && dado2 % 2 == 1) || (dado1 % 2 == 1 && dado2 % 2 == 0)|| (dado1 % 2 == 0 && dado3 % 2 == 1) || (dado1 % 2 == 1 && dado3 % 2 == 0) || (dado2 % 2 == 0 && dado3 % 2 == 1)||(dado2 % 2 == 1 && dado3 % 2 == 0)) {
-                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
-
-                        return "Cangrejo";
-                        }
-                        break;
-        case 1:  if(dado1 < 5 && dado2 < 5 || dado1 < 5 && dado3 < 5 || dado2 < 5 && dado3 < 5){
-                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
-                        return "Hormiga";
-                        }
-                        break;
-        case 2:   if((dado1 + dado2) == 7 || (dado1+dado3)== 7 || (dado2+dado3)== 7){
-                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
-                        return "Medusa";
-                        }
-                        break;
-        case 3:   if((dado1 == 1 && dado2 == 10) || (dado1 == 10 && dado2 == 1) || (dado1 == 1 && dado3==10) || (dado1 == 10 && dado3 == 1) || (dado2 == 1 && dado3==10) || (dado2 == 10 && dado3 == 1)){
-                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: ANGUILA"<<endl;
-                        return"Aguila";
-                        }
-                        break;
-        case 4: if(((dado1 + 1) == dado2) || (dado2 + 1) == dado1){
-                        cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: SALAMANDRA"<<endl;
-                        return "Salamandra";
-                        }
-                        break;
-    }
-
-    cout<<">NO HAS OBTENIDO NIGUNA ESTATUILLA"<<endl;
-    return nada;
+    return "Nada";
 
 }
+
 
 ///Interfaz de jugador seleccionando por cual estatua jugara
 
-int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, string *jugadores, string *vEstatuas, int tam, string *estatuas_j1, string *estatuas_j2){
+int seleccion_estatuilla_jugadores(string jugador, string *jugadores, string *vEstatuas, int tam, string *estatuas_j1, string *estatuas_j2){
 
             int opcion_elegida;
+
             atras:
             cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[empieza]<<"\t\t\t\t";
-            cout<<jugadores[noEmpieza]<<endl;
+            cout<<jugadores[0]<<"\t\t\t\t";
+            cout<<jugadores[1]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuas_j1, tam);
             cout<<"\t\t";
@@ -242,12 +267,8 @@ int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, s
 }
 
 ///DECLARAMOS LAS FUNCIONES DE LAS MALDICIONES
-void maldicion_cangrejo(string *, string , int *);
-void maldicion_hormiga(string *, string , int *);
-bool maldicion_medusa(string *, string , int *);
-void maldicion_aguila(string *, string , int *);
-void maldicion_salamandra(string *, string , int *);
 
+#include "maldiciones.h"
 
 int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, string *jugadores, string jugador, int *puntosJugadores){
     int opc, aguila = 0, salamandra = 0, medusa = 0;
@@ -257,97 +278,27 @@ int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, str
         if(vEstatuas[i] == estatua_obtenida){
             opc = i;
         }
-        cout<<vEstatuas[i]<<endl;
     }
 
     ///Comprobamos que maldicion obtuvo
     switch(opc){
         case 0: cout<<"LA MALDICION DEL CANGREJO SE ACTIVA!"<<endl;
             system("pause");
-            maldicion_cangrejo(jugadores, jugador, puntosJugadores);
+            maldicion_cangrejo(jugadores, jugador, puntosJugadores, vEstatuas);
             break;
         case 1: cout<<"LA MALDICION DE LA HORMIGA SE ACTIVA!"<<endl;
             maldicion_hormiga(jugadores, jugador, puntosJugadores);
             break;
         case 2: cout<<"LA MALDICION DE LA MEDUSA SE ACTIVA!"<<endl;
-            medusa = 1;
-            return medusa;
             break;
         case 3: cout<<"LA MALDICION DEL AGUILA SE ACTIVA!"<<endl;
-            aguila = 2;
-            return aguila;
             break;
         case 4: cout<<"LA MALDICION DE LA SALAMANDRA SE ACTIVA!"<<endl;
-            salamandra = 3;
-            return salamandra;
             break;
     }
 
 }
 
-void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador){
-    system("cls");
-
-    int pos, dado, rival;
-
-    for(int i = 0; i < 2; i++){
-        if(jugadores[i] == jugador){
-            pos = i;
-        }
-    }
-
-    if(pos==0){
-        rival=1;
-    }else{
-        rival=0;
-    }
-    cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR UN DADO, POR LA MALDICION DEL CANGREJO."<<endl;
-    cout<<endl;
-    system("pause");
-    dado = tiraDado();
-
-
-    puntosJugador[pos] -= dado;
-
-    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
-
-    system("pause");
-}
-
-void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
-    system("cls");
-
-    int dado1, dado2, pos, rival;
-
-    for(int i = 0; i < 2; i++){
-        if(jugadores[i] == jugador){
-            pos = i;
-        }
-    }
-
-    if(pos==0){
-        rival=1;
-    }else{
-        rival=0;
-    }
-    cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR DOS DADO, POR LA MALDICION DE LA HORMIGA."<<endl;
-    system("pause");
-
-    dado1 = tiraDado();
-    dado2 = tiraDado();
-
-    puntosJugador[pos] += (dado1 + dado2);
-
-    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<puntosJugador[pos]<<" PUNTOS DEBIDO A LA MALDICION DE LA HORMIGA."<<endl;
-    system("pause");
-}
-
-void maldicion_aguila(string *jugadores, string jugador, int *puntosJugador){
-
-}
-void maldicion_salamandra(string *jugadores, string jugador, int *puntosJugador){
-
-}
 
 ///FIN DE FUNCIONES DE MALDICIONES
 
@@ -370,11 +321,11 @@ int recorrer_estatuas(string *vEstatuas, int tam){
 
 ///Lanzamiento de estatuillas
 
-string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores){
+string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra, bool modoDiosActivado){
     while(true){
             system("cls");
 
-            int dado1, dado2;
+            int vDados[3] = {};
 
             string no_obtuvo = "No obtuvo";
 
@@ -382,8 +333,8 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
 
             cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[empieza]<<"\t\t\t\t";
-            cout<<jugadores[noEmpieza]<<endl;
+            cout<<jugadores[0]<<" "<<puntosJugadores[0]<<"\t\t\t\t";
+            cout<<jugadores[1]<<" "<<puntosJugadores[1]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, tam);
             cout<<"\t\t";
@@ -399,26 +350,27 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
             cout<<"CONDICIONES DE OBTENCION: "<<condicion<<endl;
             cout<<"-------------------------"<<endl;
 
-                cout<<"Primer dado: ";
-                dado1 = tiraDado();
-                cout<<dado1<<endl;
+            tiraDado(vDados, 2,  modoDiosActivado);
 
-                cout<<"Segundo dado: ";
-                dado2 = tiraDado();
-                cout<<dado2<<endl;
-                cout<<endl;
+            cout<<"DADO 1: "<<vDados[0]<<endl;
+            cout<<"DADO 2: "<<vDados[1]<<endl;
+            cout<<endl;
 
-                estatua_obtenida = obtencion_estatua(dado1,dado2,vEstatuas,tam,opcion);
+            estatua_obtenida = obtencion_estatua(vDados,vEstatuas, tam,opcion, llaveSalamandra);
 
             if(estatua_obtenida == "Nada"){
                 system("pause");
                 system("cls");
                 return no_obtuvo;
             }else{
+                comprobar_maldicion(vEstatuas,5,estatua_obtenida,jugadores,jugador,puntosJugadores);
+                system("pause");
+                system("cls");
                return estatua_obtenida;
             }
     }
 }
+
 
 #endif // FUNCIONES_JUGAR_H_INCLUDED
 

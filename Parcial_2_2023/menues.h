@@ -2,6 +2,8 @@
 #define MENUES_H_INCLUDED
 
 #include "jugar.h"
+#include "estadisticas.h"
+#include "creditos.h"
 
 
 void menu(){
@@ -21,10 +23,10 @@ void menu(){
         switch(opc){
             case 1: jugar();
                 break;
-       /*     case 2: estadisticas();
+            case 2: estadisticas();
                 break;
             case 3: creditos();
-                break;*/
+                break;
             case 0: return;
         }
     }
