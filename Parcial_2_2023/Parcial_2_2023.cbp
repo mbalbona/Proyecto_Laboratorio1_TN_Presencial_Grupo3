@@ -32,7 +32,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="creditos.h" />
 		<Unit filename="dados.h" />
+		<Unit filename="estadisticas.h" />
 		<Unit filename="funciones_jugar.h" />
 		<Unit filename="funciones_jugar_faseFinal.h" />
 		<Unit filename="jugar.h" />
