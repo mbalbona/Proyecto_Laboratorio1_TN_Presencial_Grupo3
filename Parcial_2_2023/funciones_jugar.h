@@ -11,7 +11,7 @@ int tiraDado(int *vDados, int tam, bool modoDios){
             vDados[i] = (rand() % numero) + 1;
         }
     }else{
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < tam; i++){
             cout<<"Ingrese el dado numero "<<i+1<<": ";
             cin>>vDados[i];
             cout<<endl;
@@ -253,12 +253,7 @@ int seleccion_estatuilla_jugadores(string jugador, string *jugadores, string *vE
 
 ///DECLARAMOS LAS FUNCIONES DE LAS MALDICIONES
 
-void maldicion_cangrejo(string *, string , int *, string *);
-void maldicion_hormiga(string *, string , int *);
-bool maldicion_medusa(string *, string , int *);
-void maldicion_aguila(string *, string , int *);
-void maldicion_salamandra(string *, string , int *);
-
+#include "maldiciones.h"
 
 int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, string *jugadores, string jugador, int *puntosJugadores){
     int opc, aguila = 0, salamandra = 0, medusa = 0;
@@ -280,92 +275,15 @@ int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, str
             maldicion_hormiga(jugadores, jugador, puntosJugadores);
             break;
         case 2: cout<<"LA MALDICION DE LA MEDUSA SE ACTIVA!"<<endl;
-            medusa = 1;
-            return medusa;
             break;
         case 3: cout<<"LA MALDICION DEL AGUILA SE ACTIVA!"<<endl;
-            aguila = 2;
-            return aguila;
             break;
         case 4: cout<<"LA MALDICION DE LA SALAMANDRA SE ACTIVA!"<<endl;
-            salamandra = 3;
-            return salamandra;
             break;
     }
 
 }
 
-void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador, string *vEstatuas){
-    system("cls");
-
-    int pos, dado, rival, numero = 10;
-    bool esta_cangrejo = false;
-
-    for(int i = 0; i < 2; i++){
-        if(jugadores[i] == jugador){
-            pos = i;
-        }
-    }
-
-    for(int i = 0; i < 5; i++){
-            if(vEstatuas[i] == "Cangrejo"){
-                esta_cangrejo = true;
-            }
-    }
-    if(pos==0){
-        rival=1;
-    }else{
-        rival=0;
-    }
-
-    if(esta_cangrejo = true){
-        cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR UN DADO, POR LA MALDICION DEL CANGREJO."<<endl;
-        system("pause");
-        dado = (rand() % numero) + 1;
-
-        cout<<"SALIO DADO: "<<dado<<endl;
-
-        puntosJugador[pos] -= dado;
-
-        cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
-    }
-}
-
-void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
-    system("cls");
-
-    int vDado[2] = {}, pos, rival;
-
-    for(int i = 0; i < 2; i++){
-        if(jugadores[i] == jugador){
-            pos = i;
-        }
-    }
-
-    if(pos==0){
-        rival=1;
-    }else{
-        rival=0;
-    }
-    cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR DOS DADO, POR LA MALDICION DE LA HORMIGA."<<endl;
-    system("pause");
-
-    tiraDado(vDado, 2 ,modoDiosActivado);
-
-    cout<<"SALIO DADO 1: "<<vDado[0]<<endl;
-    cout<<"SALIO DADO 2: "<<vDado[1]<<endl;
-
-    puntosJugador[pos] -= (vDado[0] + vDado[1]);
-
-    cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<(vDado[0] + vDado[1])<<" PUNTOS DEBIDO A LA MALDICION DE LA HORMIGA."<<endl;
-}
-
-void maldicion_aguila(string *jugadores, string jugador, int *puntosJugador){
-
-}
-void maldicion_salamandra(string *jugadores, string jugador, int *puntosJugador){
-
-}
 
 ///FIN DE FUNCIONES DE MALDICIONES
 
@@ -429,7 +347,7 @@ string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string o
                 system("cls");
                 return no_obtuvo;
             }else{
-                comprobar_maldicion(vEstatuas, tam, estatua_obtenida, jugadores, jugador, puntosJugadores);
+                comprobar_maldicion(vEstatuas,5,estatua_obtenida,jugadores,jugador,puntosJugadores);
                 system("pause");
                 system("cls");
                return estatua_obtenida;
