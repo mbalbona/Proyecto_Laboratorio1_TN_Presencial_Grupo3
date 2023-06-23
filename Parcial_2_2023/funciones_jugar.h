@@ -11,10 +11,18 @@ int tiraDado(int *vDados, int tam, bool modoDios){
             vDados[i] = (rand() % numero) + 1;
         }
     }else{
+        atras:
         for(int i = 0; i < tam; i++){
+
             cout<<"Ingrese el dado numero "<<i+1<<": ";
             cin>>vDados[i];
             cout<<endl;
+            if(vDados[i] > 10 || vDados[i] < 1){
+                cout<<"INGRESE UN VALOR DENTRO DEL RANGO DE UN DADO DE 10 CARAS!!"<<endl;
+                system("pause");
+                system("cls");
+                goto atras;
+            }
         }
     }
 }
@@ -28,10 +36,17 @@ int tiraDado_6_caras(int *vDados, bool modoDios){
             vDados[i] = (rand() % numero) + 1;
         }
     }else{
+        atras:
         for(int i = 0; i < 5; i++){
             cout<<"Ingrese el dado numero "<<i+1<<": ";
             cin>>vDados[i];
             cout<<endl;
+            if(vDados[i] > 6 || vDados[i] < 1){
+                cout<<"INGRESE UN VALOR DENTRO DEL RANGO DE UN DADO DE 6 CARAS!!"<<endl;
+                system("pause");
+                system("cls");
+                goto atras;
+            }
         }
     }
 }
@@ -138,36 +153,36 @@ string condicion_estatua(string *vEstatuas, int tam, string opcion){
 }
 
 ///Comprobamos vector de dados para activar maldiciones en fase de expedicion
-string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra){
+string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, string opcion){
 
     if(llaveSalamandra){
-        if( (vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) || (vDados[1] % 2 == 0) && (vDados[2] % 2 == 1) || (vDados[0] % 2 == 0) && (vDados[2] % 2 == 1)){
+        if( (opcion == "Cangrejo") && (vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) || (vDados[1] % 2 == 0) && (vDados[2] % 2 == 1) || (vDados[0] % 2 == 0) && (vDados[2] % 2 == 1)){
                 return "Cangrejo";
             }
-        else if( (vDados[0] < 5) && (vDados[1] < 5) || (vDados[1] < 5) && (vDados[2] < 5) || (vDados[0] < 5) && (vDados[2] < 5) ){
+        else if( (opcion == "Hormiga") && (vDados[0] < 5) && (vDados[1] < 5) || (vDados[1] < 5) && (vDados[2] < 5) || (vDados[0] < 5) && (vDados[2] < 5) ){
             return "Hormiga";
         }
-        else if( (vDados[0] + vDados[1]) == 7 || (vDados[1] + vDados[2]) == 7 || (vDados[0] + vDados[2]) == 7){
+        else if( (opcion == "Medusa") && (vDados[0] + vDados[1]) == 7 || (vDados[1] + vDados[2]) == 7 || (vDados[0] + vDados[2]) == 7){
             return "Medusa";
         }
-        else if( (vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10) || (vDados[0] == 1) && (vDados[2] == 10) || (vDados[2] == 1) && (vDados[0] == 10 || (vDados[2] == 1) && (vDados[1] == 10)) || (vDados[1] == 1) && (vDados[2] == 10)){
+        else if( (opcion == "Aguila") && (vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10) || (vDados[0] == 1) && (vDados[2] == 10) || (vDados[2] == 1) && (vDados[0] == 10 || (vDados[2] == 1) && (vDados[1] == 10)) || (vDados[1] == 1) && (vDados[2] == 10)){
             return "Aguila";
         }
 
     }else{
-        if( (vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) ){
+        if( (opcion == "Cangrejo") && (vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) ){
                 return "Cangrejo";
             }
-        else if( (vDados[0] < 5) && (vDados[1] < 5) ){
+        else if( (opcion == "Hormiga") && (vDados[0] < 5) && (vDados[1] < 5) ){
             return "Hormiga";
         }
-        else if( (vDados[0] + vDados[1]) == 7 ){
+        else if( (opcion == "Medusa") && ((vDados[0] + vDados[1]) == 7) ){
             return "Medusa";
         }
-        else if( (vDados[0] == 1) && (vDados[1] == 10) ){
+        else if( (opcion == "Aguila") && (vDados[0] == 1) && (vDados[1] == 10) ){
             return "Aguila";
         }
-        else if(comprobar_dado(vDados, 2) == 1 ){
+        else if( comprobar_dado(vDados, 2) == 1 ){
             return "Salamandra";
         }
     }
@@ -184,27 +199,27 @@ string obtencion_estatua(int *vDados, string *vEstatuas, int tam, string opcion,
     }
 
     switch(opc){
-        case 0: if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra) == "Cangrejo"){
+        case 0: if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Cangrejo"){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: CANGREJO"<<endl;
                         return "Cangrejo";
                         }
                         break;
-        case 1:  if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra) == "Hormiga"){
+        case 1:  if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Hormiga"){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: HORMIGA"<<endl;
                         return "Hormiga";
                         }
                         break;
-        case 2:   if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra) == "Medusa"){
+        case 2:   if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Medusa"){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: MEDUSA"<<endl;
                         return "Medusa";
                         }
                         break;
-        case 3:   if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra) == "Aguila"){
+        case 3:   if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Aguila"){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: AGUILA"<<endl;
                         return"Aguila";
                         }
                         break;
-        case 4: if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra) == "Salamandra"){
+        case 4: if(comprobar_dado_expedicion(vDados, 3, llaveSalamandra, opcion) == "Salamandra"){
                         cout<<">HAS OBTENIDO LA ESTATUA SELECCIONADA: SALAMANDRA"<<endl;
                         return "Salamandra";
                         }
@@ -337,10 +352,11 @@ string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string o
 
             tiraDado(vDados, 2,  modoDiosActivado);
 
-            estatua_obtenida = obtencion_estatua(vDados,vEstatuas, tam,opcion, llaveSalamandra);
-
             cout<<"DADO 1: "<<vDados[0]<<endl;
             cout<<"DADO 2: "<<vDados[1]<<endl;
+            cout<<endl;
+
+            estatua_obtenida = obtencion_estatua(vDados,vEstatuas, tam,opcion, llaveSalamandra);
 
             if(estatua_obtenida == "Nada"){
                 system("pause");
