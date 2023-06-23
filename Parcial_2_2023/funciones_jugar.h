@@ -170,16 +170,16 @@ string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, str
         }
 
     }else{
-        if( (opcion == "Cangrejo") && (vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) ){
+        if( (opcion == "Cangrejo") && ((vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) || (vDados[1] % 2 == 0) && (vDados[0] % 2 == 1)) ){
                 return "Cangrejo";
             }
-        else if( (opcion == "Hormiga") && (vDados[0] < 5) && (vDados[1] < 5) ){
+        else if( (opcion == "Hormiga") && ((vDados[0] < 5) && (vDados[1] < 5) || (vDados[1] < 5) && (vDados[0] < 5)) ){
             return "Hormiga";
         }
         else if( (opcion == "Medusa") && ((vDados[0] + vDados[1]) == 7) ){
             return "Medusa";
         }
-        else if( (opcion == "Aguila") && (vDados[0] == 1) && (vDados[1] == 10) ){
+        else if( (opcion == "Aguila") && ((vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10)) ){
             return "Aguila";
         }
         else if( comprobar_dado(vDados, 2) == 1 ){
@@ -270,7 +270,7 @@ int seleccion_estatuilla_jugadores(string jugador, string *jugadores, string *vE
 
 #include "maldiciones.h"
 
-int comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, string *jugadores, string jugador, int *puntosJugadores){
+void comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, string *jugadores, string jugador, int *puntosJugadores){
     int opc, aguila = 0, salamandra = 0, medusa = 0;
 
     ///Obtenemos la posicion de la estatua que se obtuvo
@@ -350,11 +350,18 @@ string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string o
             cout<<"CONDICIONES DE OBTENCION: "<<condicion<<endl;
             cout<<"-------------------------"<<endl;
 
-            tiraDado(vDados, 2,  modoDiosActivado);
-
-            cout<<"DADO 1: "<<vDados[0]<<endl;
-            cout<<"DADO 2: "<<vDados[1]<<endl;
-            cout<<endl;
+            if(!llaveSalamandra){
+                    tiraDado(vDados, 2,  modoDiosActivado);
+                    cout<<"DADO 1: "<<vDados[0]<<endl;
+                    cout<<"DADO 2: "<<vDados[1]<<endl;
+                    cout<<endl;
+            }else{
+                tiraDado(vDados,3, modoDiosActivado);
+                cout<<"DADO 1: "<<vDados[0]<<endl;
+                cout<<"DADO 2: "<<vDados[1]<<endl;
+                cout<<"DADO 3: "<<vDados[2]<<endl;
+                cout<<endl;
+            }
 
             estatua_obtenida = obtencion_estatua(vDados,vEstatuas, tam,opcion, llaveSalamandra);
 
@@ -363,7 +370,6 @@ string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string o
                 system("cls");
                 return no_obtuvo;
             }else{
-                comprobar_maldicion(vEstatuas,5,estatua_obtenida,jugadores,jugador,puntosJugadores);
                 system("pause");
                 system("cls");
                return estatua_obtenida;

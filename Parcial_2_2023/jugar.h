@@ -31,14 +31,15 @@ int comprobar_dado(int *vDado, int tam){
 }
 
 bool modoDiosActivado = false;
-bool puedeLanzarJ1 = true;
-bool puedeLanzarJ2 = true;
+
+int puedeLanzarJ1 = 1;
+int puedeLanzarJ2 = 1;
+int medusa_activa = 0;
 
 ///FIN VARIABLES GLOABALES
 
 #include "funciones_jugar.h"
 #include "funciones_jugar_faseFinal.h"
-
 
 void jugar(){
     system("cls");
@@ -61,6 +62,7 @@ void jugar(){
     bool primer_turno = false;
     bool llaveSalamandraJ1 = false;
     bool llaveSalamandraJ2 = false;
+
 
     ///Estatuas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
     string vEstatuillas[5] = {"Cangrejo", "Hormiga", "Medusa", "Aguila", "Salamandra"};
@@ -111,7 +113,7 @@ void jugar(){
     ///Comienza la fase de expecidicion
     while(true){
         system("cls");
-                aguila_activa = false;
+
                 ///Seleccion de estatua por la que jugara
 
                 opcion_elegidaJ1 = seleccion_estatuilla_jugadores(jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
@@ -119,16 +121,16 @@ void jugar(){
 
                 ///Se lanzan los dados
 
-                    if(puedeLanzarJ1){
+                    if(puedeLanzarJ1 == 1){
                         lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
                     }
-                    if(puedeLanzarJ2){
+
+                    if(puedeLanzarJ2 == 1){
                         lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
                     }
-
-                    deNuevoJ1:
-                    deNuevoJ2:
-
+                    cout<<"J1 despues de lanzar: "<<puedeLanzarJ1<<endl;
+                    cout<<"J2 despues de lanzar: "<<puedeLanzarJ2<<endl;
+                    system("pause");
                     ///Lanzamiento de dados con opciones de estatuillas iguales
                     if(opcion_elegidaJ1 == opcion_elegidaJ2){
                             if(lanzamiento_j1 == lanzamiento_j2 && lanzamiento_j1 != "No obtuvo" && lanzamiento_j2 != "No obtuvo"){
@@ -139,10 +141,6 @@ void jugar(){
                                 ///Se elimina la estatua conseguida para que no se liste mas
                                 vEstatuillas[opcion_elegidaJ1-1] = {""};
 
-                                if(lanzamiento_j1 == "Medusa"){
-                                    puedeLanzarJ1 == false;
-                                }
-
                                 system("cls");
                                 cout<<"AL HABER SELECCIONADO LAS MISMAS ESTATUILLAS, EL JUGADOR "<<jugadores[empieza]<<" HA GANADO."<<endl;
                                 cout<<"POR FAVOR SELECCIONA NUEVAMENTE UNA ESTATUILLA!"<<endl;
@@ -152,16 +150,9 @@ void jugar(){
                                 lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
 
                             }
-                            if(lanzamiento_j2 != "No obtuvo"){
-                                    ///Se agrega la estatua obtenida por el jugador
-                                        estatuillas_j2[opcion_elegidaJ2-1] = lanzamiento_j2;
-
-                                    ///Se elimina la estatua conseguida para que no se liste mas
-                                        vEstatuillas[opcion_elegidaJ2-1] = {""};
-                            }
                         }
 
-                            ///Lanzamiendo dados con opciones diferente
+                    ///Lanzamiendo dados con opciones diferente
                     if(opcion_elegidaJ1 != opcion_elegidaJ2){
                               if(lanzamiento_j1 != "No obtuvo"){
                                     ///Se agrega la estatua obtenida por el jugador
@@ -177,42 +168,48 @@ void jugar(){
                                     ///Se elimina la estatua conseguida para que no se liste mas
                                         vEstatuillas[opcion_elegidaJ2-1] = {""};
                                  }
-                            }
+                        }
 
-                ///Verificamos si la estatua de Aguila fue obtenida
-                for(int i = 0; i < 5; i++){
-                    if(estatuillas_j1[i] == "Aguila" && aguila_activa == false){
-                        opcion_elegidaJ1 = seleccion_estatuilla_jugadores(jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                        lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
-                        aguila_activa = true;
-                        goto deNuevoJ1;
+                    cout<<endl;
+                    for(int i = 0; i < 5; i++){
+                        if(estatuillas_j1[i] == "Medusa"){
+                            cout<<"Este es J1"<<estatuillas_j1[i]<<" "<<endl;
+                            puedeLanzarJ1 = 0;
+                            medusa_activa = 1;
+                        }
+                        else if(estatuillas_j2[i] == "Medusa"){
+                            cout<<"Este es J2"<<estatuillas_j2[i]<<" "<<endl;
+                            puedeLanzarJ2 = 0;
+                            medusa_activa = 1;
+                        }
                     }
-                }
 
-                for(int i = 0; i < 5; i++){
-                    if(estatuillas_j2[i] == "Aguila" && aguila_activa == false){
-                        opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                        lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
-                        aguila_activa = true;
-                        goto deNuevoJ2;
-                    }
-                }
+                    cout<<"J1: "<<puedeLanzarJ1<<endl;
+                    cout<<"J2: "<<puedeLanzarJ2<<endl;
+                    system("pause");
+                    system("cls");
 
-                system("cls");
+
+                if(medusa_activa == true){
+                    cont_medusa++;
+                    if(cont_medusa == 3){
+                        if(puedeLanzarJ1 == 0){
+                            puedeLanzarJ1 = 1;
+                        }else if(puedeLanzarJ2 == 0){
+                            puedeLanzarJ2 = 1;
+                        }
+                   }
+                }
 
                    if(recorrer_estatuas(vEstatuillas,5) == 0){
                         break;
                    }
 
 
-                   cont_medusa++;
-                   if(cont_medusa == 3){
-                        if(puedeLanzarJ1 == false){
-                            puedeLanzarJ1 = true;
-                        }else if(puedeLanzarJ2 == false){
-                            puedeLanzarJ2 = true;
-                        }
-                   }
+                cout<<"J1 ya termino el while: "<<puedeLanzarJ1<<endl;
+                cout<<"J2 ya termino el while: "<<puedeLanzarJ2<<endl;
+
+                system("pause");
         }
 
     ///Comienza la fase final
