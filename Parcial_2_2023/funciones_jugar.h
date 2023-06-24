@@ -1,7 +1,30 @@
 #ifndef FUNCIONES_JUGAR_H_INCLUDED
 #define FUNCIONES_JUGAR_H_INCLUDED
 
+///Funcion que comprueba si el jugador 1 obtuvo alguna estatua
+void jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatuillas_j1, int opcion_elegidaJ1){
+    if(lanzamientoj1 != "No obtuvo"){
+            ///Se agrega la estatua obtenida al jugador 1 debido a que ambos obtuvieron la estatua, pero la gana el jugador que empieza osea el 1
+            estatuillas_j1[opcion_elegidaJ1-1] = lanzamientoj1;
 
+            ///Se elimina la estatua conseguida para que no se liste mas
+            vEstatuillas[opcion_elegidaJ1-1] = {""};
+    }else{
+        return;
+    }
+}
+///Funcion que comprueba si el jugador 1 obtuvo alguna estatua
+void jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatuillas_j2, int opcion_elegidaJ2){
+    if(lanzamientoj2 != "No obtuvo"){
+            ///Se agrega la estatua obtenida al jugador 1 debido a que ambos obtuvieron la estatua, pero la gana el jugador que empieza osea el 1
+            estatuillas_j2[opcion_elegidaJ2-1] = lanzamientoj2;
+
+            ///Se elimina la estatua conseguida para que no se liste mas
+            vEstatuillas[opcion_elegidaJ2-1] = {""};
+    }else{
+        return;
+    }
+}
 ///Funcion para tirar dado (10 caras)
 int tiraDado(int *vDados, int tam, bool modoDios){
     int numero = 10;
@@ -282,19 +305,29 @@ void comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, st
 
     ///Comprobamos que maldicion obtuvo
     switch(opc){
-        case 0: cout<<"LA MALDICION DEL CANGREJO SE ACTIVA!"<<endl;
-            system("pause");
-            maldicion_cangrejo(jugadores, jugador, puntosJugadores, vEstatuas);
-            break;
-        case 1: cout<<"LA MALDICION DE LA HORMIGA SE ACTIVA!"<<endl;
-            maldicion_hormiga(jugadores, jugador, puntosJugadores);
-            break;
-        case 2: cout<<"LA MALDICION DE LA MEDUSA SE ACTIVA!"<<endl;
-            break;
-        case 3: cout<<"LA MALDICION DEL AGUILA SE ACTIVA!"<<endl;
-            break;
-        case 4: cout<<"LA MALDICION DE LA SALAMANDRA SE ACTIVA!"<<endl;
-            break;
+        case 0: cout<<endl;
+                cout<<"LA MALDICION DEL CANGREJO SE ACTIVA!"<<endl;
+                system("pause");
+                maldicion_cangrejo(jugadores, jugador, puntosJugadores, vEstatuas);
+                break;
+
+        case 1: cout<<endl;
+                cout<<"LA MALDICION DE LA HORMIGA SE ACTIVA!"<<endl;
+                system("pause");
+                maldicion_hormiga(jugadores, jugador, puntosJugadores);
+                break;
+
+        case 2: cout<<endl;
+                cout<<"LA MALDICION DE LA MEDUSA SE ACTIVA!"<<endl;
+                break;
+
+        case 3: cout<<endl;
+                cout<<"LA MALDICION DEL AGUILA SE ACTIVA!"<<endl;
+                break;
+
+        case 4: cout<<endl;
+                cout<<"LA MALDICION DE LA SALAMANDRA SE ACTIVA!"<<endl;
+                break;
     }
 
 }
@@ -318,7 +351,17 @@ int recorrer_estatuas(string *vEstatuas, int tam){
             return 1;
     }
 }
+///FUNCION QUE RECORRE LAS ESTATUAS DEL J1
+string recorrer_estatuas_J1(string lanzamientoj1, string *estatuillas_j2, int tam){
+    for(int i = 0; i < tam; i++){
+        if(estatuillas_j2[i] == lanzamientoj1){
+            return "esta";
+        }
+    }
 
+    return "no esta";
+}
+///FUNCION QUE RECORRE LAS ESTATUAS DEL J2
 ///Lanzamiento de estatuillas
 
 string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra, bool modoDiosActivado){
@@ -370,6 +413,7 @@ string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string o
                 system("cls");
                 return no_obtuvo;
             }else{
+                comprobar_maldicion(vEstatuas,5,estatua_obtenida,jugadores,jugador,puntosJugadores);
                 system("pause");
                 system("cls");
                return estatua_obtenida;

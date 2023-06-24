@@ -7,7 +7,9 @@
 void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador, string *vEstatuas){
     system("cls");
 
-    int pos, dado, rival, numero = 10;
+    int pos, rival, numero = 10;
+    int dado[1] = {};
+
     bool esta_cangrejo = false;
 
     for(int i = 0; i < 2; i++){
@@ -29,14 +31,13 @@ void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador, s
 
     if(esta_cangrejo = true){
         cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR UN DADO, POR LA MALDICION DEL CANGREJO."<<endl;
-        system("pause");
-        dado = (rand() % numero) + 1;
+        tiraDado(dado,5,modoDiosActivado);
+        cout<<endl;
+        cout<<"SALIO DADO: "<<dado[0]<<endl;
 
-        cout<<"SALIO DADO: "<<dado<<endl;
+        puntosJugador[pos] -= dado[0];
 
-        puntosJugador[pos] -= dado;
-
-        cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
+        cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado[0]<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
     }
 }
 
