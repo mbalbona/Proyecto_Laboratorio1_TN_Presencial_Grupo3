@@ -2,29 +2,34 @@
 #define FUNCIONES_JUGAR_H_INCLUDED
 
 ///Funcion que comprueba si el jugador 1 obtuvo alguna estatua
-void jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatuillas_j1, int opcion_elegidaJ1){
+bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatuillas_j1, int opcion_elegidaJ1){
     if(lanzamientoj1 != "No obtuvo"){
             ///Se agrega la estatua obtenida al jugador 1 debido a que ambos obtuvieron la estatua, pero la gana el jugador que empieza osea el 1
             estatuillas_j1[opcion_elegidaJ1-1] = lanzamientoj1;
 
             ///Se elimina la estatua conseguida para que no se liste mas
             vEstatuillas[opcion_elegidaJ1-1] = {""};
+
+            return true;
     }else{
-        return;
+        return false;
     }
 }
-///Funcion que comprueba si el jugador 1 obtuvo alguna estatua
-void jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatuillas_j2, int opcion_elegidaJ2){
+///Funcion que comprueba si el jugador 2 obtuvo alguna estatua
+bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatuillas_j2, int opcion_elegidaJ2){
     if(lanzamientoj2 != "No obtuvo"){
             ///Se agrega la estatua obtenida al jugador 1 debido a que ambos obtuvieron la estatua, pero la gana el jugador que empieza osea el 1
             estatuillas_j2[opcion_elegidaJ2-1] = lanzamientoj2;
 
             ///Se elimina la estatua conseguida para que no se liste mas
             vEstatuillas[opcion_elegidaJ2-1] = {""};
+
+            return true;
     }else{
-        return;
+        return false;
     }
 }
+
 ///Funcion para tirar dado (10 caras)
 int tiraDado(int *vDados, int tam, bool modoDios){
     int numero = 10;
@@ -345,10 +350,10 @@ int recorrer_estatuas(string *vEstatuas, int tam){
     }
 
     if(cont == 5){
-        return 0;
+        return 1;
         }
         else{
-            return 1;
+            return 0;
     }
 }
 ///FUNCION QUE RECORRE LAS ESTATUAS DEL J1
@@ -361,14 +366,17 @@ string recorrer_estatuas_J1(string lanzamientoj1, string *estatuillas_j2, int ta
 
     return "no esta";
 }
-///FUNCION QUE RECORRE LAS ESTATUAS DEL J2
+
 ///Lanzamiento de estatuillas
 
-string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra, bool modoDiosActivado){
+string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra, bool modoDiosActivado, bool aguilaActiva){
     while(true){
+            deVuelta:
+
             system("cls");
 
             int vDados[3] = {};
+            int contAguila = 0;
 
             string no_obtuvo = "No obtuvo";
 
@@ -394,19 +402,39 @@ string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string o
             cout<<"-------------------------"<<endl;
 
             if(!llaveSalamandra){
-                    tiraDado(vDados, 2,  modoDiosActivado);
+                    tiraDado(vDados, 2, modoDiosActivado);
                     cout<<"DADO 1: "<<vDados[0]<<endl;
                     cout<<"DADO 2: "<<vDados[1]<<endl;
                     cout<<endl;
             }else{
-                tiraDado(vDados,3, modoDiosActivado);
+                tiraDado(vDados, 3, modoDiosActivado);
                 cout<<"DADO 1: "<<vDados[0]<<endl;
                 cout<<"DADO 2: "<<vDados[1]<<endl;
                 cout<<"DADO 3: "<<vDados[2]<<endl;
                 cout<<endl;
             }
 
-            estatua_obtenida = obtencion_estatua(vDados,vEstatuas, tam,opcion, llaveSalamandra);
+            estatua_obtenida = obtencion_estatua(vDados, vEstatuas, tam, opcion, llaveSalamandra);
+
+           if(aguilaActiva){
+                if(estatua_obtenida != "Nada" && objetivo == false){
+                    objetivo = true;
+                    comprobar_maldicion(vEstatuas,5,estatua_obtenida,jugadores,jugador,puntosJugadores);
+                    system("pause");
+                    system("cls");
+                    return estatua_obtenida;
+                }else if(estatua_obtenida == "Nada"){
+                    if(contAguila == 0){
+                        system("cls");
+                        cout<<"DEBIDO A QUE EL RIVAL POSEE LA ESTATUA DEL AGUILA, PUEDES TIRAR NUEVAMENTE."<<endl;
+                        system("pause");
+                        contAguila++;
+                        goto deVuelta;
+                    }else{
+                        return no_obtuvo;
+                    }
+                }
+           }
 
             if(estatua_obtenida == "Nada"){
                 system("pause");

@@ -31,7 +31,7 @@ int comprobar_dado(int *vDado, int tam){
 }
 
 bool modoDiosActivado = false;
-
+bool objetivo = false;
 
 
 ///FIN VARIABLES GLOABALES
@@ -45,8 +45,6 @@ void jugar(){
     string estatuillas_j1[5] = {""};
     string estatuillas_j2[5] = {""};
 
-    int jugadorAguila = 0;
-
     string primer_lanzamiento;
     string lanzamiento_j1, lanzamiento_j2;
 
@@ -59,8 +57,9 @@ void jugar(){
 
     int puntosJugadores[2] = {0};
 
-    bool aguila_activa = false;
     bool primer_turno = true;
+    bool aguilaJ1 = false;
+    bool aguilaJ2 = false;
     bool llaveSalamandraJ1 = false;
     bool llaveSalamandraJ2 = false;
 
@@ -113,6 +112,8 @@ void jugar(){
     }
     ///Comienza la fase de expecidicion
     while(true){
+        objetivo = false;
+
         system("cls");
 
                 ///Seleccion de estatua por la que jugara
@@ -121,79 +122,128 @@ void jugar(){
                     ///Verificamos que ambos jugadores puedan seleccionar una estatua y lanzar los dados
                     if(puedeLanzarJ1 == 1){
                         if(puedeLanzarJ2 == 1){
-                            cout<<endl;
-                            cout<<"Entre en donde los dos son 1"<<endl;
-                            cout<<puedeLanzarJ1<<" "<<puedeLanzarJ2<<endl;
-                            system("pause");
                             opcion_elegidaJ1 = seleccion_estatuilla_jugadores(jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                             opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                             if(primer_turno = true){
                                 lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
+                                if(opcion_elegidaJ1 == opcion_elegidaJ2){
+                                    if( jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1) == true){
+                                        system("cls");
+                                        cout<<"EL JUGADOR "<<jugadores[empieza]<<" HA OBTENIDO LA ESTATUA EN SU ANTERIOR TIRO POR FAVOR ELIJA NUEVAMENTE SU ESTATUA."<<endl;
+                                        system("pause");
+                                        system("cls");
+                                        if(recorrer_estatuas(vEstatuillas, 5) == 1){
+                                            cout<<"SE DETECTO QUE NO QUEDAN ESTATUAS EN JUEGO. POR LO TANTO PROCEDEREMOS A CONTINUACION CON LA FASE FINAL!"<<endl;
+                                            system("pause");
+                                            goto finale;
+                                        }
+                                        opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+                                    }
+                                }
                                 lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
+                                jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
+                                jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
+
+                                ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
+                                if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                    llaveSalamandraJ1 = true;
+                                }else if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                    llaveSalamandraJ2 = true;
+                                }
+
+                                ///COMPROBAMOS SI LA ESTATUA DE AGUILA FUE OBTENIDA
+                                if(lanzamiento_j1 == "Aguila"){
+                                    aguilaJ2 = true;
+                                }else if(lanzamiento_j2 == "Aguila"){
+                                    aguilaJ1 = true;
+                                }
+
+                                ///SE DETECTA SI SE OBTUVO UNA ESTATUA EN LA PRIMER TIRADA CON LA ESTATUA DEL AGUILA EN POSICION DEL RIVAL
+                                if(aguilaJ1 == true && objetivo == true){
+                                    if(comprueba_aguila(objetivo, aguilaJ1) == 1){
+                                        opcion_elegidaJ1 = seleccion_estatuilla_jugadores(jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+                                        lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
+                                        jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
+                                    }
+                                }
+
+                                ///SE DETECTA SI SE OBTUVO UNA ESTATUA EN LA PRIMER TIRADA CON LA ESTATUA DEL AGUILA EN POSICION DEL RIVAL
+                                if(aguilaJ2 == true && objetivo == true){
+                                    if(comprueba_aguila(objetivo, aguilaJ2) == 1){
+                                        opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+                                        lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
+                                        jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
+                                    }
+                                }
+
                                 primer_turno = false;
                             }else{
                                 lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
-                                if(lanzamiento_j1 != "No obtuvo"){
-                                    jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
+                                if(opcion_elegidaJ1 == opcion_elegidaJ2){
+                                    if(jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1) == true){
+                                        system("cls");
+                                        cout<<"EL JUGADOR "<<empieza<<" HA OBTENIDO LA ESTATUA EN SU ANTERIOR TIRO POR FAVOR ELIJA NUEVAMENTE SU ESTATUA."<<endl;
+                                        system("pause");
+                                        system("cls");
+                                        if(recorrer_estatuas(vEstatuillas, 5) == 1){
+                                            cout<<"SE DETECTO QUE NO QUEDAN ESTATUAS EN JUEGO. POR LO TANTO PROCEDEREMOS A CONTINUACION CON LA FASE FINAL!"<<endl;
+                                            system("pause");
+                                            goto finale;
+                                        }
+                                        opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+                                    }
                                 }
                                 lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
+                                jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
                                 jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
+
+                                ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
+                                if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                    llaveSalamandraJ1 = true;
+                                }else if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                    llaveSalamandraJ2 = true;
+                                }
                             }
                         }
                     }
 
+
                     ///Verificamos si unicamente el jugador dos puede lanzar, de ser asi selecciona estatua y lanza los dados
                     if(puedeLanzarJ2 == 1){
                         if(puedeLanzarJ1 == 0){
-                            cout<<endl;
-                            cout<<"Entre en donde lanza j2 no obtuvo medusa y el j1 si obtuvo"<<endl;
-                            cout<<puedeLanzarJ1<<" "<<puedeLanzarJ2<<endl;
-                            system("pause");
                             opcion_elegidaJ1 = -1;
                             lanzamiento_j1 = "No obtuvo";
                             opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                             lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
+                            jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
+
+                            ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
+                                if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                    llaveSalamandraJ1 = true;
+                                }else if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                    llaveSalamandraJ2 = true;
+                                }
                         }
                     }
 
                     ///Verificamos si unicamente el jugador uno puede lanzar, de ser asi selecciona estatua y lanza los dados
                     if(puedeLanzarJ1 == 1){
                         if(puedeLanzarJ2 == 0){
-                            cout<<endl;
-                            cout<<"Entre en donde j1 no obtuvo la medusa y el j2 si obtuvo"<<endl;
-                            cout<<puedeLanzarJ1<<" "<<puedeLanzarJ2<<endl;
-                            system("pause");
                             opcion_elegidaJ2 = -1;
                             lanzamiento_j2 = "No obtuvo";
                             opcion_elegidaJ1 = seleccion_estatuilla_jugadores(jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                             lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
+                            jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
+
+                            ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
+                                if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                    llaveSalamandraJ1 = true;
+                                }else if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                    llaveSalamandraJ2 = true;
+                                }
                         }
                     }
 
-                    ///Lanzamiento de dados con opciones de estatuillas iguales
-                    if(opcion_elegidaJ1 == opcion_elegidaJ2){
-
-                            ///Entra aca si ambos jugadores sacaron la misma estatua
-                            if( (lanzamiento_j1 == lanzamiento_j2) && (lanzamiento_j1 != "No obtuvo" && lanzamiento_j2 != "No obtuvo") ){
-
-                                jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
-
-                                ///Pedimos seleccionar otra estatuilla al jugador 2 y lanza nuevamente el dado
-                                system("cls");
-                                cout<<"AL HABER SELECCIONADO LAS MISMAS ESTATUILLAS, EL JUGADOR "<<jugadores[empieza]<<" HA GANADO."<<endl;
-                                cout<<"POR FAVOR SELECCIONA NUEVAMENTE UNA ESTATUILLA!"<<endl;
-                                system("pause");
-                                system("cls");
-                                cout<<endl;
-                                opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
-
-                            }else if(lanzamiento_j1 != lanzamiento_j2){ ///Entra aca si ambos jugadores eligieron la misma estatua pero solo uno obtuvo una de ellas
-                                jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
-                                jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
-                            }
-
-                        }
 
                     ///Lanzamiendo dados con opciones diferente
                     if(opcion_elegidaJ1 != opcion_elegidaJ2){
@@ -228,12 +278,13 @@ void jugar(){
                    }
                 }
 
-                   if(recorrer_estatuas(vEstatuillas,5) == 0){
+                   if(recorrer_estatuas(vEstatuillas,5) == 1){
                         break;
                    }
         }
 
     ///Comienza la fase final
+    finale:
     while(true){
             ///BENEFICIO DE LA HORMIGA
         int valorDadoBeneficioHormigaJ1;
