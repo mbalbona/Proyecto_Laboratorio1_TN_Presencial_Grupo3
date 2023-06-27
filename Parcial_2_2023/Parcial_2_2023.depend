@@ -190,3 +190,32 @@
 
 1687554078 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\creditos.h
 
+1687902237 source:c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	<string.h>
+	<stdio.h>
+	"menues.h"
+
+1687902976 c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
+	"jugar.h"
+	"estadisticas.h"
+	"creditos.h"
+
+1687909146 c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
+	"funciones_jugar.h"
+	"funciones_jugar_faseFinal.h"
+
+1687909870 c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+	"maldiciones.h"
+
+1687906162 c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\maldiciones.h
+	"funciones_jugar.h"
+
+1687902237 c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar_fasefinal.h
+
+1687902237 c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\estadisticas.h
+
+1687902237 c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\creditos.h
+

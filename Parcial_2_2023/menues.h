@@ -7,7 +7,7 @@
 
 
 void menu(){
-
+    atras:
     while(true){
         int opc;
         cout<<"\tIRWIN'S REVENGE"<<endl;
@@ -20,6 +20,12 @@ void menu(){
         cout<<endl;
         cout<<"Elija una opcion: ";
         cin>>opc;
+        if(opc < 0 || opc > 3){
+            cout<<"INGRESE UNA OPCION CORRECTA!"<<endl;
+            system("pause");
+            system("cls");
+            goto atras;
+        }
         switch(opc){
             case 1: jugar();
                 break;

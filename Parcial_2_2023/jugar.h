@@ -1,34 +1,9 @@
 #ifndef JUGAR_H_INCLUDED
 #define JUGAR_H_INCLUDED
 
-///FUNCION Y VARIABLES DE ALCANCE GLOBAL
+///VARIABLES DE ALCANCE GLOBAL
 ///ESTAMOS AL TANTO DE QUE NO ES RECOMENDABLE USAR VARIABLES GLOBALES DE SER POSIBLE
 
-///FUNCION QUE ORDENA EL DADO Y COMPRUEBA LA ESCALERA
-int comprobar_dado(int *vDado, int tam){
-    int aux;
-
-    ///ORDENAMOS EL VECTOR CON EL METODO BURBUJA
-    for (int i = 0; i < tam-1; i++) {
-        for (int j = 0; j < tam-i-1; j++) {
-            if (vDado[j] > vDado[j+1]) {
-                aux = vDado[j];
-                vDado[j] = vDado[j+1];
-                vDado[j+1] = aux;
-            }
-        }
-    }
-
-    ///COMPROBAMOS SI ESTAN ORDENADOS O NO
-
-    for (int i = 1; i < tam-1; i++) {
-        if (vDado[i] != vDado[i-1] + 1){
-            return 0;  // No es escalera
-        }
-    }
-
-    return 1; //Escalera
-}
 
 bool modoDiosActivado = false;
 bool objetivo = false;
@@ -125,7 +100,7 @@ void jugar(){
                             opcion_elegidaJ1 = seleccion_estatuilla_jugadores(jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                             opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                             if(primer_turno = true){
-                                lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
+                                lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
                                 if(opcion_elegidaJ1 == opcion_elegidaJ2){
                                     if( jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1) == true){
                                         system("cls");
@@ -140,14 +115,15 @@ void jugar(){
                                         opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                                     }
                                 }
-                                lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
+
+                                lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado,aguilaJ2);
                                 jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
                                 jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
 
                                 ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
-                                if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
                                     llaveSalamandraJ1 = true;
-                                }else if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                }else if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
                                     llaveSalamandraJ2 = true;
                                 }
 
@@ -162,7 +138,7 @@ void jugar(){
                                 if(aguilaJ1 == true && objetivo == true){
                                     if(comprueba_aguila(objetivo, aguilaJ1) == 1){
                                         opcion_elegidaJ1 = seleccion_estatuilla_jugadores(jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                        lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
+                                        lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
                                         jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
                                     }
                                 }
@@ -171,14 +147,14 @@ void jugar(){
                                 if(aguilaJ2 == true && objetivo == true){
                                     if(comprueba_aguila(objetivo, aguilaJ2) == 1){
                                         opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                        lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
+                                        lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado, aguilaJ2);
                                         jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
                                     }
                                 }
 
                                 primer_turno = false;
                             }else{
-                                lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
+                                lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
                                 if(opcion_elegidaJ1 == opcion_elegidaJ2){
                                     if(jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1) == true){
                                         system("cls");
@@ -193,14 +169,14 @@ void jugar(){
                                         opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                                     }
                                 }
-                                lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
+                                lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado, aguilaJ2);
                                 jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
                                 jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
 
                                 ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
-                                if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
                                     llaveSalamandraJ1 = true;
-                                }else if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                }else if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
                                     llaveSalamandraJ2 = true;
                                 }
                             }
@@ -214,13 +190,13 @@ void jugar(){
                             opcion_elegidaJ1 = -1;
                             lanzamiento_j1 = "No obtuvo";
                             opcion_elegidaJ2 = seleccion_estatuilla_jugadores(jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                            lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado);
+                            lanzamiento_j2 = lanzamiento_jugador(jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado, aguilaJ2);
                             jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
 
                             ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
-                                if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
                                     llaveSalamandraJ1 = true;
-                                }else if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                }else if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
                                     llaveSalamandraJ2 = true;
                                 }
                         }
@@ -232,13 +208,13 @@ void jugar(){
                             opcion_elegidaJ2 = -1;
                             lanzamiento_j2 = "No obtuvo";
                             opcion_elegidaJ1 = seleccion_estatuilla_jugadores(jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                            lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado);
+                            lanzamiento_j1 = lanzamiento_jugador(jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
                             jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
 
                             ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
-                                if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
                                     llaveSalamandraJ1 = true;
-                                }else if(comprobar_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
+                                }else if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
                                     llaveSalamandraJ2 = true;
                                 }
                         }

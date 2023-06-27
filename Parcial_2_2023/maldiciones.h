@@ -72,6 +72,7 @@ void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
 
     cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<(vDado[0] + vDado[1])<<" PUNTOS DEBIDO A LA MALDICION DE LA HORMIGA."<<endl;
 }
+
 int comprueba_salamandra(string lanzamientoJ1, string lanzamientoJ2){
     if(lanzamientoJ1 == "Salamandra"){
         return 1;

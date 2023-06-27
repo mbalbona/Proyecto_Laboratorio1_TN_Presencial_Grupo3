@@ -32,6 +32,7 @@ bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatui
 
 ///Funcion para tirar dado (10 caras)
 int tiraDado(int *vDados, int tam, bool modoDios){
+    atras:
     int numero = 10;
 
     if(!modoDios){
@@ -39,7 +40,7 @@ int tiraDado(int *vDados, int tam, bool modoDios){
             vDados[i] = (rand() % numero) + 1;
         }
     }else{
-        atras:
+
         for(int i = 0; i < tam; i++){
 
             cout<<"Ingrese el dado numero "<<i+1<<": ";
@@ -57,6 +58,7 @@ int tiraDado(int *vDados, int tam, bool modoDios){
 
 ///Dado de 6 caras
 int tiraDado_6_caras(int *vDados, bool modoDios){
+    atras:
     int  numero = 6;
 
     if(!modoDios){
@@ -64,7 +66,7 @@ int tiraDado_6_caras(int *vDados, bool modoDios){
             vDados[i] = (rand() % numero) + 1;
         }
     }else{
-        atras:
+
         for(int i = 0; i < 5; i++){
             cout<<"Ingrese el dado numero "<<i+1<<": ";
             cin>>vDados[i];
@@ -179,18 +181,27 @@ string condicion_estatua(string *vEstatuas, int tam, string opcion){
 
     return vCondicion[opc];
 }
+///FUNCION QUE COMPRUEBA ESCALERA
+
+int comprobar_dado(int *vDado, int tam){
+     if ( (vDado[0] == vDado[1] - 1) || (vDado[0] == vDado[0] + 1) || ( vDado[1] == vDado[0] - 1) || ( vDado[1] == vDado[0] + 1 ) ){
+        return 1;
+     }else{
+        return 0;
+     }
+}
 
 ///Comprobamos vector de dados para activar maldiciones en fase de expedicion
 string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, string opcion){
 
     if(llaveSalamandra){
-        if( (opcion == "Cangrejo") && (vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) || (vDados[1] % 2 == 0) && (vDados[2] % 2 == 1) || (vDados[0] % 2 == 0) && (vDados[2] % 2 == 1)){
+        if( (opcion == "Cangrejo") && ((vDados[0] % 2 == 0) && (vDados[1] % 2 == 1)) || ((vDados[1] % 2 == 0) && (vDados[0] % 2 == 1)) || ((vDados[0] % 2 == 0) && (vDados[2] % 2 == 1)) || ((vDados[2] % 2 == 0) && (vDados[0] % 2 == 1)) || ((vDados[1] % 2 == 0) && vDados[2] % 2 == 1) || ((vDados[2] % 2 == 0) && (vDados[1] % 2 == 1))){
                 return "Cangrejo";
             }
-        else if( (opcion == "Hormiga") && (vDados[0] < 5) && (vDados[1] < 5) || (vDados[1] < 5) && (vDados[2] < 5) || (vDados[0] < 5) && (vDados[2] < 5) ){
+        else if( (opcion == "Hormiga") && ((vDados[0] < 5) && (vDados[1] < 5)) || ((vDados[1] < 5) && (vDados[2] < 5)) || ((vDados[0] < 5) && (vDados[2] < 5)) ){
             return "Hormiga";
         }
-        else if( (opcion == "Medusa") && (vDados[0] + vDados[1]) == 7 || (vDados[1] + vDados[2]) == 7 || (vDados[0] + vDados[2]) == 7){
+        else if( (opcion == "Medusa") && ((vDados[0] + vDados[1]) == 7) || ((vDados[1] + vDados[2]) == 7) || ((vDados[0] + vDados[2]) == 7) || ((vDados[0] + vDados[1] +vDados[2]) == 7) )  {
             return "Medusa";
         }
         else if( (opcion == "Aguila") && (vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10) || (vDados[0] == 1) && (vDados[2] == 10) || (vDados[2] == 1) && (vDados[0] == 10 || (vDados[2] == 1) && (vDados[1] == 10)) || (vDados[1] == 1) && (vDados[2] == 10)){
@@ -210,10 +221,15 @@ string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, str
         else if( (opcion == "Aguila") && ((vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10)) ){
             return "Aguila";
         }
-        else if( comprobar_dado(vDados, 2) == 1 ){
+        else if( (opcion == "Salamandra") && (comprobar_dado(vDados, tam) == 1) ) {
+            cout<<"HOLA"<<endl;
+            system("pause");
             return "Salamandra";
         }
     }
+
+    return "Nada";
+
 }
 
 ///Funcion que determina si ganaste o no ganaste una estatua
@@ -371,8 +387,6 @@ string recorrer_estatuas_J1(string lanzamientoj1, string *estatuillas_j2, int ta
 
 string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra, bool modoDiosActivado, bool aguilaActiva){
     while(true){
-            deVuelta:
-
             system("cls");
 
             int vDados[3] = {};
@@ -381,6 +395,8 @@ string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string o
             string no_obtuvo = "No obtuvo";
 
             string condicion, estatua_obtenida;
+
+            deVuelta:
 
             cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
