@@ -220,9 +220,6 @@ void jugar(){
                                 puedeLanzarJ2 = 1;
                             }
                         }
-                        system("cls");
-                        cout<<"EL RIVAL TIENE EN SU POSICION LA ESTATUA DE MEDUSA Y TIENE LA MALDICION ACTIVA, EL MISMO SE PIERDE EL TURNO"<<endl;
-                        system("pause");
                     }
 
                    if(recorrer_estatuas(vEstatuillas,5) == 1){
