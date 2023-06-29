@@ -41,6 +41,9 @@ void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador, s
 
         cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado[0]<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
     }
+
+    system("pause");
+    system("cls");
 }
 
 
@@ -61,8 +64,9 @@ void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
         rival=0;
     }
     cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR DOS DADO, POR LA MALDICION DE LA HORMIGA."<<endl;
+    cout<<endl;
     system("pause");
-
+    cout<<endl;
     tiraDado(vDado, 2 ,modoDiosActivado);
 
     cout<<"SALIO DADO 1: "<<vDado[0]<<endl;
@@ -71,6 +75,9 @@ void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
     puntosJugador[pos] -= (vDado[0] + vDado[1]);
 
     cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<(vDado[0] + vDado[1])<<" PUNTOS DEBIDO A LA MALDICION DE LA HORMIGA."<<endl;
+
+    system("pause");
+    system("cls");
 }
 
 int comprueba_salamandra(string lanzamientoJ1, string lanzamientoJ2){
@@ -90,6 +97,7 @@ int comprueba_aguila(bool target, bool aguila ){
     }else{
         return 0;
     }
+
 }
 
 
