@@ -88,20 +88,25 @@
 
 1686624824 c:\users\mateo\onedrive - frgp.utn.edu.ar\laboratorio i\parciales\segundo_parcial_proyectojuego\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\maldiciones.h
 
-1686700541 source:c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
+1687474686 source:c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
 	<iostream>
 	<ctime>
 	<cstdlib>
 	<string.h>
+	<stdio.h>
 	"menues.h"
 
-1686700541 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
+1688000798 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
 	"jugar.h"
+	"estadisticas.h"
+	"creditos.h"
 
-1686943982 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
+1688010221 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
 	"funciones_jugar.h"
+	"funciones_jugar_faseFinal.h"
 
-1686700541 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+1688010980 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+	"maldiciones.h"
 
 1687467686 source:c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
 	<iostream>
@@ -218,4 +223,13 @@
 1687902237 c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\estadisticas.h
 
 1687902237 c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\creditos.h
+
+1688000798 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\maldiciones.h
+	"funciones_jugar.h"
+
+1687474686 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar_fasefinal.h
+
+1687675437 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\estadisticas.h
+
+1687675437 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\creditos.h
 
