@@ -75,9 +75,9 @@ void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
 
 int comprueba_salamandra(string lanzamientoJ1, string lanzamientoJ2){
     if(lanzamientoJ1 == "Salamandra"){
-        return 1;
-    }else if(lanzamientoJ2 == "Salamandra"){
         return 2;
+    }else if(lanzamientoJ2 == "Salamandra"){
+        return 1;
     }
 }
 

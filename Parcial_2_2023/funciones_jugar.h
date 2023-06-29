@@ -93,7 +93,7 @@ void mostrar_estatuillas(string *estatuillas_jugador, int tam){
 }
 
 ///Funcion para utilizar el jugador elegido para el primer turno y su primer turno completo
-int primerTurno(string jugadores[2], bool modoDios){
+int primerTurno(string jugadores[2]){
 
     int dadoAnterior, ultimoDado, numero = 10;
     int jugador;
@@ -194,17 +194,20 @@ int comprobar_dado(int *vDado, int tam){
 ///Comprobamos vector de dados para activar maldiciones en fase de expedicion
 string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, string opcion){
 
+    cout<<vDados[0]<<" "<<vDados[1]<<" "<<vDados[2]<<endl;
+    system("pause");
+
     if(llaveSalamandra){
         if( (opcion == "Cangrejo") && ((vDados[0] % 2 == 0) && (vDados[1] % 2 == 1)) || ((vDados[1] % 2 == 0) && (vDados[0] % 2 == 1)) || ((vDados[0] % 2 == 0) && (vDados[2] % 2 == 1)) || ((vDados[2] % 2 == 0) && (vDados[0] % 2 == 1)) || ((vDados[1] % 2 == 0) && vDados[2] % 2 == 1) || ((vDados[2] % 2 == 0) && (vDados[1] % 2 == 1))){
                 return "Cangrejo";
             }
-        else if( (opcion == "Hormiga") && ((vDados[0] < 5) && (vDados[1] < 5)) || ((vDados[1] < 5) && (vDados[2] < 5)) || ((vDados[0] < 5) && (vDados[2] < 5)) ){
+        else if( (opcion == "Hormiga") && (((vDados[0] < 5) && (vDados[1] < 5)) || ((vDados[0] < 5) && (vDados[2] < 5)) || ((vDados[1] < 5) && (vDados[0] < 5)) || ((vDados[1] < 5) && (vDados[2] < 5)) || ((vDados[2] < 5) && (vDados[0] < 5)) || ((vDados[2] < 5) && (vDados[1] < 5))) ){
             return "Hormiga";
         }
         else if( (opcion == "Medusa") && ((vDados[0] + vDados[1]) == 7) || ((vDados[1] + vDados[2]) == 7) || ((vDados[0] + vDados[2]) == 7) || ((vDados[0] + vDados[1] +vDados[2]) == 7) )  {
             return "Medusa";
         }
-        else if( (opcion == "Aguila") && (vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10) || (vDados[0] == 1) && (vDados[2] == 10) || (vDados[2] == 1) && (vDados[0] == 10 || (vDados[2] == 1) && (vDados[1] == 10)) || (vDados[1] == 1) && (vDados[2] == 10)){
+        else if( (opcion == "Aguila") && ((vDados[0] == 1) && (vDados[1] == 10)) || ((vDados[1] == 1) && (vDados[0] == 10)) || ((vDados[0] == 1) && (vDados[2] == 10)) || ((vDados[2] == 1) && (vDados[0] == 10)) || ((vDados[2] == 1) && (vDados[1] == 10)) || ((vDados[1] == 1) && (vDados[2] == 10)) ){
             return "Aguila";
         }
 
@@ -222,8 +225,6 @@ string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, str
             return "Aguila";
         }
         else if( (opcion == "Salamandra") && (comprobar_dado(vDados, tam) == 1) ) {
-            cout<<"HOLA"<<endl;
-            system("pause");
             return "Salamandra";
         }
     }
@@ -278,15 +279,15 @@ string obtencion_estatua(int *vDados, string *vEstatuas, int tam, string opcion,
 
 ///Interfaz de jugador seleccionando por cual estatua jugara
 
-int seleccion_estatuilla_jugadores(string jugador, string *jugadores, string *vEstatuas, int tam, string *estatuas_j1, string *estatuas_j2){
+int seleccion_estatuilla_jugadores(int empieza, int noEmpieza, string jugador, string *jugadores, string *vEstatuas, int tam, string *estatuas_j1, string *estatuas_j2){
 
             int opcion_elegida;
 
             atras:
             cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[0]<<"\t\t\t\t";
-            cout<<jugadores[1]<<endl;
+            cout<<jugadores[empieza]<<"\t\t\t\t";
+            cout<<jugadores[noEmpieza]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuas_j1, tam);
             cout<<"\t\t";
@@ -340,14 +341,17 @@ void comprobar_maldicion(string *vEstatuas, int tam, string estatua_obtenida, st
 
         case 2: cout<<endl;
                 cout<<"LA MALDICION DE LA MEDUSA SE ACTIVA!"<<endl;
+                system("pause");
                 break;
 
         case 3: cout<<endl;
                 cout<<"LA MALDICION DEL AGUILA SE ACTIVA!"<<endl;
+                system("pause");
                 break;
 
         case 4: cout<<endl;
                 cout<<"LA MALDICION DE LA SALAMANDRA SE ACTIVA!"<<endl;
+                system("pause");
                 break;
     }
 
@@ -385,7 +389,7 @@ string recorrer_estatuas_J1(string lanzamientoj1, string *estatuillas_j2, int ta
 
 ///Lanzamiento de estatuillas
 
-string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra, bool modoDiosActivado, bool aguilaActiva){
+string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string opcion, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, int *puntosJugadores, bool llaveSalamandra, bool modoDiosActivado, bool aguilaActiva){
     while(true){
             system("cls");
 
@@ -458,7 +462,6 @@ string lanzamiento_jugador(string *jugadores, int tam,  string jugador, string o
                 return no_obtuvo;
             }else{
                 comprobar_maldicion(vEstatuas,5,estatua_obtenida,jugadores,jugador,puntosJugadores);
-                system("pause");
                 system("cls");
                return estatua_obtenida;
             }
