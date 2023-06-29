@@ -194,24 +194,14 @@ int comprobar_dado(int *vDado, int tam){
 ///Comprobamos vector de dados para activar maldiciones en fase de expedicion
 string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, string opcion){
 
+    int contHormiga = 0;
+
     cout<<vDados[0]<<" "<<vDados[1]<<" "<<vDados[2]<<endl;
+    cout<<opcion<<endl;
+    cout<<llaveSalamandra<<endl;
     system("pause");
 
-    if(llaveSalamandra){
-        if( (opcion == "Cangrejo") && ((vDados[0] % 2 == 0) && (vDados[1] % 2 == 1)) || ((vDados[1] % 2 == 0) && (vDados[0] % 2 == 1)) || ((vDados[0] % 2 == 0) && (vDados[2] % 2 == 1)) || ((vDados[2] % 2 == 0) && (vDados[0] % 2 == 1)) || ((vDados[1] % 2 == 0) && vDados[2] % 2 == 1) || ((vDados[2] % 2 == 0) && (vDados[1] % 2 == 1))){
-                return "Cangrejo";
-            }
-        else if( (opcion == "Hormiga") && (((vDados[0] < 5) && (vDados[1] < 5)) || ((vDados[0] < 5) && (vDados[2] < 5)) || ((vDados[1] < 5) && (vDados[0] < 5)) || ((vDados[1] < 5) && (vDados[2] < 5)) || ((vDados[2] < 5) && (vDados[0] < 5)) || ((vDados[2] < 5) && (vDados[1] < 5))) ){
-            return "Hormiga";
-        }
-        else if( (opcion == "Medusa") && ((vDados[0] + vDados[1]) == 7) || ((vDados[1] + vDados[2]) == 7) || ((vDados[0] + vDados[2]) == 7) || ((vDados[0] + vDados[1] +vDados[2]) == 7) )  {
-            return "Medusa";
-        }
-        else if( (opcion == "Aguila") && ((vDados[0] == 1) && (vDados[1] == 10)) || ((vDados[1] == 1) && (vDados[0] == 10)) || ((vDados[0] == 1) && (vDados[2] == 10)) || ((vDados[2] == 1) && (vDados[0] == 10)) || ((vDados[2] == 1) && (vDados[1] == 10)) || ((vDados[1] == 1) && (vDados[2] == 10)) ){
-            return "Aguila";
-        }
-
-    }else{
+    if(!llaveSalamandra){
         if( (opcion == "Cangrejo") && ((vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) || (vDados[1] % 2 == 0) && (vDados[0] % 2 == 1)) ){
                 return "Cangrejo";
             }
@@ -226,6 +216,27 @@ string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, str
         }
         else if( (opcion == "Salamandra") && (comprobar_dado(vDados, tam) == 1) ) {
             return "Salamandra";
+        }
+    }else{
+        if( (opcion == "Cangrejo") && (((vDados[0] % 2 == 0) && (vDados[1] % 2 == 1)) || ((vDados[1] % 2 == 0) && (vDados[0] % 2 == 1)) || ((vDados[0] % 2 == 0) && (vDados[2] % 2 == 1)) || ((vDados[2] % 2 == 0) && (vDados[0] % 2 == 1)) || ((vDados[1] % 2 == 0) && vDados[2] % 2 == 1) || ((vDados[2] % 2 == 0) && (vDados[1] % 2 == 1))) ){
+                return "Cangrejo";
+        }
+
+        for(int i = 0; i < tam; i++){
+            if( (opcion == "Hormiga") && (vDados[i] < 5) ){
+                contHormiga ++;
+            }
+
+            if(contHormiga == 2){
+                return "Hormiga";
+            }
+        }
+
+        if( (opcion == "Medusa") && (((vDados[0] + vDados[1]) == 7) || ((vDados[1] + vDados[2]) == 7) || ((vDados[0] + vDados[2]) == 7) || ((vDados[0] + vDados[1] +vDados[2]) == 7)) )  {
+            return "Medusa";
+        }
+        else if( (opcion == "Aguila") && (((vDados[0] == 1) && (vDados[1] == 10)) || ((vDados[1] == 1) && (vDados[0] == 10)) || ((vDados[0] == 1) && (vDados[2] == 10)) || ((vDados[2] == 1) && (vDados[0] == 10)) || ((vDados[2] == 1) && (vDados[1] == 10)) || ((vDados[1] == 1) && (vDados[2] == 10))) ){
+            return "Aguila";
         }
     }
 

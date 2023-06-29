@@ -150,13 +150,6 @@ void jugar(){
                                         jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
                                     }
                                 }
-
-                                ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
-                                if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
-                                    llaveSalamandraJ1 = true;
-                                }else if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
-                                    llaveSalamandraJ2 = true;
-                                }
                         }
                     }
 
@@ -201,7 +194,6 @@ void jugar(){
                     ///Lanzamiendo dados con opciones diferente
                     if(opcion_elegidaJ1 != opcion_elegidaJ2){
                             system("cls");
-                            system("pause");
                             jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
                             jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
                         }
