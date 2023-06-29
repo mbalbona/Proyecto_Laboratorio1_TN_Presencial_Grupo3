@@ -22,9 +22,12 @@ string buscarEstatua(string *estatua, int tam){
             return "Salamandra";
         }else if(estatua[i] == "Hormiga"){
             return "Hormiga";
+        }else if(estatua[i] == "Aguila"){
+            return "Aguila";
         }
     }
 }
+
 
 
 ///FUNCION QUE COMPRUEBA SI HAY ESCALERA CORTA O NO

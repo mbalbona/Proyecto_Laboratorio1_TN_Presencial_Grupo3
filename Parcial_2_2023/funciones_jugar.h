@@ -1,6 +1,38 @@
 #ifndef FUNCIONES_JUGAR_H_INCLUDED
 #define FUNCIONES_JUGAR_H_INCLUDED
 
+///FUNCION QUE COMPRUEBA ESCALERA
+
+int comprobar_dado(int *vDado, int tam){
+     ///DECLARAMOS UN VECTOR AUXILIAR PARA NO MODIFICAR EL VECTOR ORIGINAL DADO QUE ES UN PUNTERO
+     int vecAux[5];
+     int aux;
+
+     for(int i = 0; i < tam; i++){
+        vecAux[i] == vDado[i];
+     }
+
+     ///ORDENAMOS EL VECTOR AUXILIAR
+     for (int i = 0; i < tam; i++) {
+        for (int j = 0; j < tam - i; j++) {
+            if (vecAux[j] > vecAux[j + 1]) {
+                aux = vecAux[j];
+                vecAux[j] = vecAux[j + 1];
+                vecAux[j + 1] = aux;
+            }
+        }
+    }
+
+    ///CON EL VECTOR AUXILIAR ORDENADO VEMOS SI ES ESCALERA
+    for (int i = 0; i < tam - 1; i++) {
+        if (vecAux[i + 1] - vecAux[i] != 1) {
+            return 0;  // No es una escalera
+        }
+    }
+
+    return 1;
+}
+
 ///Funcion que comprueba si el jugador 1 obtuvo alguna estatua
 bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatuillas_j1, int opcion_elegidaJ1){
 
@@ -206,15 +238,6 @@ string condicion_estatua(string *vEstatuas, int tam, string opcion){
     }
 
     return vCondicion[opc];
-}
-///FUNCION QUE COMPRUEBA ESCALERA
-
-int comprobar_dado(int *vDado, int tam){
-     if ( (vDado[0] == vDado[1] - 1) || (vDado[0] == vDado[0] + 1) || ( vDado[1] == vDado[0] - 1) || ( vDado[1] == vDado[0] + 1 ) ){
-        return 1;
-     }else{
-        return 0;
-     }
 }
 
 ///Comprobamos vector de dados para activar maldiciones en fase de expedicion
