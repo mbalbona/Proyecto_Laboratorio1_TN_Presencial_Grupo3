@@ -115,8 +115,6 @@ void jugar(){
                             lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntos_generales, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
                                 if(opcion_elegidaJ1 == opcion_elegidaJ2){
                                     if(jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1) == true){
-                                        puntos_generales[1] -= 3;
-                                        puntos_rivalObtiene[1] -= 3;
                                         system("cls");
                                         cout<<"EL JUGADOR "<<jugadores[empieza]<<" HA OBTENIDO LA ESTATUA EN SU ANTERIOR TIRO POR FAVOR ELIJA NUEVAMENTE SU ESTATUA."<<endl;
                                         system("pause");

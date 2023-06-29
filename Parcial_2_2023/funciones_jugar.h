@@ -54,7 +54,7 @@ bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatui
             }
 
             puntos_rivalObtiene[1] -= 3;
-
+            puntos_generales[0] -= 3;
             return true;
     }else{
         return false;
@@ -81,7 +81,7 @@ bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatui
             }
 
             puntos_rivalObtiene[0] -= 3;
-
+            puntos_generales[1] -= 3;
             return true;
     }else{
         return false;
