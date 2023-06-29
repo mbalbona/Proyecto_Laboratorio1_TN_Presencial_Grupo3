@@ -39,7 +39,7 @@ void jugar(){
     bool llaveSalamandraJ2 = false;
 
 
-    ///Estatuas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
+    ///Estatuillas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
     string vEstatuillas[5] = {"Cangrejo", "Hormiga", "Medusa", "Aguila", "Salamandra"};
 
 
@@ -48,7 +48,7 @@ void jugar(){
         cout<<endl;
         cout<<"Ingrese el nombre del jugador numero "<< i+1 <<": ";
         cin>>jugadores[i];
-        if(jugadores[0] == "LAB1"){
+        if(jugadores[0] == "LAB1"|| jugadores[0]=="lab1"){
             modoDiosActivado = true;
             system("cls");
             cout<<endl;
