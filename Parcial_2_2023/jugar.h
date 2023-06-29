@@ -109,9 +109,7 @@ void jugar(){
                                         system("pause");
                                         system("cls");
                                         if(recorrer_estatuas(vEstatuillas, 5) == 1){
-                                            cout<<"SE DETECTO QUE NO QUEDAN ESTATUAS EN JUEGO. POR LO TANTO PROCEDEREMOS A CONTINUACION CON LA FASE FINAL!"<<endl;
-                                            system("pause");
-                                            goto finale;
+                                            break;
                                         }
                                         opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                                     }
@@ -138,6 +136,9 @@ void jugar(){
                                 ///SE DETECTA SI SE OBTUVO UNA ESTATUA EN LA PRIMER TIRADA CON LA ESTATUA DEL AGUILA EN POSICION DEL RIVAL
                                 if(aguilaJ1 == true && objetivo == true){
                                     if(comprueba_aguila(objetivo, aguilaJ1) == 1){
+                                        if(recorrer_estatuas(vEstatuillas, 5) == 1){
+                                            break;
+                                        }
                                         opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                                         lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
                                         jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
@@ -147,6 +148,9 @@ void jugar(){
                                 ///SE DETECTA SI SE OBTUVO UNA ESTATUA EN LA PRIMER TIRADA CON LA ESTATUA DEL AGUILA EN POSICION DEL RIVAL
                                 if(aguilaJ2 == true && objetivo == true){
                                     if(comprueba_aguila(objetivo, aguilaJ2) == 1){
+                                        if(recorrer_estatuas(vEstatuillas, 5) == 1){
+                                            break;
+                                        }
                                         opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                                         lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado, aguilaJ2);
                                         jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
@@ -228,30 +232,34 @@ void jugar(){
         }
 
     ///Comienza la fase final
-    finale:
     while(true){
-            ///BENEFICIO DE LA HORMIGA
+
+        cout<<endl;
+        cout<<"BIENVENIDOS A LA FASE FINAL"<<endl;
+        cout<<endl;
+
+        ///BENEFICIO DE LA HORMIGA
         int valorDadoBeneficioHormigaJ1;
         int valorDadoBeneficioHormigaJ2;
         bool estatuaHormiga_J1 = false;
+        bool estatuaHormiga_J2 = false;
 
          if(buscarEstatua(estatuillas_j1, 5) == "Hormiga"){
             estatuaHormiga_J1 = true;
+         }else if(buscarEstatua(estatuillas_j2, 5) == "Hormiga"){
+            estatuaHormiga_J2 = true;
          }
 
         if(estatuaHormiga_J1){
             cout<<"Beneficio de la Hormiga"<<endl;
             cout<<"El jugador "<<jugadores[empieza]<<" debe elegir un numero del 1 al 6: ";
             cin>>valorDadoBeneficioHormigaJ1;
-        }else{
+        }else if(estatuaHormiga_J2){
             cout<<"Beneficio de la Hormiga"<<endl;
             cout<<"El jugador "<<jugadores[noEmpieza]<<" debe elegir un numero del 1 al 6: ";
             cin>>valorDadoBeneficioHormigaJ2;
         }
 
-        cout<<endl;
-        cout<<"BIENVENIDOS A LA FASE FINAL"<<endl;
-        cout<<endl;
 
         ///CONTAMOS ESTATUAS PARA SABER QUIEN ES EL PRIMERO.
         int contador_J1 = 0, contador_J2 = 0;
@@ -275,13 +283,14 @@ void jugar(){
         }else{
             cout<<"EMPIEZA EL JUGADOR "<<jugadores[noEmpieza]<<endl;
             system("pause");
+
             ///SE CAMBIAN LOS VALOS PARA QUE LOS NOMBRES SE ENCUENTRE ORDENADOS
             aux = empieza;
             empieza = noEmpieza;
             noEmpieza = aux;
 
             /// SE CAMBIEN EL VALOR DEL DADO DE LA HORMIGA
-            valorDadoBeneficioHormigaJ1=valorDadoBeneficioHormigaJ2;
+            valorDadoBeneficioHormigaJ1 = valorDadoBeneficioHormigaJ2;
             valorDadoBeneficioHormigaJ2=0;
 
             ///SE COPIA EL VALOR DEL VECTOR EMPIEZA A NOEMPIEZA Y VICEVERSA;
