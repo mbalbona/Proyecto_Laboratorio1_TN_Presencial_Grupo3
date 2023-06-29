@@ -203,18 +203,18 @@ void jugar(){
                     for(int i = 0; i < 5; i++){
                         if(estatuillas_j1[i] == "Medusa"){
                             puedeLanzarJ1 = 0;
-                            medusa_activa = 1;
+                            medusa_activa = true;
                         }
                         else if(estatuillas_j2[i] == "Medusa"){
                             puedeLanzarJ2 = 0;
-                            medusa_activa = 1;
+                            medusa_activa = true;
                         }
                     }
 
                 ///Verifica si la maldicion de medusa esta activa
                 if(medusa_activa == true){
                     cont_medusa++;
-                    if(cont_medusa == 4){
+                    if(cont_medusa == 3){
                         if(puedeLanzarJ1 == 0){
                             puedeLanzarJ1 = 1;
                         }else if(puedeLanzarJ2 == 0){

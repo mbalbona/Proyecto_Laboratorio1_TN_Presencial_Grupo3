@@ -196,11 +196,6 @@ string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, str
 
     int contHormiga = 0;
 
-    cout<<vDados[0]<<" "<<vDados[1]<<" "<<vDados[2]<<endl;
-    cout<<opcion<<endl;
-    cout<<llaveSalamandra<<endl;
-    system("pause");
-
     if(!llaveSalamandra){
         if( (opcion == "Cangrejo") && ((vDados[0] % 2 == 0) && (vDados[1] % 2 == 1) || (vDados[1] % 2 == 0) && (vDados[0] % 2 == 1)) ){
                 return "Cangrejo";
