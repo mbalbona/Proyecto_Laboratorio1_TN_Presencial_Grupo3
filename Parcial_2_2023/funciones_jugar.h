@@ -218,7 +218,7 @@ string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, str
         else if( (opcion == "Medusa") && ((vDados[0] + vDados[1]) == 7) ){
             return "Medusa";
         }
-        else if( (opcion == "Aguila") && ((vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10)) ){
+        else if( (opcion == "Aguila") && ((vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10) || (vDados[2]==1)|| (vDados[2]==10)) ){
             return "Aguila";
         }
         else if( (opcion == "Salamandra") && (comprobar_dado(vDados, tam) == 1) ) {
