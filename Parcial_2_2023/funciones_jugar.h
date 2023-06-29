@@ -3,6 +3,8 @@
 
 ///Funcion que comprueba si el jugador 1 obtuvo alguna estatua
 bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatuillas_j1, int opcion_elegidaJ1){
+
+
     if(lanzamientoj1 != "No obtuvo"){
             ///Se agrega la estatua obtenida al jugador 1 debido a que ambos obtuvieron la estatua, pero la gana el jugador que empieza osea el 1
             estatuillas_j1[opcion_elegidaJ1-1] = lanzamientoj1;
@@ -11,10 +13,15 @@ bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatui
             vEstatuillas[opcion_elegidaJ1-1] = {""};
 
             if(cont_turno == 0){
-                puntosJugadores[0] += 10;
+                puntos_estatuillas_primerIntento[0] += 10;
+                puntos_estatuillas[0] += 5;
+                puntos_generales[0] += 15;
             }else{
-                puntosJugadores[0] += 5;
+                puntos_estatuillas[0] += 5;
+                puntos_generales[0] += 5;
             }
+
+            puntos_rivalObtiene[1] -= 3;
 
             return true;
     }else{
@@ -23,6 +30,8 @@ bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatui
 }
 ///Funcion que comprueba si el jugador 2 obtuvo alguna estatua
 bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatuillas_j2, int opcion_elegidaJ2){
+
+
     if(lanzamientoj2 != "No obtuvo"){
             ///Se agrega la estatua obtenida al jugador 1 debido a que ambos obtuvieron la estatua, pero la gana el jugador que empieza osea el 1
             estatuillas_j2[opcion_elegidaJ2-1] = lanzamientoj2;
@@ -31,10 +40,15 @@ bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatui
             vEstatuillas[opcion_elegidaJ2-1] = {""};
 
             if(cont_turno == 0){
-                puntosJugadores[0] += 10;
+                puntos_estatuillas_primerIntento[1] += 10;
+                puntos_estatuillas[1] += 5;
+                puntos_generales[1] += 15;
             }else{
-                puntosJugadores[0] += 5;
+                puntos_estatuillas[1] += 5;
+                puntos_generales[1] += 5;
             }
+
+            puntos_rivalObtiene[0] -= 3;
 
             return true;
     }else{

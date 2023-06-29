@@ -11,12 +11,15 @@ bool keyWinnerOneShot[2] = {false};
 
 int cont_turno = 0;
 int contador_J1 = 0, contador_J2 = 0;
-int contarLanzamiento_J1 = 0, contarLanzamiento_J2 = 0;
-int puntosEstatuillasM[2]={};
-int puntosGandorFF[2]={};
-int puntosEstatuillasR[2]={};
-int puntosLanzamiento[2]={};
-int puntosJugadores[2] = {0};
+int puntos_lanzamientoJ1 = 0, puntos_lanzamientoJ2 = 0;
+int puntos_generales[2] = {0};
+int puntos_estatuillas[2] = {0};
+int puntos_estatuillas_primerIntento[2]={};
+int puntos_ganador_faseFinal[2]={};
+int puntos_ganador_sinEstatuillas[2]={};
+int puntos_rivalObtiene[2] = {0};
+int puntos_lanzamiento_faseFinal[2]={};
+
 
 ///FIN VARIABLES GLOABALES
 
@@ -48,8 +51,6 @@ void jugar(){
 
     bool lanzamientoPrimero = 1;
 
-
-     int puntosGanador[2]={};
 
     ///Estatuas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
     string vEstatuillas[5] = {"Cangrejo", "Hormiga", "Medusa", "Aguila", "Salamandra"};
@@ -111,9 +112,11 @@ void jugar(){
                             opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                             opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
 
-                            lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
+                            lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntos_generales, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
                                 if(opcion_elegidaJ1 == opcion_elegidaJ2){
                                     if(jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1) == true){
+                                        puntos_generales[1] -= 3;
+                                        puntos_rivalObtiene[1] -= 3;
                                         system("cls");
                                         cout<<"EL JUGADOR "<<jugadores[empieza]<<" HA OBTENIDO LA ESTATUA EN SU ANTERIOR TIRO POR FAVOR ELIJA NUEVAMENTE SU ESTATUA."<<endl;
                                         system("pause");
@@ -125,7 +128,7 @@ void jugar(){
                                     }
                                 }
 
-                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado,aguilaJ2);
+                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntos_generales, llaveSalamandraJ2, modoDiosActivado,aguilaJ2);
                                 jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
                                 jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
 
@@ -150,7 +153,7 @@ void jugar(){
                                             break;
                                         }
                                         opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
+                                        lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntos_generales, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
                                         jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
                                     }
                                 }
@@ -162,7 +165,7 @@ void jugar(){
                                             break;
                                         }
                                         opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado, aguilaJ2);
+                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntos_generales, llaveSalamandraJ2, modoDiosActivado, aguilaJ2);
                                         jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
                                     }
                                 }
@@ -177,7 +180,7 @@ void jugar(){
                             opcion_elegidaJ1 = -1;
                             lanzamiento_j1 = "No obtuvo";
                             opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                            lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntosJugadores, llaveSalamandraJ2, modoDiosActivado, aguilaJ2);
+                            lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntos_generales, llaveSalamandraJ2, modoDiosActivado, aguilaJ2);
                             jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
 
                             ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
@@ -195,7 +198,7 @@ void jugar(){
                             opcion_elegidaJ2 = -1;
                             lanzamiento_j2 = "No obtuvo";
                             opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                            lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntosJugadores, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
+                            lanzamiento_j1 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[empieza], vEstatuillas[opcion_elegidaJ1-1], estatuillas_j1, estatuillas_j2,vEstatuillas, puntos_generales, llaveSalamandraJ1, modoDiosActivado, aguilaJ1);
                             jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
 
                             ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
@@ -334,57 +337,50 @@ void jugar(){
         while(true){
             lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, valorDadoBeneficioHormigaJ1, modoDiosActivado);
 
-                contarLanzamiento_J1++;
-                    if(lanzamiento_j1 == "GANASTE"){
-                      puntosGanador[0] = 15;
-                        if(contador_J1 == 0){
-                            puntosGandorFF[0] = 50;
-                        }
-                        cout<<"FIN DEL JUEGO"<<endl;
-                        system("pause");
-                        system("cls");
-                        break;
+            puntos_lanzamientoJ1--;
+
+            if(lanzamiento_j1 == "GANASTE"){
+                puntos_ganador_faseFinal[0] = 15;
+                if(contador_J1 == 0){
+                    puntos_ganador_sinEstatuillas[0] = 50;
+                }
+                cout<<"FIN DEL JUEGO"<<endl;
+                system("pause");
+                system("cls");
+                break;
             }
 
             lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, valorDadoBeneficioHormigaJ2,  modoDiosActivado);
 
-             contarLanzamiento_J2++;
-                if(lanzamiento_j2 == "GANASTE"){
-                   puntosGanador[1] = 15;
-                    if(contador_J2 == 0){
-                        puntosGandorFF[1] = 50;
-                    }
-                    cout<<"FIN DEL JUEGO"<<endl;
-                    system("pause");
-                    system("cls");
-                    break;
+            puntos_lanzamientoJ2--;
+
+            if(lanzamiento_j2 == "GANASTE"){
+                puntos_ganador_faseFinal[1] = 15;
+                if(contador_J2 == 0){
+                    puntos_ganador_sinEstatuillas[1] = 50;
+                }
+                cout<<"FIN DEL JUEGO"<<endl;
+                system("pause");
+                system("cls");
+                break;
             }
         }
+
         break;
+
     }
 
      cout<<"PUNTOS PARA CADA JUGADOR"<<endl;
 
-    ///Verifica si obtuvo estatuilla en primer tirada
-    for(int i = 0; i < 2; i++){
-        if(keyWinnerOneShot[i] == true){
-            puntosEstatuillasM[i] = 10;
-        }
-    }
-
-    puntosEstatuillasR[0]-= contador_J1;
-    puntosEstatuillasR[1]-= contador_J2;
-    puntosLanzamiento[0]-= contarLanzamiento_J1;
-    puntosLanzamiento[1]-= contarLanzamiento_J2;
 
     cout<<"HITO\t\t\t"<<jugadores[empieza]<<"\t\t"<<jugadores[noEmpieza]<<endl;
     cout<<"-----------------------------------------------------------"<<endl;
-    cout<<"Estatuilla \t\t+"<<puntosJugadores[0]<<" PDV\t\t"<<puntosJugadores[1]<<" PDV"<<endl;
-    cout<<"Estatuilla++ \t\t+"<<puntosEstatuillasM[0]<<" PDV\t\t"<<puntosEstatuillasM[1]<<" PDV"<<endl;
-    cout<<"Ganador \t\t+"<<puntosGanador[0]<<" PDV\t\t"<<puntosGanador[1]<<" PDV"<<endl;
-    cout<<"Ganador++ \t\t"<<puntosGandorFF[0]<<" PDV\t\t"<<puntosGandorFF[1]<<" PDV"<<endl;
-    cout<<"Estatuilla-- \t\t"<<puntosEstatuillasR[0]<<" PDV\t\t"<<puntosEstatuillasR[1]<<" PDV"<<endl;
-    cout<<"Lanzamiento \t\t"<<puntosLanzamiento[0]<<" PDV\t\t"<<puntosLanzamiento[1]<<" PDV"<<endl;
+    cout<<"Estatuilla \t\t+"<<puntos_estatuillas[0]<<" PDV\t\t"<<puntos_estatuillas[1]<<" PDV"<<endl;
+    cout<<"Estatuilla++ \t\t+"<<puntos_estatuillas_primerIntento[0]<<" PDV\t\t"<<puntos_estatuillas_primerIntento[1]<<" PDV"<<endl;
+    cout<<"Ganador \t\t+"<<puntos_ganador_faseFinal[0]<<" PDV\t\t"<<puntos_ganador_faseFinal[1]<<" PDV"<<endl;
+    cout<<"Ganador++ \t\t"<<puntos_ganador_sinEstatuillas[0]<<" PDV\t\t"<<puntos_ganador_sinEstatuillas[1]<<" PDV"<<endl;
+    cout<<"Estatuilla-- \t\t"<<puntos_rivalObtiene[0]<<" PDV\t\t"<<puntos_rivalObtiene[1]<<" PDV"<<endl;
+    cout<<"Lanzamiento \t\t"<<puntos_lanzamientoJ1<<" PDV\t\t"<<puntos_lanzamientoJ2<<" PDV"<<endl;
     cout<<"-----------------------------------------------------------"<<endl;
     system("pause");
     system("cls");
