@@ -28,7 +28,9 @@ void jugar(){
     int cont_medusa = 0;
     int puedeLanzarJ1 = 1;
     int puedeLanzarJ2 = 1;
-    int medusa_activa = 0;
+    int medusa_J1 = 0;
+    int medusa_J2 = 0;
+    int paso_medusa = 0;
 
     int puntosJugadores[2] = {0};
 
@@ -150,6 +152,7 @@ void jugar(){
                                         jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
                                     }
                                 }
+
                         }
                     }
 
@@ -200,28 +203,27 @@ void jugar(){
 
                     ///Verifica si alguno de los dos tiene la estatua medusa en su poder y si es asi el jugador que la posea*
                     ///*no pueda lanzar durante 3 turnos
-                    for(int i = 0; i < 5; i++){
-                        if(estatuillas_j1[i] == "Medusa"){
-                            puedeLanzarJ1 = 0;
-                            medusa_activa = true;
-                        }
-                        else if(estatuillas_j2[i] == "Medusa"){
-                            puedeLanzarJ2 = 0;
-                            medusa_activa = true;
-                        }
+                    if(lanzamiento_j1 == "Medusa"){
+                        medusa_J1 = 1;
+                        puedeLanzarJ1 = 0;
+                    }else if(lanzamiento_j2 == "Medusa"){
+                        medusa_J2 = 1;
+                        puedeLanzarJ2 = 0;
                     }
 
-                ///Verifica si la maldicion de medusa esta activa
-                if(medusa_activa == true){
-                    cont_medusa++;
-                    if(cont_medusa == 3){
-                        if(puedeLanzarJ1 == 0){
-                            puedeLanzarJ1 = 1;
-                        }else if(puedeLanzarJ2 == 0){
-                            puedeLanzarJ2 = 1;
+                    if( (medusa_J1 == 1) || (medusa_J2 == 1) ){
+                        cont_medusa++;
+                        if(cont_medusa == 4){
+                            if(puedeLanzarJ1 == 0){
+                                puedeLanzarJ1 = 1;
+                            }else if(puedeLanzarJ2 == 0){
+                                puedeLanzarJ2 = 1;
+                            }
                         }
-                   }
-                }
+                        system("cls");
+                        cout<<"EL RIVAL TIENE EN SU POSICION LA ESTATUA DE MEDUSA Y TIENE LA MALDICION ACTIVA, EL MISMO SE PIERDE EL TURNO"<<endl;
+                        system("pause");
+                    }
 
                    if(recorrer_estatuas(vEstatuillas,5) == 1){
                         break;
