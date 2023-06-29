@@ -10,6 +10,12 @@ bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatui
             ///Se elimina la estatua conseguida para que no se liste mas
             vEstatuillas[opcion_elegidaJ1-1] = {""};
 
+            if(cont_turno == 0){
+                puntosJugadores[0] += 10;
+            }else{
+                puntosJugadores[0] += 5;
+            }
+
             return true;
     }else{
         return false;
@@ -23,6 +29,12 @@ bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatui
 
             ///Se elimina la estatua conseguida para que no se liste mas
             vEstatuillas[opcion_elegidaJ2-1] = {""};
+
+            if(cont_turno == 0){
+                puntosJugadores[0] += 10;
+            }else{
+                puntosJugadores[0] += 5;
+            }
 
             return true;
     }else{
@@ -412,8 +424,8 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
 
             cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[0]<<" "<<puntosJugadores[0]<<"\t\t\t\t";
-            cout<<jugadores[1]<<" "<<puntosJugadores[1]<<endl;
+            cout<<jugadores[empieza]<<" "<<puntosJugadores[empieza]<<"\t\t\t\t";
+            cout<<jugadores[noEmpieza]<<" "<<puntosJugadores[noEmpieza]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, tam);
             cout<<"\t\t";

@@ -7,17 +7,16 @@
 
 bool modoDiosActivado = false;
 bool objetivo = false;
-
 bool keyWinnerOneShot[2] = {false};
 
-
+int cont_turno = 0;
 int contador_J1 = 0, contador_J2 = 0;
 int contarLanzamiento_J1 = 0, contarLanzamiento_J2 = 0;
-    int puntosEstatuillasM[2]={};
-
-    int puntosGandorFF[2]={};
-    int puntosEstatuillasR[2]={};
-    int puntosLanzamiento[2]={};
+int puntosEstatuillasM[2]={};
+int puntosGandorFF[2]={};
+int puntosEstatuillasR[2]={};
+int puntosLanzamiento[2]={};
+int puntosJugadores[2] = {0};
 
 ///FIN VARIABLES GLOABALES
 
@@ -42,9 +41,6 @@ void jugar(){
     int medusa_J2 = 0;
     int paso_medusa = 0;
 
-    int puntosJugadores[2] = {0};
-
-    bool primer_turno = true;
     bool aguilaJ1 = false;
     bool aguilaJ2 = false;
     bool llaveSalamandraJ1 = false;
@@ -243,6 +239,8 @@ void jugar(){
                    if(recorrer_estatuas(vEstatuillas,5) == 1){
                         break;
                    }
+
+                   cont_turno++;
         }
 
     ///Comienza la fase final
@@ -288,7 +286,7 @@ void jugar(){
         contador_J2 = contadorEstatuillas(estatuillas_j2, 5);
 
         int aux;
-        string vectorAuxiliar[5]={""};
+        string vectorAuxiliar[5] = {""};
 
         ///DETERMINAR EL ORDEN DE TIRADA DE LOS JUGADORES DEPENDIENDO DE LA CANTIDAD DE ESTATUILLAS
         if(contador_J1>contador_J2){
@@ -305,13 +303,13 @@ void jugar(){
 
             /// SE CAMBIEN EL VALOR DEL DADO DE LA HORMIGA
             valorDadoBeneficioHormigaJ1 = valorDadoBeneficioHormigaJ2;
-            valorDadoBeneficioHormigaJ2=0;
+            valorDadoBeneficioHormigaJ2 = 0;
 
             ///SE COPIA EL VALOR DEL VECTOR EMPIEZA A NOEMPIEZA Y VICEVERSA;
             for(int i=0; i<5; i++){
-                vectorAuxiliar[i]=estatuillas_j1[i];
-                estatuillas_j1[i]=estatuillas_j2[i];
-                estatuillas_j2[i]=vectorAuxiliar[i];
+                vectorAuxiliar[i] = estatuillas_j1[i];
+                estatuillas_j1[i] = estatuillas_j2[i];
+                estatuillas_j2[i] = vectorAuxiliar[i];
             }
         }
         system("cls");
@@ -338,9 +336,9 @@ void jugar(){
 
                 contarLanzamiento_J1++;
                     if(lanzamiento_j1 == "GANASTE"){
-                      puntosGanador[0]=15;
-                        if(contador_J1==0){
-                            puntosGandorFF[0]=50;
+                      puntosGanador[0] = 15;
+                        if(contador_J1 == 0){
+                            puntosGandorFF[0] = 50;
                         }
                         cout<<"FIN DEL JUEGO"<<endl;
                         system("pause");
@@ -352,9 +350,9 @@ void jugar(){
 
              contarLanzamiento_J2++;
                 if(lanzamiento_j2 == "GANASTE"){
-                   puntosGanador[1]=15;
-                    if(contador_J2==0){
-                        puntosGandorFF[1]=50;
+                   puntosGanador[1] = 15;
+                    if(contador_J2 == 0){
+                        puntosGandorFF[1] = 50;
                     }
                     cout<<"FIN DEL JUEGO"<<endl;
                     system("pause");
@@ -366,10 +364,11 @@ void jugar(){
     }
 
      cout<<"PUNTOS PARA CADA JUGADOR"<<endl;
+
     ///Verifica si obtuvo estatuilla en primer tirada
-    for(int i=0; i<2; i++){
-        if(keyWinnerOneShot[i]){
-            puntosEstatuillasM[i]=10;
+    for(int i = 0; i < 2; i++){
+        if(keyWinnerOneShot[i] == true){
+            puntosEstatuillasM[i] = 10;
         }
     }
 
