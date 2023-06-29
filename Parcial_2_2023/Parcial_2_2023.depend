@@ -108,7 +108,7 @@
 1688010980 c:\users\pineda walter\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
 	"maldiciones.h"
 
-1687467686 source:c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
+1688079588 source:c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
 	<iostream>
 	<ctime>
 	<cstdlib>
@@ -116,22 +116,22 @@
 	<stdio.h>
 	"menues.h"
 
-1687996042 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
+1688079588 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\menues.h
 	"jugar.h"
 	"estadisticas.h"
 	"creditos.h"
 
-1688004673 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
+1688079588 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
 	"funciones_jugar.h"
 	"funciones_jugar_faseFinal.h"
 
-1688004121 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+1688080413 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
 	"maldiciones.h"
 
-1687999193 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\maldiciones.h
+1688079588 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\maldiciones.h
 	"funciones_jugar.h"
 
-1687467686 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar_fasefinal.h
+1688080274 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar_fasefinal.h
 
 1687545941 source:c:\users\mbalbona\onedrive - frgp.utn.edu.ar\escritorio\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
 	<iostream>
@@ -191,9 +191,9 @@
 
 1687547809 c:\users\walte\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\creditos.h
 
-1687554078 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\estadisticas.h
+1688079588 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\estadisticas.h
 
-1687554078 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\creditos.h
+1688079588 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\creditos.h
 
 1687902237 source:c:\users\mateo\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
 	<iostream>

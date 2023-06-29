@@ -28,7 +28,37 @@ string buscarEstatua(string *estatua, int tam){
     }
 }
 
+///FUNCION QUE COMPRUEBA ESCALERA
 
+int comprobar_dado(int *vDado, int tam){
+     ///DECLARAMOS UN VECTOR AUXILIAR PARA NO MODIFICAR EL VECTOR ORIGINAL DADO QUE ES UN PUNTERO
+     int vecAux[5];
+     int aux;
+
+     for(int i = 0; i < tam; i++){
+        vecAux[i] == vDado[i];
+     }
+
+     ///ORDENAMOS EL VECTOR AUXILIAR
+     for (int i = 0; i < tam; i++) {
+        for (int j = 0; j < tam - i; j++) {
+            if (vecAux[j] > vecAux[j + 1]) {
+                aux = vecAux[j];
+                vecAux[j] = vecAux[j + 1];
+                vecAux[j + 1] = aux;
+            }
+        }
+    }
+
+    ///CON EL VECTOR AUXILIAR ORDENADO VEMOS SI ES ESCALERA
+    for (int i = 0; i < tam - 1; i++) {
+        if (vecAux[i + 1] - vecAux[i] != 1) {
+            return 0;  // No es una escalera
+        }
+    }
+
+    return 1;
+}
 
 ///FUNCION QUE COMPRUEBA SI HAY ESCALERA CORTA O NO
 int escalera_corta(int *vDado, int tam){
