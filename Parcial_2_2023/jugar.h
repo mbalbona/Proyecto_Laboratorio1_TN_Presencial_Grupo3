@@ -8,6 +8,16 @@
 bool modoDiosActivado = false;
 bool objetivo = false;
 
+bool keyWinnerOneShot[2] = {false};
+
+
+int contador_J1 = 0, contador_J2 = 0;
+int contarLanzamiento_J1 = 0, contarLanzamiento_J2 = 0;
+    int puntosEstatuillasM[2]={};
+
+    int puntosGandorFF[2]={};
+    int puntosEstatuillasR[2]={};
+    int puntosLanzamiento[2]={};
 
 ///FIN VARIABLES GLOABALES
 
@@ -40,6 +50,10 @@ void jugar(){
     bool llaveSalamandraJ1 = false;
     bool llaveSalamandraJ2 = false;
 
+    bool lanzamientoPrimero = 1;
+
+
+     int puntosGanador[2]={};
 
     ///Estatuas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
     string vEstatuillas[5] = {"Cangrejo", "Hormiga", "Medusa", "Aguila", "Salamandra"};
@@ -254,7 +268,7 @@ void jugar(){
         cout<<endl;
 
         ///CONTAMOS ESTATUAS PARA SABER QUIEN ES EL PRIMERO.
-        int contador_J1 = 0, contador_J2 = 0;
+
         bool estatuaMedusa_J1 = false;
         bool estatuaMedusa_J2 = false;
         bool estatuaSalamandra_J1 = false;
@@ -311,26 +325,61 @@ void jugar(){
 
 
         while(true){
-                lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, valorDadoBeneficioHormigaJ1, modoDiosActivado);
+            lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, valorDadoBeneficioHormigaJ1, modoDiosActivado);
 
-            if(lanzamiento_j1 == "GANASTE"){
-                cout<<"FIN DEL JUEGO"<<endl;
-                system("pause");
-                system("cls");
-                break;
+                contarLanzamiento_J1++;
+                    if(lanzamiento_j1 == "GANASTE"){
+                      puntosGanador[0]=15;
+                        if(contador_J1==0){
+                            puntosGandorFF[0]=50;
+                        }
+                        cout<<"FIN DEL JUEGO"<<endl;
+                        system("pause");
+                        system("cls");
+                        break;
             }
+
             lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, valorDadoBeneficioHormigaJ2,  modoDiosActivado);
 
-            if(lanzamiento_j2 == "GANASTE"){
-                cout<<"FIN DEL JUEGO"<<endl;
-                system("pause");
-                system("cls");
-                break;
+             contarLanzamiento_J2++;
+                if(lanzamiento_j2 == "GANASTE"){
+                   puntosGanador[1]=15;
+                    if(contador_J2==0){
+                        puntosGandorFF[1]=50;
+                    }
+                    cout<<"FIN DEL JUEGO"<<endl;
+                    system("pause");
+                    system("cls");
+                    break;
             }
         }
         break;
     }
 
+     cout<<"PUNTOS PARA CADA JUGADOR"<<endl;
+    ///Verifica si obtuvo estatuilla en primer tirada
+    for(int i=0; i<2; i++){
+        if(keyWinnerOneShot[i]){
+            puntosEstatuillasM[i]=10;
+        }
+    }
+
+    puntosEstatuillasR[0]-= contador_J1;
+    puntosEstatuillasR[1]-= contador_J2;
+    puntosLanzamiento[0]-= contarLanzamiento_J1;
+    puntosLanzamiento[1]-= contarLanzamiento_J2;
+
+    cout<<"HITO\t\t\t"<<jugadores[empieza]<<"\t\t"<<jugadores[noEmpieza]<<endl;
+    cout<<"-----------------------------------------------------------"<<endl;
+    cout<<"Estatuilla \t\t+"<<puntosJugadores[0]<<" PDV\t\t"<<puntosJugadores[1]<<" PDV"<<endl;
+    cout<<"Estatuilla++ \t\t+"<<puntosEstatuillasM[0]<<" PDV\t\t"<<puntosEstatuillasM[1]<<" PDV"<<endl;
+    cout<<"Ganador \t\t+"<<puntosGanador[0]<<" PDV\t\t"<<puntosGanador[1]<<" PDV"<<endl;
+    cout<<"Ganador++ \t\t"<<puntosGandorFF[0]<<" PDV\t\t"<<puntosGandorFF[1]<<" PDV"<<endl;
+    cout<<"Estatuilla-- \t\t"<<puntosEstatuillasR[0]<<" PDV\t\t"<<puntosEstatuillasR[1]<<" PDV"<<endl;
+    cout<<"Lanzamiento \t\t"<<puntosLanzamiento[0]<<" PDV\t\t"<<puntosLanzamiento[1]<<" PDV"<<endl;
+    cout<<"-----------------------------------------------------------"<<endl;
+    system("pause");
+    system("cls");
 }
 
 /*if(aguila_activa){
