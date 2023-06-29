@@ -40,8 +40,8 @@ int comprobar_dado(int *vDado, int tam){
      }
 
      ///ORDENAMOS EL VECTOR AUXILIAR
-     for (int i = 0; i < tam; i++) {
-        for (int j = 0; j < tam - i; j++) {
+     for (int i = 0; i < tam - 1; i++) {
+        for (int j = 0; j < tam - i - 1; j++) {
             if (vecAux[j] > vecAux[j + 1]) {
                 aux = vecAux[j];
                 vecAux[j] = vecAux[j + 1];
@@ -52,7 +52,7 @@ int comprobar_dado(int *vDado, int tam){
 
     ///CON EL VECTOR AUXILIAR ORDENADO VEMOS SI ES ESCALERA
     for (int i = 0; i < tam - 1; i++) {
-        if (vecAux[i + 1] - vecAux[i] != 1) {
+        if (vecAux[i] != vecAux[i + 1] - 1) {
             return 0;  // No es una escalera
         }
     }
@@ -134,6 +134,7 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
 
             string obtencionEscalera;
 
+            tirada:
             cout<<"\tIRWIN'S REVENGE - FASE FINAL"<<endl;
             cout<<"---------------------------------------------------"<<endl;
             cout<<jugadores[empieza]<<"\t\t\t\t";
@@ -153,11 +154,6 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
 
 
             tiraDado_6_caras(vDado, modoDios);
-
-            for(int i = 0; i < 5; i++){
-                cout<<vDado[i]<<" ";
-            }
-            system("pause");
 
                 atras:
                 atrasH:
@@ -180,7 +176,6 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
 
                 }
 
-
                 if(valorDadoH != 0){
                     cout<<"Que dado desea cambiar :";
                     cin>>dadoSelecionado;
@@ -192,6 +187,14 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                 }
 
                 obtencionEscalera = obtencion_escalera(vDado, llaveMedusa, llaveSalamandra);
+
+                if(primer_turno_final == true){
+                    cout<<"AL SER EL PRIMER TURNO DE LA FASE FINAL Y POSEER LA ESTATUA DEL CANGREJO VUELVE A TIRRAR NUEVAMENTE!"<<endl;
+                    system("pause");
+                    system("cls");
+                    primer_turno_final = false;
+                    goto tirada;
+                }
                 system("pause");
                 system("cls");
                return obtencionEscalera;

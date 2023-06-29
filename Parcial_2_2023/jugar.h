@@ -8,6 +8,7 @@
 bool modoDiosActivado = false;
 bool objetivo = false;
 bool keyWinnerOneShot[2] = {false};
+bool primer_turno_final = true;
 
 int cont_turno = 0;
 int contador_J1 = 0, contador_J2 = 0;
@@ -282,6 +283,9 @@ void jugar(){
         bool estatuaSalamandra_J2 = false;
         bool aguila_J1 = false;
         bool aguila_J2 = false;
+        bool cangrejo_J1 = false;
+        bool cangrejo_J2 = false;
+
 
         contador_J1 = contadorEstatuillas(estatuillas_j1, 5);
         contador_J2 = contadorEstatuillas(estatuillas_j2, 5);
@@ -329,12 +333,15 @@ void jugar(){
             aguila_J1 = true;
         }else if(buscarEstatua(estatuillas_j2, 5) == "Aguila"){
             aguila_J2 = true;
+        }else if(buscarEstatua(estatuillas_j1, 5) == "Cangrejo"){
+            cangrejo_J1 = true;
+        }else if(buscarEstatua(estatuillas_j2, 5) == "Cangrejo"){
+            cangrejo_J2 = true;
         }
 
 
         while(true){
             lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, valorDadoBeneficioHormigaJ1, modoDiosActivado);
-
             puntos_lanzamientoJ1--;
 
             if(lanzamiento_j1 == "GANASTE"){

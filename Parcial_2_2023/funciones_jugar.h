@@ -28,6 +28,7 @@ bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatui
         return false;
     }
 }
+
 ///Funcion que comprueba si el jugador 2 obtuvo alguna estatua
 bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatuillas_j2, int opcion_elegidaJ2){
 
