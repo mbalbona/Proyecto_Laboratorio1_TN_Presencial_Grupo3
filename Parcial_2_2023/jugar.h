@@ -12,20 +12,21 @@ bool primer_turno_final = true;
 
 int cont_turno = 0;
 int contador_J1 = 0, contador_J2 = 0;
-int puntos_lanzamientoJ1 = 0, puntos_lanzamientoJ2 = 0;
-int puntos_generales[2] = {0};
+int puntos_lanzamientoJ[2]= {0};//Son los puntos que se descuenta por cada lanzamiento en la fase final
+int puntos_generales[2] = {0};//Puntos de maldiciones
 int puntos_estatuillas[2] = {0};
-int puntos_estatuillas_primerIntento[2]={};
-int puntos_ganador_faseFinal[2]={};
-int puntos_ganador_sinEstatuillas[2]={};
-int puntos_rivalObtiene[2] = {0};
-int puntos_lanzamiento_faseFinal[2]={};
+int puntos_estatuillas_primerIntento[2]={};//Puntos que almacena si se obtiene se obtiene una estatua en la primera lanzada
+int puntos_ganador_faseFinal[2]={};//Puntos por ganar fase final
+int puntos_ganador_sinEstatuillas[2]={};//Puntos por ganar fase final sin estatuas
+int puntos_rivalObtiene[2] = {0};//Puntos negativos que obtiene el rival por obtener una estatua.
+
 
 
 ///FIN VARIABLES GLOABALES
 
 #include "funciones_jugar.h"
 #include "funciones_jugar_faseFinal.h"
+#include "estadisticas.h"
 
 void jugar(){
     system("cls");
@@ -49,8 +50,6 @@ void jugar(){
     bool aguilaJ2 = false;
     bool llaveSalamandraJ1 = false;
     bool llaveSalamandraJ2 = false;
-
-    bool lanzamientoPrimero = 1;
 
 
     ///Estatuas                0 - Arena; 1 - Tierra; 2 - Agua; 3 - Aire; 4 - Fuego
@@ -108,7 +107,6 @@ void jugar(){
                     ///Verificamos que ambos jugadores puedan seleccionar una estatua y lanzar los dados
                     if(puedeLanzarJ1 == 1){
                         if(puedeLanzarJ2 == 1){
-
                             ///Seleccion de estatua por la que jugara
                             opcion_elegidaJ1 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[empieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
                             opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
@@ -124,12 +122,20 @@ void jugar(){
                                             break;
                                         }
                                         opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
+                                    }else{
+                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntos_generales, llaveSalamandraJ2, modoDiosActivado,aguilaJ2);
+                                        jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
+                                        jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
                                     }
+
+                                } else if(opcion_elegidaJ1 != opcion_elegidaJ2){
+                                    system("cls");
+                                    lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntos_generales, llaveSalamandraJ2, modoDiosActivado,aguilaJ2);
+                                    jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
+                                    jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
                                 }
 
-                                lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntos_generales, llaveSalamandraJ2, modoDiosActivado,aguilaJ2);
-                                jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
-                                jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
+
 
                                 ///COMPROBAMOS SI SE OBTUVO LA ESTATUA DE LA SALAMANDRA Y LA ACTIVAMOS PARA EL JUGADOR QUE CORRESPONDA
                                 if(comprueba_salamandra(lanzamiento_j1, lanzamiento_j2) == 1){
@@ -208,14 +214,6 @@ void jugar(){
                                 }
                         }
                     }
-
-
-                    ///Lanzamiendo dados con opciones diferente
-                    if(opcion_elegidaJ1 != opcion_elegidaJ2){
-                            system("cls");
-                            jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
-                            jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
-                        }
 
                     ///Verifica si alguno de los dos tiene la estatua medusa en su poder y si es asi el jugador que la posea*
                     ///*no pueda lanzar durante 3 turnos
@@ -340,7 +338,7 @@ void jugar(){
 
         while(true){
             lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguilaJ1, dadoBendicionHormigaJ1, modoDiosActivado, cangrejo_J1, estatuaHormiga_J1);
-            puntos_lanzamientoJ1--;
+            puntos_lanzamientoJ[0]--;
 
             if(lanzamiento_j1 == "GANASTE"){
                 puntos_ganador_faseFinal[0] = 15;
@@ -355,7 +353,7 @@ void jugar(){
 
             lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguilaJ2, dadoBendicionHormigaJ2,  modoDiosActivado, cangrejo_J2, estatuaHormiga_J2);
 
-            puntos_lanzamientoJ2--;
+            puntos_lanzamientoJ[1]--;
 
             if(lanzamiento_j2 == "GANASTE"){
                 puntos_ganador_faseFinal[1] = 15;
@@ -379,7 +377,8 @@ void jugar(){
 
     }
 
-     cout<<"PUNTOS PARA CADA JUGADOR"<<endl;
+    estadisticas();
+    /* cout<<"PUNTOS PARA CADA JUGADOR"<<endl;
 
 
     cout<<"HITO\t\t\t"<<jugadores[empieza]<<"\t\t"<<jugadores[noEmpieza]<<endl;
@@ -389,10 +388,10 @@ void jugar(){
     cout<<"Ganador \t\t+"<<puntos_ganador_faseFinal[0]<<" PDV\t\t"<<puntos_ganador_faseFinal[1]<<" PDV"<<endl;
     cout<<"Ganador++ \t\t"<<puntos_ganador_sinEstatuillas[0]<<" PDV\t\t"<<puntos_ganador_sinEstatuillas[1]<<" PDV"<<endl;
     cout<<"Estatuilla-- \t\t"<<puntos_rivalObtiene[0]<<" PDV\t\t"<<puntos_rivalObtiene[1]<<" PDV"<<endl;
-    cout<<"Lanzamiento \t\t"<<puntos_lanzamientoJ1<<" PDV\t\t"<<puntos_lanzamientoJ2<<" PDV"<<endl;
+    cout<<"Lanzamiento \t\t"<<puntos_lanzamientoJ[0]<<" PDV\t\t"<<puntos_lanzamientoJ[1]<<" PDV"<<endl;
     cout<<"-----------------------------------------------------------"<<endl;
     system("pause");
-    system("cls");
+    system("cls");*/
 }
 
 /*if(aguila_activa){

@@ -22,9 +22,11 @@ bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatui
             }
 
             puntos_rivalObtiene[1] -= 3;
-            puntos_generales[0] -= 3;
+
+
             return true;
     }else{
+
         return false;
     }
 }
@@ -43,16 +45,14 @@ bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatui
             if(cont_turno == 0){
                 puntos_estatuillas_primerIntento[1] += 10;
                 puntos_estatuillas[1] += 5;
-                puntos_generales[1] += 15;
             }else{
                 puntos_estatuillas[1] += 5;
-                puntos_generales[1] += 5;
             }
-
             puntos_rivalObtiene[0] -= 3;
-            puntos_generales[1] -= 3;
+
             return true;
     }else{
+
         return false;
     }
 }
@@ -431,8 +431,8 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
 
             cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[empieza]<<" "<<puntosJugadores[empieza]<<"\t\t\t\t";
-            cout<<jugadores[noEmpieza]<<" "<<puntosJugadores[noEmpieza]<<endl;
+            cout<<jugadores[empieza]<<" "<<puntosJugadores[empieza]<<" "<<puntos_estatuillas[empieza]<<"\t\t\t\t";
+            cout<<jugadores[noEmpieza]<<" "<<puntosJugadores[noEmpieza]<<" "<<puntos_estatuillas[noEmpieza]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, tam);
             cout<<"\t\t";
