@@ -182,6 +182,7 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                         goto dado;
                     }else{
                         vDado[dadoSelecionado-1] = valorDadoH;
+                        valorDadoH = 0;
                     }
 
                     goto atrasH;
