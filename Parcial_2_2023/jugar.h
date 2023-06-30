@@ -339,7 +339,7 @@ void jugar(){
         }
 
         while(true){
-            lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, dadoBendicionHormigaJ1, modoDiosActivado, cangrejo_J1, estatuaHormiga_J1);
+            lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguilaJ1, dadoBendicionHormigaJ1, modoDiosActivado, cangrejo_J1, estatuaHormiga_J1);
             puntos_lanzamientoJ1--;
 
             if(lanzamiento_j1 == "GANASTE"){
@@ -353,7 +353,7 @@ void jugar(){
                 break;
             }
 
-            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, dadoBendicionHormigaJ2,  modoDiosActivado, cangrejo_J2, estatuaHormiga_J2);
+            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguilaJ2, dadoBendicionHormigaJ2,  modoDiosActivado, cangrejo_J2, estatuaHormiga_J2);
 
             puntos_lanzamientoJ2--;
 

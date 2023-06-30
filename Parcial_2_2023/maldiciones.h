@@ -31,10 +31,9 @@ void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador, s
 
     if(esta_cangrejo = true){
         cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR UN DADO, POR LA MALDICION DEL CANGREJO."<<endl;
-
+        cout<<endl;
         tiraDado(dado,1,modoDiosActivado);
 
-        cout<<endl;
         cout<<"SALIO DADO: "<<dado[0]<<endl;
 
         puntosJugador[pos] -= dado[0];
@@ -45,7 +44,6 @@ void maldicion_cangrejo(string *jugadores, string jugador, int *puntosJugador, s
     system("pause");
     system("cls");
 }
-
 
 void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
     system("cls");
@@ -91,6 +89,7 @@ int comprueba_aguila(bool target, bool aguila ){
         system("cls");
         cout<<"AL HABER OBTENIDO LA ESTATUA EN LA PRIMERA TIRADA CON LA ESTATUA DEL AGUILA EN POSESION, VUELVA A ELEGIR OTRA ESTATUA"<<endl;
         system("pause");
+        system("cls");
         return 1;
     }else{
         return 0;

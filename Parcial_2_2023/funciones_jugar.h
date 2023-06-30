@@ -396,6 +396,7 @@ int recorrer_estatuas(string *vEstatuas, int tam){
     if(cont == 5){
         cout<<"SE DETECTO QUE NO QUEDAN ESTATUAS EN JUEGO. POR LO TANTO PROCEDEREMOS A CONTINUACION CON LA FASE FINAL!"<<endl;
         system("pause");
+        system("cls");
         return 1;
         }
         else{
