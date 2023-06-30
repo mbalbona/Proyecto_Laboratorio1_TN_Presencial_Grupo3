@@ -82,7 +82,7 @@ int escalera_corta(int *vDado, int tam){
 ///FUNCION COMPROBAR ESCALERA
 string obtencion_escalera(int *vDado, bool llaveMedusa, bool llaveSalamandra ){
 
-    int escalera = 0;
+    int iguales = 0;
 
         ///COMPRUEBA SI TIENE LA LLAVE MEDUSA PARA VER BUSCAR LA ESLERA COMUN O BIEN DADOS IGUALES
             if(llaveMedusa){
@@ -91,12 +91,14 @@ string obtencion_escalera(int *vDado, bool llaveMedusa, bool llaveSalamandra ){
                         return "GANASTE";
                     }else{
                         for(int i = 0; i < 5; i++){
-                                if(vDado[i] != vDado[0]){
-                                        return "SIGUE";
+                                if(vDado[i] == vDado[0]){
+                                       iguales++;
                                 }
                         }
-                        cout<<">HAS GANADO, CON TODOS LOS DADOS IGUALES (BENEFICIO DE LA MADUSA)"<<endl;
-                        return "GANASTE";
+                        if(iguales == 5){
+                            cout<<">HAS GANADO, CON TODOS LOS DADOS IGUALES (BENEFICIO DE LA MEDUSA)"<<endl;
+                            return "GANASTE";
+                        }
                     }
             }
 
@@ -105,25 +107,18 @@ string obtencion_escalera(int *vDado, bool llaveMedusa, bool llaveSalamandra ){
                 if(comprobar_dado(vDado, 5) == 1){
                         cout<<">HAS GANADO, CON UNA ESCALERA"<<endl;
                         return "GANASTE";
-                          }else if (escalera_corta(vDado, 5) == 1) {
+                    }
+                    else if(escalera_corta(vDado, 5) == 1) {
                         cout<<">HAS GANADO, CON UNA ESCALERA CORTA (BENEFICIO DE LA SALAMANDRA)"<<endl;
                         return "GANASTE";
-                    }else{
-                        return "SIGUE";
                     }
             }
 
-            ///COMPRUEBA LA ESCALERA DE TODOS LOS DADOS SIN IMPORTAR EL ORDEN.
-                if(comprobar_dado(vDado, 5) == 1){
-                        cout<<">HAS GANADO, CON UNA ESCALERA"<<endl;
-                        return "GANASTE";
-                    }else{
-                        return "SIGUE";
-                    }
+        return "SIGUE";
 
 }
 
-string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, int valorDadoH, bool modoDios){
+string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, int valorDadoH, bool modoDios, bool cangrejo){
     while(true){
             system("cls");
 
@@ -177,9 +172,15 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                 }
 
                 if(valorDadoH != 0){
+                    dado:
                     cout<<"Que dado desea cambiar:";
                     cin>>dadoSelecionado;
 
+                    if(dadoSelecionado < 0 && dadoSelecionado > 5){
+                        cout<<"VALOR INVALIDO! ELIJA NUEVAMENTE EL DADO A CAMBIAR."<<endl;
+                        cout<<endl;
+                        goto dado;
+                    }
                     vDado[dadoSelecionado-1] = valorDadoH;
 
                     goto atrasH;
@@ -187,17 +188,18 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
 
                 obtencionEscalera = obtencion_escalera(vDado, llaveMedusa, llaveSalamandra);
 
-                if( (primer_turno_final == true) && (obtencionEscalera == "SIGUE") ) {
+                if( (primer_turno_final == true) && (obtencionEscalera == "SIGUE") && (cangrejo == true) ) {
                     cout<<"AL SER EL PRIMER TURNO DE LA FASE FINAL Y POSEER LA ESTATUA DEL CANGREJO VUELVE A TIRAR NUEVAMENTE!"<<endl;
                     system("pause");
                     system("cls");
                     primer_turno_final = false;
                     goto tirada;
-                }else if( (primer_turno_final == true) && (obtencionEscalera != "SIGUE") ){
+                }else if( (primer_turno_final == true) && (obtencionEscalera != "SIGUE") && (cangrejo == true) ){
                     return "GANASTE";
                 }
                 system("pause");
                 system("cls");
+
                return obtencionEscalera;
     }
 }

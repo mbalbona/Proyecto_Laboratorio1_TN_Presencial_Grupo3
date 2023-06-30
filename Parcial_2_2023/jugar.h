@@ -306,9 +306,9 @@ void jugar(){
             empieza = noEmpieza;
             noEmpieza = aux;
 
-            /// SE CAMBIEN EL VALOR DEL DADO DE LA HORMIGA
+            /*/// SE CAMBIEN EL VALOR DEL DADO DE LA HORMIGA
             valorDadoBeneficioHormigaJ2 = valorDadoBeneficioHormigaJ1;
-            valorDadoBeneficioHormigaJ1 = 0;
+            valorDadoBeneficioHormigaJ1 = 0;*/
 
             ///SE COPIA EL VALOR DEL VECTOR EMPIEZA A NOEMPIEZA Y VICEVERSA;
             for(int i=0; i<5; i++){
@@ -341,7 +341,7 @@ void jugar(){
 
 
         while(true){
-            lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, valorDadoBeneficioHormigaJ1, modoDiosActivado);
+            lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, valorDadoBeneficioHormigaJ1, modoDiosActivado, cangrejo_J1);
             puntos_lanzamientoJ1--;
 
             if(lanzamiento_j1 == "GANASTE"){
@@ -355,7 +355,7 @@ void jugar(){
                 break;
             }
 
-            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, valorDadoBeneficioHormigaJ2,  modoDiosActivado);
+            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, valorDadoBeneficioHormigaJ2,  modoDiosActivado, cangrejo_J2);
 
             puntos_lanzamientoJ2--;
 
@@ -368,6 +368,12 @@ void jugar(){
                 system("pause");
                 system("cls");
                 break;
+            }
+
+            if(cangrejo_J1 == true){
+                cangrejo_J1 = false;
+            }else if(cangrejo_J2 == true){
+                cangrejo_J2 = false;
             }
         }
 
