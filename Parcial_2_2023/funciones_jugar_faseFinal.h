@@ -176,12 +176,13 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                     cout<<"Que dado desea cambiar:";
                     cin>>dadoSelecionado;
 
-                    if(dadoSelecionado < 0 && dadoSelecionado > 5){
+                    if( (dadoSelecionado < 0) || (dadoSelecionado > 5) ){
                         cout<<"VALOR INVALIDO! ELIJA NUEVAMENTE EL DADO A CAMBIAR."<<endl;
                         cout<<endl;
                         goto dado;
+                    }else{
+                        vDado[dadoSelecionado-1] = valorDadoH;
                     }
-                    vDado[dadoSelecionado-1] = valorDadoH;
 
                     goto atrasH;
                 }
@@ -197,6 +198,7 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                 }else if( (primer_turno_final == true) && (obtencionEscalera != "SIGUE") && (cangrejo == true) ){
                     return "GANASTE";
                 }
+
                 system("pause");
                 system("cls");
 
