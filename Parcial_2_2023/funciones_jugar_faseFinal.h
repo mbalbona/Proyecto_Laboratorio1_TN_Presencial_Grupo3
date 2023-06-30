@@ -71,12 +71,21 @@ int comprobar_dado(int *vDado, int tam){
 
 ///FUNCION QUE COMPRUEBA SI HAY ESCALERA CORTA O NO
 int escalera_corta(int *vDado, int tam){
+    int cont = 0;
 
-    if(vDado[0]<vDado[1] && vDado[1]<vDado[2] && vDado[2]<vDado[3]){
-        return 1;
-    }
+      for (int i = 1; i < tam; i++) {
+        if (vDado[i] == vDado[i-1] + 1) {
+            return 1;
+        }
+        else{
+          return 0;
+        }
+      }
+
 
 }
+
+
 ///FUNCION COMPROBAR ESCALERA
 string obtencion_escalera(int *vDado, bool llaveMedusa, bool llaveSalamandra ){
 
