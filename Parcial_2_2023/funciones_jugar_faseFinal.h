@@ -13,25 +13,13 @@ int contadorEstatuillas(string *estatuillas_Jugador, int tam){
         return contador_Estatuillas;
 }
 
-///FUNCION BUSCAR LAS 3 ESTATUAS QUE MODIFICAN LOS DADOS
-string buscarEstatua(string *estatua, int tam, string dato){
-    string nada="nada";
-    for(int i=0; i<tam; i++){
-        if(estatua[i] == dato){
-            return dato;
-        }
-    }
-    return nada;
-
-
-}
-string buscarEstatuaS(string *estatua, int tam){
+/*string buscarEstatuaS(string *estatua, int tam){
     for(int i=0; i<tam; i++){
         if(estatua[i] == "Salamandra"){
             return "Salamandra";
         }
     }
-}
+}*/
 
 ///FUNCION QUE COMPRUEBA ESCALERA
 
@@ -132,7 +120,7 @@ string obtencion_escalera(int *vDado, bool llaveMedusa, bool llaveSalamandra ){
 
 }
 
-string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, int valorDadoH, bool modoDios, bool cangrejo, bool estatuaHormiga){
+string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, int dadoHormiga, bool modoDios, bool cangrejo, bool estatuaHormiga){
     while(true){
             system("cls");
 
@@ -195,7 +183,7 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                         cout<<endl;
                         goto dado;
                     }else{
-                        vDado[dadoSelecionado-1] = valorDadoH;
+                        vDado[dadoSelecionado-1] = dadoHormiga;
                         estatuaHormiga = false;
                     }
 

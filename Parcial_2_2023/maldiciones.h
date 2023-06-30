@@ -65,8 +65,6 @@ void maldicion_hormiga(string *jugadores, string jugador, int *puntosJugador){
     }
     cout<<"EL JUGADOR "<<jugadores[rival]<<" DEBE TIRAR DOS DADO, POR LA MALDICION DE LA HORMIGA."<<endl;
     cout<<endl;
-    system("pause");
-    cout<<endl;
     tiraDado(vDado, 2 ,modoDiosActivado);
 
     cout<<"SALIO DADO 1: "<<vDado[0]<<endl;
