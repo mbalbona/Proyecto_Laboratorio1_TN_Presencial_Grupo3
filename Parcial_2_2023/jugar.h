@@ -257,10 +257,15 @@ void jugar(){
         int valorDadoBeneficioHormigaJ2;
         bool estatuaHormiga_J1 = false;
         bool estatuaHormiga_J2 = false;
+        string c="Cangrejo";
+        string h="Hormiga";
+        string m="Medusa";
+        string a="Aguila";
+        string s="Salamandra";
 
-         if(buscarEstatua(estatuillas_j1, 5) == "Hormiga"){
+         if(buscarEstatua(estatuillas_j1, 5, h) == "Hormiga"){
             estatuaHormiga_J1 = true;
-         }else if(buscarEstatua(estatuillas_j2, 5) == "Hormiga"){
+         }else if(buscarEstatua(estatuillas_j2, 5, h) == "Hormiga"){
             estatuaHormiga_J2 = true;
          }
 
@@ -306,9 +311,9 @@ void jugar(){
             empieza = noEmpieza;
             noEmpieza = aux;
 
-            /*/// SE CAMBIEN EL VALOR DEL DADO DE LA HORMIGA
+            /// SE CAMBIEN EL VALOR DEL DADO DE LA HORMIGA
             valorDadoBeneficioHormigaJ2 = valorDadoBeneficioHormigaJ1;
-            valorDadoBeneficioHormigaJ1 = 0;*/
+            valorDadoBeneficioHormigaJ1 = 0;
 
             ///SE COPIA EL VALOR DEL VECTOR EMPIEZA A NOEMPIEZA Y VICEVERSA;
             for(int i=0; i<5; i++){
@@ -321,27 +326,47 @@ void jugar(){
 
         ///SE REALIZAN LAS BUSQUEDAS DE LAS ESTATUILLAS MEDUSA Y SALAMANDRA
 
-        if(buscarEstatua(estatuillas_j1, 5) == "Medusa"){
+        if(buscarEstatua(estatuillas_j1, 5, m) == "Medusa"){
             estatuaMedusa_J1 = true;
-        }else if(buscarEstatua(estatuillas_j2, 5) == "Medusa"){
+        }
+        if(buscarEstatua(estatuillas_j2, 5, m) == "Medusa"){
             estatuaMedusa_J2 = true;
-        }else if(buscarEstatua(estatuillas_j1, 5) == "Salamandra"){
+        }
+        if(buscarEstatua(estatuillas_j1, 5, s) == "Salamandra"){
             estatuaSalamandra_J1 = true;
-        }else if(buscarEstatua(estatuillas_j2, 5) == "Salamandra"){
+        }
+        if(buscarEstatua(estatuillas_j2, 5, s) == "Salamandra"){
             estatuaSalamandra_J2 = true;
-        }else if(buscarEstatua(estatuillas_j1, 5) == "Aguila"){
+        }
+        if(buscarEstatua(estatuillas_j1, 5, a) == "Aguila"){
             aguila_J1 = true;
-        }else if(buscarEstatua(estatuillas_j2, 5) == "Aguila"){
+        }
+        if(buscarEstatua(estatuillas_j2, 5, a) == "Aguila"){
             aguila_J2 = true;
-        }else if(buscarEstatua(estatuillas_j1, 5) == "Cangrejo"){
+        }
+        if(buscarEstatua(estatuillas_j1, 5, c) == "Cangrejo"){
             cangrejo_J1 = true;
-        }else if(buscarEstatua(estatuillas_j2, 5) == "Cangrejo"){
+        }
+        if(buscarEstatua(estatuillas_j2, 5, c) == "Cangrejo"){
             cangrejo_J2 = true;
         }
 
 
+
+
+cout<<estatuaSalamandra_J1<<endl;
+cout<<estatuaSalamandra_J2<<endl;
+cout<<estatuaHormiga_J1<<endl;
+cout<<estatuaHormiga_J2<<endl;
+cout<<estatuaMedusa_J1<<endl;
+cout<<estatuaMedusa_J2<<endl;
+cout<<aguila_J1<<endl;
+cout<<aguila_J2<<endl;
+cout<<cangrejo_J1<<endl;
+cout<<cangrejo_J2<<endl;
+system("pause");
         while(true){
-            lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, valorDadoBeneficioHormigaJ1, modoDiosActivado, cangrejo_J1);
+            lanzamiento_j1 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[empieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J1, estatuaSalamandra_J1, aguila_J1, valorDadoBeneficioHormigaJ1, modoDiosActivado, cangrejo_J1, estatuaHormiga_J1);
             puntos_lanzamientoJ1--;
 
             if(lanzamiento_j1 == "GANASTE"){
@@ -355,7 +380,7 @@ void jugar(){
                 break;
             }
 
-            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, valorDadoBeneficioHormigaJ2,  modoDiosActivado, cangrejo_J2);
+            lanzamiento_j2 = lanzamiento_jugador_faseFinal(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], estatuillas_j1, estatuillas_j2, vEstatuillas, estatuaMedusa_J2, estatuaSalamandra_J2, aguila_J2, valorDadoBeneficioHormigaJ2,  modoDiosActivado, cangrejo_J2, estatuaHormiga_J2);
 
             puntos_lanzamientoJ2--;
 
