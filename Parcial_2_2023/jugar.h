@@ -307,8 +307,8 @@ void jugar(){
             noEmpieza = aux;
 
             /// SE CAMBIEN EL VALOR DEL DADO DE LA HORMIGA
-            valorDadoBeneficioHormigaJ1 = valorDadoBeneficioHormigaJ2;
-            valorDadoBeneficioHormigaJ2 = 0;
+            valorDadoBeneficioHormigaJ2 = valorDadoBeneficioHormigaJ1;
+            valorDadoBeneficioHormigaJ1 = 0;
 
             ///SE COPIA EL VALOR DEL VECTOR EMPIEZA A NOEMPIEZA Y VICEVERSA;
             for(int i=0; i<5; i++){

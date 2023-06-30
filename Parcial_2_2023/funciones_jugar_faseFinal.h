@@ -177,23 +177,24 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                 }
 
                 if(valorDadoH != 0){
-                    cout<<"Que dado desea cambiar :";
+                    cout<<"Que dado desea cambiar:";
                     cin>>dadoSelecionado;
 
                     vDado[dadoSelecionado-1] = valorDadoH;
 
-                    valorDadoH=0;
                     goto atrasH;
                 }
 
                 obtencionEscalera = obtencion_escalera(vDado, llaveMedusa, llaveSalamandra);
 
-                if(primer_turno_final == true){
-                    cout<<"AL SER EL PRIMER TURNO DE LA FASE FINAL Y POSEER LA ESTATUA DEL CANGREJO VUELVE A TIRRAR NUEVAMENTE!"<<endl;
+                if( (primer_turno_final == true) && (obtencionEscalera == "SIGUE") ) {
+                    cout<<"AL SER EL PRIMER TURNO DE LA FASE FINAL Y POSEER LA ESTATUA DEL CANGREJO VUELVE A TIRAR NUEVAMENTE!"<<endl;
                     system("pause");
                     system("cls");
                     primer_turno_final = false;
                     goto tirada;
+                }else if( (primer_turno_final == true) && (obtencionEscalera != "SIGUE") ){
+                    return "GANASTE";
                 }
                 system("pause");
                 system("cls");
