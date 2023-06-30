@@ -36,7 +36,7 @@ int comprobar_dado(int *vDado, int tam){
      int aux;
 
      for(int i = 0; i < tam; i++){
-        vecAux[i] == vDado[i];
+        vecAux[i] = vDado[i];
      }
 
      ///ORDENAMOS EL VECTOR AUXILIAR
@@ -49,6 +49,7 @@ int comprobar_dado(int *vDado, int tam){
             }
         }
     }
+
 
     ///CON EL VECTOR AUXILIAR ORDENADO VEMOS SI ES ESCALERA
     for (int i = 0; i < tam - 1; i++) {
@@ -190,12 +191,16 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
 
                 obtencionEscalera = obtencion_escalera(vDado, llaveMedusa, llaveSalamandra);
 
+
+
                 if( (primer_turno_final == true) && (obtencionEscalera == "SIGUE") && (cangrejo == true) ) {
+
                     cout<<"AL SER EL PRIMER TURNO DE LA FASE FINAL Y POSEER LA ESTATUA DEL CANGREJO VUELVE A TIRAR NUEVAMENTE!"<<endl;
                     system("pause");
                     system("cls");
                     primer_turno_final = false;
                     goto tirada;
+
                 }else if( (primer_turno_final == true) && (obtencionEscalera != "SIGUE") && (cangrejo == true) ){
                     return "GANASTE";
                 }
