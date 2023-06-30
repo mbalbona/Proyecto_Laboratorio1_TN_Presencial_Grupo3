@@ -71,7 +71,7 @@ int comprobar_dado(int *vDado, int tam){
 
 ///FUNCION QUE COMPRUEBA SI HAY ESCALERA CORTA O NO
 int escalera_corta(int *vDado, int tam){
-    int cont = 0;
+
 
       for (int i = 1; i < tam; i++) {
         if (vDado[i] == vDado[i-1] + 1) {
