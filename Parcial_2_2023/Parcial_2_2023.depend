@@ -121,17 +121,18 @@
 	"estadisticas.h"
 	"creditos.h"
 
-1688084981 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
+1688161389 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\jugar.h
 	"funciones_jugar.h"
 	"funciones_jugar_faseFinal.h"
+	"estadisticas.h"
 
-1688081692 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
+1688160913 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar.h
 	"maldiciones.h"
 
-1688079588 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\maldiciones.h
+1688159411 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\maldiciones.h
 	"funciones_jugar.h"
 
-1688088033 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar_fasefinal.h
+1688159411 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\funciones_jugar_fasefinal.h
 
 1687545941 source:c:\users\mbalbona\onedrive - frgp.utn.edu.ar\escritorio\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\main.cpp
 	<iostream>
@@ -191,7 +192,8 @@
 
 1687547809 c:\users\walte\documents\github\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\creditos.h
 
-1688079588 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\estadisticas.h
+1688161550 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\estadisticas.h
+	"jugar.h"
 
 1688079588 c:\users\mbalbona\desktop\proyecto_laboratorio1_tn_presencial_grupo3\parcial_2_2023\creditos.h
 

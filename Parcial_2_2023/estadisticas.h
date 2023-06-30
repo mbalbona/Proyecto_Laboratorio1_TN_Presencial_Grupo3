@@ -23,10 +23,11 @@ void estadisticas (){
     cout<<"Ganador++ \t\t"<<puntos_ganador_sinEstatuillas[empieza]<<" PDV\t\t"<<puntos_ganador_sinEstatuillas[noEmpieza]<<" PDV"<<endl;
     cout<<"Estatuilla-- \t\t"<<puntos_rivalObtiene[empieza]<<" PDV\t\t"<<puntos_rivalObtiene[noEmpieza]<<" PDV"<<endl;
     cout<<"Lanzamiento \t\t"<<puntos_lanzamientoJ[empieza]<<" PDV\t\t"<<puntos_lanzamientoJ[noEmpieza]<<" PDV"<<endl;
+    cout<<"SAC \t\t\t"<<puntos_SAC[empieza]<<" PDV \t\t\t"<<puntos_SAC[noEmpieza]<<" PDV"<<endl;
     cout<<"-----------------------------------------------------------"<<endl;
     ///SUMA EL TOTAL DE PUNTOS DE CADA JUGADOR
     for(int i=0; i<2; i++){
-        total[i] = puntos_estatuillas[i] + puntos_estatuillas_primerIntento[i] + puntos_ganador_faseFinal[i] + puntos_ganador_sinEstatuillas[i] + puntos_rivalObtiene[i] + puntos_lanzamientoJ[i];
+        total[i] = puntos_estatuillas[i] + puntos_estatuillas_primerIntento[i] + puntos_ganador_faseFinal[i] + puntos_ganador_sinEstatuillas[i] + puntos_rivalObtiene[i] + puntos_lanzamientoJ[i] + puntos_SAC[i];
     }
 
     cout<<"TOTAL\t\t\t"<<total[empieza]<<" PDV\t\t"<<total[noEmpieza]<<" PDV"<<endl;

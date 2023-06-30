@@ -21,7 +21,8 @@ int puntos_estatuillas_primerIntento[2]={};//Puntos que almacena si se obtiene s
 int puntos_ganador_faseFinal[2]={};//Puntos por ganar fase final
 int puntos_ganador_sinEstatuillas[2]={};//Puntos por ganar fase final sin estatuas
 int puntos_rivalObtiene[2] = {0};//Puntos negativos que obtiene el rival por obtener una estatua.
-
+///VARIABLE PARCIAL
+int puntos_SAC[2] = {0};
 
 
 ///FIN VARIABLES GLOABALES
@@ -37,7 +38,8 @@ void jugar(){
     string estatuillas_j2[5] = {""};
 
     string primer_lanzamiento;
-    string lanzamiento_j1, lanzamiento_j2;
+    string lanzamiento_j1 = "";
+    string lanzamiento_j2 = "";
 
 
     int opcion_elegidaJ1, opcion_elegidaJ2;
@@ -124,13 +126,11 @@ void jugar(){
                                             break;
                                         }
                                         opcion_elegidaJ2 = seleccion_estatuilla_jugadores(empieza, noEmpieza, jugadores[noEmpieza], jugadores, vEstatuillas, 5, estatuillas_j1, estatuillas_j2);
-                                    }else{
-                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntos_generales, llaveSalamandraJ2, modoDiosActivado,aguilaJ2);
-                                        jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
-                                        jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
                                     }
+                                        lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntos_generales, llaveSalamandraJ2, modoDiosActivado,aguilaJ2);
+                                        jugador2_obtuvo(lanzamiento_j2, vEstatuillas, estatuillas_j2, opcion_elegidaJ2);
 
-                                } else if(opcion_elegidaJ1 != opcion_elegidaJ2){
+                                }else if(opcion_elegidaJ1 != opcion_elegidaJ2){
                                     system("cls");
                                     lanzamiento_j2 = lanzamiento_jugador(empieza, noEmpieza, jugadores, 5, jugadores[noEmpieza], vEstatuillas[opcion_elegidaJ2-1], estatuillas_j1, estatuillas_j2, vEstatuillas, puntos_generales, llaveSalamandraJ2, modoDiosActivado,aguilaJ2);
                                     jugador1_obtuvo(lanzamiento_j1, vEstatuillas, estatuillas_j1, opcion_elegidaJ1);
@@ -255,7 +255,10 @@ void jugar(){
         ///DADO PARA LA BENDIICION DE LA HORMIGA
         int dadoBendicionHormigaJ1;
         int dadoBendicionHormigaJ2;
-
+        /// MODIFICACION PARCIAL
+        int contador_SAC_J1 = 0;
+        int contador_SAC_J2 = 0;
+        ///----------------------
 
         bool cangrejo_J1 = false;
         bool cangrejo_J2 = false;
@@ -303,8 +306,10 @@ void jugar(){
         for(int i = 0; i < 5; i++){
             if(estatuillas_j1[i] == "Cangrejo"){
                 cangrejo_J1 = true;
+                contador_SAC_J1++;
             }else if(estatuillas_j2[i] == "Cangrejo"){
                 cangrejo_J2 = true;
+                contador_SAC_J2++;
             }
             if(estatuillas_j1[i] == "Hormiga"){
                 estatuaHormiga_J1 = true;
@@ -318,16 +323,25 @@ void jugar(){
             }
             if(estatuillas_j1[i] == "Aguila"){
                 aguilaJ1 = true;
+                contador_SAC_J1++;
             }else if(estatuillas_j2[i] == "Aguila"){
                 aguilaJ2 = true;
+                contador_SAC_J2++;
             }
             if(estatuillas_j1[i] == "Salamandra"){
                 estatuaSalamandra_J1 = true;
+                contador_SAC_J1++;
             }else if(estatuillas_j2[i] == "Salamandra"){
                 estatuaSalamandra_J2 = true;
+                contador_SAC_J2;
             }
         }
 
+        if(contador_SAC_J1 == 3){
+            puntos_SAC[0] += 20;
+        }else if(contador_SAC_J2 == 3){
+            puntos_SAC[1] += 20;
+        }
         if(estatuaHormiga_J1){
             cout<<"Beneficio de la Hormiga"<<endl;
             cout<<"El jugador "<<jugadores[empieza]<<" debe elegir un numero del 1 al 6: ";

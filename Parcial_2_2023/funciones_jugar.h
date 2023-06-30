@@ -111,7 +111,7 @@ int tiraDado_6_caras(int *vDados, bool modoDios){
 ///Mostramos las estatuas del jugador
 void mostrar_estatuillas(string *estatuillas_jugador, int tam){
 
-    for(int i = 0; i < tam; i++){
+        for(int i = 0; i < tam; i++){
         if(estatuillas_jugador[i] != ""){
             cout<<estatuillas_jugador[i]<<" ";
         }
@@ -227,7 +227,7 @@ string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, str
         else if( (opcion == "Aguila") && ((vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10) || (vDados[2]==1)|| (vDados[2]==10)) ){
             return "Aguila";
         }
-        else if( (opcion == "Salamandra") && ( (vDados[0] == vDados[1] - 1) || (vDados[1] == vDados[0] + 1) ) ) {
+        else if( (opcion == "Salamandra") && ((vDados[0] == vDados[1] - 1) || (vDados[1] == vDados[0] + 1)) ) {
             return "Salamandra";
         }
     }else{
