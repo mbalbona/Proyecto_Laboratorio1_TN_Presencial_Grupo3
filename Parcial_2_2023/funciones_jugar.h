@@ -3,6 +3,8 @@
 
 ///Funcion que comprueba si el jugador 1 obtuvo alguna estatua
 bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatuillas_j1, int opcion_elegidaJ1){
+
+
     if(lanzamientoj1 != "No obtuvo"){
             ///Se agrega la estatua obtenida al jugador 1 debido a que ambos obtuvieron la estatua, pero la gana el jugador que empieza osea el 1
             estatuillas_j1[opcion_elegidaJ1-1] = lanzamientoj1;
@@ -10,13 +12,29 @@ bool jugador1_obtuvo(string lanzamientoj1, string *vEstatuillas, string *estatui
             ///Se elimina la estatua conseguida para que no se liste mas
             vEstatuillas[opcion_elegidaJ1-1] = {""};
 
+            if(cont_turno == 0){
+                puntos_estatuillas_primerIntento[0] += 10;
+                puntos_estatuillas[0] += 5;
+                puntos_generales[0] += 15;
+            }else{
+                puntos_estatuillas[0] += 5;
+                puntos_generales[0] += 5;
+            }
+
+            puntos_rivalObtiene[1] -= 3;
+
+
             return true;
     }else{
+
         return false;
     }
 }
+
 ///Funcion que comprueba si el jugador 2 obtuvo alguna estatua
 bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatuillas_j2, int opcion_elegidaJ2){
+
+
     if(lanzamientoj2 != "No obtuvo"){
             ///Se agrega la estatua obtenida al jugador 1 debido a que ambos obtuvieron la estatua, pero la gana el jugador que empieza osea el 1
             estatuillas_j2[opcion_elegidaJ2-1] = lanzamientoj2;
@@ -24,8 +42,17 @@ bool jugador2_obtuvo(string lanzamientoj2, string *vEstatuillas, string *estatui
             ///Se elimina la estatua conseguida para que no se liste mas
             vEstatuillas[opcion_elegidaJ2-1] = {""};
 
+            if(cont_turno == 0){
+                puntos_estatuillas_primerIntento[1] += 10;
+                puntos_estatuillas[1] += 5;
+            }else{
+                puntos_estatuillas[1] += 5;
+            }
+            puntos_rivalObtiene[0] -= 3;
+
             return true;
     }else{
+
         return false;
     }
 }
@@ -181,15 +208,6 @@ string condicion_estatua(string *vEstatuas, int tam, string opcion){
 
     return vCondicion[opc];
 }
-///FUNCION QUE COMPRUEBA ESCALERA
-
-int comprobar_dado(int *vDado, int tam){
-     if ( (vDado[0] == vDado[1] - 1) || (vDado[0] == vDado[0] + 1) || ( vDado[1] == vDado[0] - 1) || ( vDado[1] == vDado[0] + 1 ) ){
-        return 1;
-     }else{
-        return 0;
-     }
-}
 
 ///Comprobamos vector de dados para activar maldiciones en fase de expedicion
 string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, string opcion){
@@ -209,7 +227,7 @@ string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, str
         else if( (opcion == "Aguila") && ((vDados[0] == 1) && (vDados[1] == 10) || (vDados[1] == 1) && (vDados[0] == 10) || (vDados[2]==1)|| (vDados[2]==10)) ){
             return "Aguila";
         }
-        else if( (opcion == "Salamandra") && (comprobar_dado(vDados, tam) == 1) ) {
+        else if( (opcion == "Salamandra") && ( (vDados[0] == vDados[1] - 1) || (vDados[1] == vDados[0] + 1) ) ) {
             return "Salamandra";
         }
     }else{
@@ -227,7 +245,7 @@ string comprobar_dado_expedicion(int *vDados, int tam, bool llaveSalamandra, str
             }
         }
 
-        if( (opcion == "Medusa") && (((vDados[0] + vDados[1]) == 7) || ((vDados[1] + vDados[2]) == 7) || ((vDados[0] + vDados[2]) == 7) || ((vDados[0] + vDados[1] +vDados[2]) == 7)) )  {
+        if( (opcion == "Medusa") && (((vDados[0] + vDados[1]) == 7) || ((vDados[1] + vDados[2]) == 7) || ((vDados[0] + vDados[2]) == 7)) )  {
             return "Medusa";
         }
         else if( (opcion == "Aguila") && (((vDados[0] == 1) && (vDados[1] == 10)) || ((vDados[1] == 1) && (vDados[0] == 10)) || ((vDados[0] == 1) && (vDados[2] == 10)) || ((vDados[2] == 1) && (vDados[0] == 10)) || ((vDados[2] == 1) && (vDados[1] == 10)) || ((vDados[1] == 1) && (vDados[2] == 10))) ){
@@ -376,6 +394,9 @@ int recorrer_estatuas(string *vEstatuas, int tam){
     }
 
     if(cont == 5){
+        cout<<"SE DETECTO QUE NO QUEDAN ESTATUAS EN JUEGO. POR LO TANTO PROCEDEREMOS A CONTINUACION CON LA FASE FINAL!"<<endl;
+        system("pause");
+        system("cls");
         return 1;
         }
         else{
@@ -410,8 +431,8 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
 
             cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[0]<<" "<<puntosJugadores[0]<<"\t\t\t\t";
-            cout<<jugadores[1]<<" "<<puntosJugadores[1]<<endl;
+            cout<<jugadores[empieza]<<"\t\t\t\t";
+            cout<<jugadores[noEmpieza]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, tam);
             cout<<"\t\t";
