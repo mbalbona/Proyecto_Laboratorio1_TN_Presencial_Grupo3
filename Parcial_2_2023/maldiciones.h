@@ -39,7 +39,6 @@ void maldicion_cangrejo(string *jugadores, string jugador, int *puntos_Jugadores
         puntos_Jugadores[pos] -= dado[0];
 
         cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<dado[0]<<" PUNTOS DEBIDO A LA MALDICION DEL CANGREJO."<<endl;
-        cout<<puntos_Jugadores[pos]<<endl;
     }
 
     system("pause");
@@ -72,7 +71,7 @@ void maldicion_hormiga(string *jugadores, string jugador, int *puntos_Jugadores)
     puntos_Jugadores[pos] -= (vDado[0] + vDado[1]);
 
     cout<<"EL JUGADOR "<<jugadores[pos]<<" PIERDE "<<(vDado[0] + vDado[1])<<" PUNTOS DEBIDO A LA MALDICION DE LA HORMIGA."<<endl;
-    cout<<puntos_Jugadores[pos]<<endl;
+
     system("pause");
     system("cls");
 }

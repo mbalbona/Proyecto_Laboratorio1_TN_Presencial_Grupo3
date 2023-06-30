@@ -4,6 +4,8 @@
 ///VARIABLES DE ALCANCE GLOBAL
 ///ESTAMOS AL TANTO DE QUE NO ES RECOMENDABLE USAR VARIABLES GLOBALES DE SER POSIBLE
 
+int empieza, noEmpieza;
+string jugadores[2] = {};
 
 bool modoDiosActivado = false;
 bool objetivo = false;
@@ -30,14 +32,14 @@ int puntos_rivalObtiene[2] = {0};//Puntos negativos que obtiene el rival por obt
 
 void jugar(){
     system("cls");
-    string jugadores[2] = {};
+
     string estatuillas_j1[5] = {""};
     string estatuillas_j2[5] = {""};
 
     string primer_lanzamiento;
     string lanzamiento_j1, lanzamiento_j2;
 
-    int empieza, noEmpieza;
+
     int opcion_elegidaJ1, opcion_elegidaJ2;
     int cont_medusa = 0;
     int puedeLanzarJ1 = 1;

@@ -431,8 +431,8 @@ string lanzamiento_jugador(int empieza, int noEmpieza, string *jugadores, int ta
 
             cout<<"\tIRWIN'S REVENGE - FASE DE EXPEDICION"<<endl;
             cout<<"---------------------------------------------------"<<endl;
-            cout<<jugadores[empieza]<<" "<<puntosJugadores[empieza]<<" "<<puntos_estatuillas[empieza]<<"\t\t\t\t";
-            cout<<jugadores[noEmpieza]<<" "<<puntosJugadores[noEmpieza]<<" "<<puntos_estatuillas[noEmpieza]<<endl;
+            cout<<jugadores[empieza]<<"\t\t\t\t";
+            cout<<jugadores[noEmpieza]<<endl;
             cout<<"ESTATUILLAS: ";
             mostrar_estatuillas(estatuillas_j1, tam);
             cout<<"\t\t";
