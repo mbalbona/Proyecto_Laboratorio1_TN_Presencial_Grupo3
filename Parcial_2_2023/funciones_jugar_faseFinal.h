@@ -14,16 +14,21 @@ int contadorEstatuillas(string *estatuillas_Jugador, int tam){
 }
 
 ///FUNCION BUSCAR LAS 3 ESTATUAS QUE MODIFICAN LOS DADOS
-string buscarEstatua(string *estatua, int tam){
+string buscarEstatua(string *estatua, int tam, string dato){
+    string nada="nada";
     for(int i=0; i<tam; i++){
-        if(estatua[i] == "Medusa"){
-            return "Medusa";
-        }else if(estatua[i] == "Salamandra"){
+        if(estatua[i] == dato){
+            return dato;
+        }
+    }
+    return nada;
+
+
+}
+string buscarEstatuaS(string *estatua, int tam){
+    for(int i=0; i<tam; i++){
+        if(estatua[i] == "Salamandra"){
             return "Salamandra";
-        }else if(estatua[i] == "Hormiga"){
-            return "Hormiga";
-        }else if(estatua[i] == "Aguila"){
-            return "Aguila";
         }
     }
 }
@@ -34,7 +39,7 @@ int comprobar_dado(int *vDado, int tam){
      ///DECLARAMOS UN VECTOR AUXILIAR PARA NO MODIFICAR EL VECTOR ORIGINAL DADO QUE ES UN PUNTERO
      int vecAux[5];
      int aux;
-
+    int cont = 0;
      for(int i = 0; i < tam; i++){
         vecAux[i] = vDado[i];
      }
@@ -50,36 +55,28 @@ int comprobar_dado(int *vDado, int tam){
         }
     }
 
-
     ///CON EL VECTOR AUXILIAR ORDENADO VEMOS SI ES ESCALERA
     for (int i = 0; i < tam - 1; i++) {
         if (vecAux[i] != vecAux[i + 1] - 1) {
             return 0;  // No es una escalera
         }
+        cont++;
     }
 
+    if(cont == 4){
+        return 2;
+    }
     return 1;
 }
 
 ///FUNCION QUE COMPRUEBA SI HAY ESCALERA CORTA O NO
 int escalera_corta(int *vDado, int tam){
-    int cont = 0;
 
-      for (int i = 1; i < tam; i++) {
-        if (vDado[i] != vDado[i-1] + 1) {
-            return 0;  // No es una escalera corta
-        }
-        else{
-           cont++;
-        }
-      }
+    if(vDado[0]<vDado[1] && vDado[1]<vDado[2] && vDado[2]<vDado[3]){
+        return 1;
+    }
 
-        ///SI EL CONTADOR ES IGUAL A CUATRO SIGNIFICA HAY 4 NUMEROS CONSECUTIVOS LO CUAL SE TRADUCE EN UNA ESCALERA CORTA
-       if(cont == 4){
-               return 1; //Escalera corta
-       }
 }
-
 ///FUNCION COMPROBAR ESCALERA
 string obtencion_escalera(int *vDado, bool llaveMedusa, bool llaveSalamandra ){
 
@@ -87,6 +84,7 @@ string obtencion_escalera(int *vDado, bool llaveMedusa, bool llaveSalamandra ){
 
         ///COMPRUEBA SI TIENE LA LLAVE MEDUSA PARA VER BUSCAR LA ESLERA COMUN O BIEN DADOS IGUALES
             if(llaveMedusa){
+
                 if(comprobar_dado(vDado, 5) == 1){
                         cout<<">HAS GANADO, CON UNA ESCALERA"<<endl;
                         return "GANASTE";
@@ -105,21 +103,27 @@ string obtencion_escalera(int *vDado, bool llaveMedusa, bool llaveSalamandra ){
 
             ///COMPRUEBA SI TIENE LA LLAVE SALAMANDRA
             if(llaveSalamandra){
+
                 if(comprobar_dado(vDado, 5) == 1){
                         cout<<">HAS GANADO, CON UNA ESCALERA"<<endl;
                         return "GANASTE";
                     }
-                    else if(escalera_corta(vDado, 5) == 1) {
+                            cout<<"entre a la salamandra 2"<<endl;
+            system("pause");
+                if(escalera_corta(vDado, 5) == 1) {
                         cout<<">HAS GANADO, CON UNA ESCALERA CORTA (BENEFICIO DE LA SALAMANDRA)"<<endl;
                         return "GANASTE";
                     }
             }
 
+
+
+
         return "SIGUE";
 
 }
 
-string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, int valorDadoH, bool modoDios, bool cangrejo){
+string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, int valorDadoH, bool modoDios, bool cangrejo, bool estatuaHormiga){
     while(true){
             system("cls");
 
@@ -172,7 +176,7 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
 
                 }
 
-                if(valorDadoH != 0){
+                if(estatuaHormiga){
                     dado:
                     cout<<"Que dado desea cambiar:";
                     cin>>dadoSelecionado;
@@ -183,24 +187,22 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
                         goto dado;
                     }else{
                         vDado[dadoSelecionado-1] = valorDadoH;
-                        valorDadoH = 0;
+                        estatuaHormiga = false;
                     }
 
                     goto atrasH;
                 }
 
                 obtencionEscalera = obtencion_escalera(vDado, llaveMedusa, llaveSalamandra);
-
-
-
+                cout<<obtencionEscalera<<endl;
+                system("pause");
                 if( (primer_turno_final == true) && (obtencionEscalera == "SIGUE") && (cangrejo == true) ) {
-
                     cout<<"AL SER EL PRIMER TURNO DE LA FASE FINAL Y POSEER LA ESTATUA DEL CANGREJO VUELVE A TIRAR NUEVAMENTE!"<<endl;
                     system("pause");
                     system("cls");
                     primer_turno_final = false;
+                    aguilaActiva=true;
                     goto tirada;
-
                 }else if( (primer_turno_final == true) && (obtencionEscalera != "SIGUE") && (cangrejo == true) ){
                     return "GANASTE";
                 }
