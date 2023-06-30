@@ -30,8 +30,8 @@ int puntos_lanzamiento_faseFinal[2]={};
 void jugar(){
     system("cls");
     string jugadores[2] = {};
-    string estatuillas_j1[5] = {"Hormiga", "Medusa", "Aguila"};
-    string estatuillas_j2[5] = {"Cangrejo", "Salamandra"};
+    string estatuillas_j1[5] = {""};
+    string estatuillas_j2[5] = {""};
 
     string primer_lanzamiento;
     string lanzamiento_j1, lanzamiento_j2;
@@ -100,7 +100,7 @@ void jugar(){
         noEmpieza = 1;
     }
     ///Comienza la fase de expecidicion
-    while(false){
+    while(true){
         objetivo = false;
 
         system("cls");

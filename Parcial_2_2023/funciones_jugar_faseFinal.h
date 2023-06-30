@@ -118,7 +118,12 @@ string obtencion_escalera(int *vDado, bool llaveMedusa, bool llaveSalamandra ){
                             return "GANASTE";
                         }
             }
-        return "SIGUE";
+
+            if(comprobar_dado(vDado, 5) == 1){
+                        cout<<">HAS GANADO, CON UNA ESCALERA"<<endl;
+                        return "GANASTE";
+                    }
+            return "SIGUE";
 }
 
 string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugadores, int tam,  string jugador, string *estatuillas_j1, string *estatuillas_j2, string *vEstatuas, bool llaveMedusa, bool llaveSalamandra,bool aguilaActiva, int dadoHormiga, bool modoDios, bool cangrejo, bool estatuaHormiga){
