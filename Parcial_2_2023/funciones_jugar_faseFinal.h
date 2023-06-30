@@ -128,6 +128,7 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
             int dadoSelecionado, dadoNuevo;
             int contDaAguila=0;
             int vDado[5] = {};
+            char opcion;
 
             string no_obtuvo = "No obtuvo";
 
@@ -181,23 +182,44 @@ string lanzamiento_jugador_faseFinal(int empieza, int noEmpieza, string *jugador
             if(obtencionEscalera== "SIGUE"){
                 if(estatuaHormiga){
                     dado:
-                    cout<<"Que dado desea cambiar:";
-                    cin>>dadoSelecionado;
-
-                    if( (dadoSelecionado < 0) || (dadoSelecionado > 5) ){
-                        cout<<"VALOR INVALIDO! ELIJA NUEVAMENTE EL DADO A CAMBIAR."<<endl;
-                        cout<<endl;
-                        goto dado;
-                    }else{
-                        vDado[dadoSelecionado-1] = dadoHormiga;
-                        estatuaHormiga = false;
+                    cout<<"Desea cambiar dados? Y/N ";
+                    cin>>opcion;
+                    switch(opcion){
+                            case 'N':
+                               break;
+                            case 'n':
+                                break;
+                            case 'Y':
+                                    cout<<"Que dado desea cambiar:";
+                                    cin>>dadoSelecionado;
+                                    if( (dadoSelecionado < 0) || (dadoSelecionado > 5) ){
+                                        cout<<"VALOR INVALIDO! ELIJA NUEVAMENTE EL DADO A CAMBIAR."<<endl;
+                                        cout<<endl;
+                                        goto dado;
+                                    }else{
+                                        vDado[dadoSelecionado-1] = dadoHormiga;
+                                        estatuaHormiga = false;
+                                    }
+                                    goto atrasH;
+                                break;
+                            case 'y':
+                                    cout<<"Que dado desea cambiar:";
+                                    cin>>dadoSelecionado;
+                                    if( (dadoSelecionado < 0) || (dadoSelecionado > 5) ){
+                                        cout<<"VALOR INVALIDO! ELIJA NUEVAMENTE EL DADO A CAMBIAR."<<endl;
+                                        cout<<endl;
+                                        goto dado;
+                                    }else{
+                                        vDado[dadoSelecionado-1] = dadoHormiga;
+                                        estatuaHormiga = false;
+                                    }
+                                    goto atrasH;
+                                break;
                     }
-
-                    goto atrasH;
                 }
 
                 //obtencionEscalera = obtencion_escalera(vDado, llaveMedusa, llaveSalamandra);
-                cout<<obtencionEscalera<<endl;
+
                 system("pause");
                 if( (primer_turno_final == true) && (obtencionEscalera == "SIGUE") && (cangrejo == true) ) {
                     cout<<"AL SER EL PRIMER TURNO DE LA FASE FINAL Y POSEER LA ESTATUA DEL CANGREJO VUELVE A TIRAR NUEVAMENTE!"<<endl;
